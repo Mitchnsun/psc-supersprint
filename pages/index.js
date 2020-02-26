@@ -3,7 +3,7 @@ import MyLayout from '../components/Layout';
 export default function Index() {
   return (
     <MyLayout>
-      <p>PSC Supersprint 2020</p>
+      <h1>PSC Supersprint 2020</h1>
     </MyLayout>
   );
 }
