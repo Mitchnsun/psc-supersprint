@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router';
 import useSWR from 'swr';
 import Link from 'next/link';
 
@@ -8,32 +7,45 @@ const linkStyle = {
   marginRight: 15
 };
 
-function fetcher(url) {
-  return fetch(url).then(r => r.json());
+async function fetcher(url) {
+  const res = await fetch(url);
+  const json = await res.json();
+  return json;
 }
 
 export default function Results() {
-  const router = useRouter();
-  const year = router.query.year || '2020';
-  const { data, error } = useSWR('/api/results', fetcher);
-  let msg = data?.msg;
-
-  if (!data) msg = 'Loading...';
-  if (error) msg = 'Failed to fetch the quote.';
+  const { data, error } = useSWR(`/api/results?year=2020`, fetcher);
+  const results = data?.results || [];
 
   return (
     <MyLayout>
       <h1>Box scores</h1>
       <div>
-        <Link href="/results?year=2020" as="/results/2020">
+        <Link href="/results/2020">
           <a style={linkStyle}>2020</a>
         </Link>
-        <Link href="/results?year=2019" as="/results/2019">
+        <Link href="/results/2019">
           <a style={linkStyle}>2019</a>
         </Link>
       </div>
-      <p>This is the results page for {year}</p>
-      <p>{msg}</p>
+      <p>This is the results page for 2020</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th><th>BIB</th><th>Cat.</th><th>Temps</th>
+          </tr>
+        </thead>
+        <tbody>
+          {results.map(item => (
+            <tr>
+              <td>{item.firstname} {item.lastname}</td>
+              <td>{item.bib}</td>
+              <td>{item.cat}{item.sex}</td>
+              <td>{item.times?.total}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
       <style jsx>{`
         h1,
         a {
