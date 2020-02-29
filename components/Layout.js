@@ -6,20 +6,18 @@ const layoutStyle = {
   margin: 20,
   padding: 20,
   backgroundColor: COLORS.WHITE,
-  border: `1px solid ${COLORS.SECONDARY}`
+  border: `1px solid ${COLORS.SECONDARY}`,
 };
 
 const containerStyle = {
   margin: 'auto',
-  maxWidth: '1080px'
+  maxWidth: '1080px',
 };
 
-const Layout = props => (
+const Layout = ({ children }) => (
   <div style={containerStyle}>
     <Header />
-    <div style={layoutStyle}>
-      {props.children}
-    </div>
+    <div style={layoutStyle}>{children}</div>
   </div>
 );
 

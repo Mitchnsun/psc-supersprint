@@ -1,11 +1,15 @@
+import React from 'react';
+
 const Header = () => (
   <header>
-    <img src="/static/Bandeau_2020.webp" />
-    <style jsx>{`
-      img {
-        width: 100%;
-      }
-    `}</style>
+    <img src="/static/Bandeau_2020.webp" alt="Bandeau Supersprint Paris 20ième 2020" />
+    <style jsx>
+      {`
+        img {
+          width: 100%;
+        }
+      `}
+    </style>
   </header>
 );
 
