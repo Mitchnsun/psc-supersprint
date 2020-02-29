@@ -19,7 +19,7 @@
   "bugs": {
     "url": "https://github.com/Mitchnsun/psc-supersprint/issues"
   },
-  "homepage": "https://github.com/Mitchnsun/psc-supersprint#readme",
+  "homepage": "https://psc-supersprint.now.sh/",
   "dependencies": {
     "firebase": "^7.9.1",
     "lodash": "^4.17.15",

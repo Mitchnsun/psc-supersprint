@@ -1,2 +1,2 @@
-import ResultsPage from '../results';
+import ResultsPage from '../index';
 export default ResultsPage;

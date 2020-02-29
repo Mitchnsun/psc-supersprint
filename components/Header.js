@@ -1,18 +1,12 @@
-import Link from 'next/link';
-
-const linkStyle = {
-  marginRight: 15
-};
-
 const Header = () => (
-  <div>
-    <Link href="/">
-      <a style={linkStyle}>Home</a>
-    </Link>
-    <Link href="/results">
-      <a style={linkStyle}>Results</a>
-    </Link>
-  </div>
+  <header>
+    <img src="/static/Bandeau_2020.webp" />
+    <style jsx>{`
+      img {
+        width: 100%;
+      }
+    `}</style>
+  </header>
 );
 
 export default Header;
