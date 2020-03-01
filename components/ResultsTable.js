@@ -1,6 +1,7 @@
 import React from 'react';
-import { get } from 'lodash';
 import COLORS from '../styles/colors';
+
+import TimeCell from './atoms/TimeCell';
 
 const ResultsTable = ({ results }) => (
   <React.Fragment>
@@ -12,16 +13,22 @@ const ResultsTable = ({ results }) => (
           <th>BIB</th>
           <th>Cat.</th>
           <th>Temps</th>
+          <th>Nat.</th>
+          <th>Vélo</th>
+          <th>CAP</th>
         </tr>
       </thead>
       <tbody>
         {results.map((item, index) => (
-          <tr>
+          <tr key={item.bib}>
             <td>{index + 1}</td>
             <td>{`${item.firstname} ${item.lastname}`}</td>
             <td>{`#${item.bib}`}</td>
             <td>{`${item.cat}${item.sex}`}</td>
-            <td>{get(item, 'times.total')}</td>
+            <TimeCell time={item.total} />
+            <TimeCell time={item.swim} />
+            <TimeCell time={item.bike} />
+            <TimeCell time={item.run} />
           </tr>
         ))}
       </tbody>
