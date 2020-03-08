@@ -35,6 +35,7 @@ class MyApp extends App {
         <style jsx global>
           {`
             body {
+              font-size: 0.9rem;
               font-family: OpenSans, sans-serif;
               background-color: ${COLORS.PRIMARY};
             }

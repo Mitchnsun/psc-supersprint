@@ -2,6 +2,7 @@ const base = {
   BLUE: 'rgb(81, 188, 201)',
   BRONZE: 'hsl(33, 100%, 34%)',
   GRAY: '#e3e2e3',
+  GRAY_DARK: '#5F5E5D',
   GREEN: 'hsl(144, 52%, 34%)',
   PURPLE: 'rgba(111, 61, 141, 1)',
   PURPLE_DARK: 'rgb(51, 35, 130)',

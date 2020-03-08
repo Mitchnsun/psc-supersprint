@@ -1,13 +1,14 @@
 import React from 'react';
 import COLORS from '../styles/colors';
 
-import TimeCell from './atoms/TimeCell';
+import LineResult from './LineResult';
 
 const ResultsTable = ({ results }) => (
   <React.Fragment>
-    <table>
+    <table style={{ textAlign: 'center' }}>
       <thead>
         <tr>
+          <th aria-label="Expand" />
           <th>Rang</th>
           <th>Nom</th>
           <th>BIB</th>
@@ -20,16 +21,7 @@ const ResultsTable = ({ results }) => (
       </thead>
       <tbody>
         {results.map((item, index) => (
-          <tr key={item.bib}>
-            <td>{index + 1}</td>
-            <td>{`${item.firstname} ${item.lastname}`}</td>
-            <td>{`#${item.bib}`}</td>
-            <td>{`${item.cat}${item.sex}`}</td>
-            <TimeCell time={item.total} />
-            <TimeCell time={item.swim} />
-            <TimeCell time={item.bike} />
-            <TimeCell time={item.run} />
-          </tr>
+          <LineResult key={item.bib} result={item} rank={index + 1} />
         ))}
       </tbody>
     </table>
@@ -44,17 +36,17 @@ const ResultsTable = ({ results }) => (
           color: ${COLORS.PRIMARY};
           font-family: OpenSansBold;
           font-weight: bold;
-          font-size: 1.25rem;
+          font-size: 1.1rem;
+        }
+        tbody {
+          border-spacing: 0;
+          border-collapse: collapse;
         }
         tr {
           height: 2.5rem;
           border-bottom: 1px solid ${COLORS.GRAY};
-        }
-        td {
-          text-align: center;
-        }
-        tbody tr:hover {
-          background-color: ${COLORS.GRAY};
+          outline: 0;
+          vertical-align: middle;
         }
       `}
     </style>
