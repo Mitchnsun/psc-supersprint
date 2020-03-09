@@ -3,7 +3,7 @@ import COLORS from '../styles/colors';
 
 import LineResult from './LineResult';
 
-const ResultsTable = ({ results }) => (
+const ResultsTable = ({ results, totals }) => (
   <React.Fragment>
     <table style={{ textAlign: 'center' }}>
       <thead>
@@ -20,8 +20,8 @@ const ResultsTable = ({ results }) => (
         </tr>
       </thead>
       <tbody>
-        {results.map((item, index) => (
-          <LineResult key={item.bib} result={item} rank={index + 1} />
+        {results.map(item => (
+          <LineResult key={item.bib} result={item} totals={totals} />
         ))}
       </tbody>
     </table>

@@ -14,11 +14,12 @@ async function fetcher(url) {
 export default function Results() {
   const { data } = useSWR('/api/results?year=2020', fetcher);
   const results = get(data, 'results', []);
+  const totals = get(data, 'totals', {});
 
   return (
     <React.Fragment>
       <Title hLevel={1}>Résultats 2020</Title>
-      <ResultsTable results={results} />
+      <ResultsTable results={results} totals={totals} />
       <style jsx>
         {`
           a {

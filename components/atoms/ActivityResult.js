@@ -27,17 +27,17 @@ const ActivityResult = ({ icon, label, time, speed, unit }) => (
           vertical-align: middle;
           margin: 0;
           padding: 0 0.5rem;
-          color: ${COLORS.PURPLE_DARK};
+          color: ${COLORS.PURPLE};
           font-family: OpenSansBold;
-          font-size: 1.4rem;
+          font-size: 1.3rem;
           font-weight: bold;
         }
         .speed {
-          font-size: 1rem;
+          font-size: 0.9rem;
           margin: 0.25rem;
         }
         .speed span {
-          font-size: 0.85rem;
+          font-size: 0.8rem;
           padding-left: 2px;
           color: ${COLORS.GRAY_DARK};
         }

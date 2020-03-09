@@ -4,7 +4,7 @@ import TimeCell from './atoms/TimeCell';
 import DetailsResult from './DetailsResult';
 import ArrowIcon from './atoms/ArrowIcon';
 
-const LineResult = ({ result, rank }) => {
+const LineResult = ({ result, totals }) => {
   const [moreDetails, setMoreDetails] = useState(false);
   return (
     <React.Fragment>
@@ -12,7 +12,7 @@ const LineResult = ({ result, rank }) => {
         <td>
           <ArrowIcon down={moreDetails} />
         </td>
-        <td>{rank}</td>
+        <td>{result.ranks.scratch}</td>
         <td>{`${result.firstname} ${result.lastname}`}</td>
         <td>{`#${result.bib}`}</td>
         <td>{`${result.cat}${result.sex}`}</td>
@@ -24,14 +24,14 @@ const LineResult = ({ result, rank }) => {
       {moreDetails && (
         <tr>
           <td colSpan="9">
-            <DetailsResult result={result} rank={rank} />
+            <DetailsResult result={result} totals={totals} />
           </td>
         </tr>
       )}
       <style jsx>
         {`
           tr {
-            height: 2.5rem;
+            height: 2.75rem;
             border-bottom: 1px solid ${COLORS.GRAY};
             outline: 0;
             vertical-align: middle;

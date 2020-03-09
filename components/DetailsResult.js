@@ -3,11 +3,13 @@ import Time from '../utils/time';
 import SwimIcon from './atoms/SwimIcon';
 import BikeIcon from './atoms/BikeIcon';
 import RunIcon from './atoms/RunIcon';
+import Ranks from './atoms/Ranks';
 import ActivityResult from './atoms/ActivityResult';
 
-const DetailsResult = ({ result }) => (
+const DetailsResult = ({ result, totals }) => (
   <div className="container">
     <div className="activitiesLine">
+      <Ranks ranks={result.ranks} cat={result.cat} gender={result.sex} totals={totals} />
       <ActivityResult
         icon={<SwimIcon />}
         label="Natation"
