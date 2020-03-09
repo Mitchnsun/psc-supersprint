@@ -16,7 +16,7 @@ const LineResult = ({ result, totals }) => {
         <td>{`${result.firstname} ${result.lastname}`}</td>
         <td>{`#${result.bib}`}</td>
         <td>{`${result.cat}${result.sex}`}</td>
-        <TimeCell time={result.total} />
+        <TimeCell time={result.total} isBold />
         <TimeCell time={result.swim} />
         <TimeCell time={result.bike} />
         <TimeCell time={result.run} />
