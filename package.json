@@ -27,9 +27,9 @@
     }
   },
   "dependencies": {
-    "firebase": "^7.9.1",
+    "firebase": "^7.10.0",
     "lodash": "^4.17.15",
-    "next": "^9.2.2",
+    "next": "^9.3.0",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
     "styled-jsx": "^3.2.4",
@@ -42,7 +42,7 @@
     "eslint-config-prettier": "^6.10.0",
     "eslint-plugin-import": "^2.20.1",
     "eslint-plugin-jsx-a11y": "^6.2.3",
-    "eslint-plugin-react": "^7.18.3",
+    "eslint-plugin-react": "^7.19.0",
     "eslint-plugin-react-hooks": "^1.7.0",
     "husky": "^4.2.3",
     "prettier": "1.19.1",
