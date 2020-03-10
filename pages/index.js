@@ -50,28 +50,27 @@ export default function Results() {
           .searchBar {
             display: flex;
             align-items: center;
-            margin: 1rem;
+            flex-wrap: wrap;
+            margin: 1rem 0;
           }
           input {
-            margin: 0;
-            margin-right: 0.5rem;
+            margin: 0.25rem;
             box-sizing: border-box;
             border: 1px solid ${COLORS.GRAY_DARK};
-            padding: 7px;
-            height: 30px;
+            padding: 5px 7px;
+            height: 35px;
           }
           select {
-            margin-right: 0.5rem;
-            padding: 7px;
+            margin: 0.25rem;
+            padding: 5px 7px;
             background: none;
             box-sizing: border-box;
             border: 1px solid ${COLORS.GRAY_DARK};
             border-radius: 0;
-            height: 30px;
+            height: 35px;
           }
           p {
-            margin: 0;
-            margin-right: 0.5rem;
+            margin: 0.25rem;
             font-size: 1.1rem;
             font-family: 'OpenSansBold';
             color: ${COLORS.PRIMARY};

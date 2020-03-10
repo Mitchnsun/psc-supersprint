@@ -3,7 +3,7 @@ import COLORS from '../styles/colors';
 import Header from './Header';
 
 const layoutStyle = {
-  margin: 20,
+  margin: '0 1rem 1rem',
   padding: 20,
   backgroundColor: COLORS.WHITE,
   border: `1px solid ${COLORS.SECONDARY}`,

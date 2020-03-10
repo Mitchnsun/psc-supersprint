@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import COLORS from '../styles/colors';
+import BREAKPOINT from '../styles/breakpoints';
 
 import LineResult from './LineResult';
 
@@ -17,6 +18,17 @@ const ResultsTable = ({ results, search = {}, totals }) => {
       rEx(item.sex, gender),
   );
 
+  const [width, setWidth] = useState(process.browser ? window.innerWidth : BREAKPOINT + 1);
+  useEffect(() => {
+    const handleResize = () => {
+      setWidth(window.innerWidth);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
   return (
     <React.Fragment>
       <table style={{ textAlign: 'center' }}>
@@ -26,11 +38,15 @@ const ResultsTable = ({ results, search = {}, totals }) => {
             <th>Rang</th>
             <th>Nom</th>
             <th>BIB</th>
-            <th>Cat.</th>
+            {width > BREAKPOINT && <th>Cat.</th>}
             <th>Temps</th>
-            <th>Nat.</th>
-            <th>Vélo</th>
-            <th>CAP</th>
+            {width > BREAKPOINT && (
+              <React.Fragment>
+                <th>Nat.</th>
+                <th>Vélo</th>
+                <th>CAP</th>
+              </React.Fragment>
+            )}
           </tr>
         </thead>
         <tbody>

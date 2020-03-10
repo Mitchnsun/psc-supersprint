@@ -39,6 +39,11 @@ class MyApp extends App {
               font-family: OpenSans, sans-serif;
               background-color: ${COLORS.PRIMARY};
             }
+            @media (max-width: 450px) {
+              body {
+                font-size: 0.9rem;
+              }
+            }
           `}
         </style>
       </Layout>

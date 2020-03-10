@@ -40,6 +40,7 @@ const DetailsResult = ({ result, totals }) => (
         .activitiesLine {
           display: flex;
           justify-content: space-around;
+          flex-wrap: wrap;
         }
       `}
     </style>
