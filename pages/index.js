@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import useSWR from 'swr';
 import { get } from 'lodash';
+import { Helmet } from 'react-helmet';
 
 import ResultsTable from '../components/ResultsTable';
 import Title from '../components/atoms/Title';
@@ -20,6 +21,9 @@ export default function Results() {
 
   return (
     <React.Fragment>
+      <Helmet>
+        <title>PSC Supersprint | 2020</title>
+      </Helmet>
       <Title hLevel={1}>Résultats 2020</Title>
       <div className="searchBar">
         <p>Filtrer par:</p>

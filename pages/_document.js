@@ -8,6 +8,7 @@ class MyDocument extends Document {
         <Head>
           <link rel="preload" href="/fonts/opensans-regular-webfont.woff" as="font" crossOrigin="" />
           <link rel="preload" href="/fonts/opensans-bold-webfont.woff" as="font" crossOrigin="" />
+          <link rel="icon" type="image/jpg" href="/static/Favicon.jpg" />
         </Head>
         <body>
           <Main />

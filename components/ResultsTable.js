@@ -37,7 +37,7 @@ const ResultsTable = ({ results, search = {}, totals }) => {
             <th aria-label="Expand" />
             <th>Rang</th>
             <th>Nom</th>
-            <th>BIB</th>
+            <th>Dossard</th>
             {width > BREAKPOINT && <th>Cat.</th>}
             <th>Temps</th>
             {width > BREAKPOINT && (
