@@ -33,7 +33,7 @@
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
     "react-helmet": "^5.2.1",
-    "styled-jsx": "^3.2.4",
+    "styled-jsx": "^3.4.4",
     "swr": "^0.1.18"
   },
   "devDependencies": {
