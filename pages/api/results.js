@@ -1,5 +1,6 @@
 import { compact } from 'lodash';
-import loadDB from '../../lib/load-db';
+import { ref, child, get } from 'firebase/database'
+import db from '../../lib/firebase';
 import Ranks from '../../utils/ranks';
 
 const sortResults = data =>
@@ -14,10 +15,7 @@ const rankResults = data => {
 };
 
 export default async (req, res) => {
-  const db = await loadDB();
-  const results = await db
-    .ref('results')
-    .once('value')
-    .then(snap => snap.val());
-  res.status(200).json(rankResults(results));
+  const resultRef = child(ref(db), 'results')
+  const results = await get(resultRef)
+  res.status(200).json(rankResults(results.val()));
 };
