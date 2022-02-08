@@ -9,12 +9,12 @@ export default function Results() {
     <React.Fragment>
       <Title hLevel={1}>Résultats 2019</Title>
       <div>
-        <Link href="/results/2020">
+        <Link href="/results/2022" passHref>
           <button type="button" style={linkStyle}>
-            2020
+            2022
           </button>
         </Link>
-        <Link href="/results/2019">
+        <Link href="/results/2019" passHref>
           <button type="button" style={linkStyle}>
             2019
           </button>
