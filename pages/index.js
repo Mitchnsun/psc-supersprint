@@ -8,7 +8,7 @@ import Title from '../components/atoms/Title';
 import Board from '../components/Board';
 
 
-const ResultsPage = ({ results, totals }) => (
+const ResultsPage = ({ results = [], totals = [] }) => (
   <React.Fragment>
     <Helmet>
       <title>PSC Supersprint | 2022</title>
