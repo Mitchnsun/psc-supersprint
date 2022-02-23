@@ -25,6 +25,6 @@ export async function getServerSideProps() {
   const results = await get(resultRef)
 
   return {
-    props: rankResults(results.val()),
+    props: rankResults(Object.values(results.val()) || []),
   }
 }
