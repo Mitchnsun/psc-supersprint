@@ -1,5 +1,20 @@
 import { compact } from 'lodash';
+import * as yup from 'yup';
 import Ranks from './ranks';
+
+export const schema = yup.object({
+  firstname: yup.string().required(),
+  lastname: yup.string().required(),
+  gender: yup.string().required(),
+  bib: yup.number().required(),
+  category: yup.string().required(),
+  times: yup.object({
+    swim: yup.number().required(),
+    bike: yup.number().required(),
+    total: yup.number().required(),
+  })
+
+});
 
 const sortResults = data =>
 // eslint-disable-next-line implicit-arrow-linebreak

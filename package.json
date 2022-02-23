@@ -27,14 +27,19 @@
     }
   },
   "dependencies": {
+    "@hookform/resolvers": "^2.8.8",
+    "axios": "^0.26.0",
     "firebase": "^9.6.3",
     "lodash": "^4.17.21",
     "next": "^12.1.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-helmet": "^6.1.0",
+    "react-hook-form": "^7.27.1",
+    "react-simple-timefield": "^3.2.5",
     "styled-jsx": "^4.0.1",
-    "swr": "^1.1.2"
+    "swr": "^1.1.2",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "eslint": "^8.7.0",
