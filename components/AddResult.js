@@ -1,23 +1,33 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React from 'react';
-import axios from 'axios';
+import React, { useState } from 'react';
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
+import { push, ref, set } from "firebase/database";
+import db from '../lib/firebase';
 import { schema } from '../utils/results';
 
 const AddResultForm = () => {
-  const { register, handleSubmit, formState:{ errors } } = useForm({
+  const [isLoading, setIsLoading] = useState(false);
+  const [status, setStatus] = useState(null);
+  const { register, reset, handleSubmit, formState:{ errors } } = useForm({
     resolver: yupResolver(schema)
   });
-  const onSubmit = data => axios.post('/api/result', data).then(res => console.log('res', res));
+  const onSubmit = async ({ firstname, lastname, bib, gender, category, times }) => {
+    setIsLoading(true);
+    const { key } = await push(ref(db, 'results'))
+    set(ref(db, `results/${key}`), { firstname, lastname, bib, sex: gender, cat: category, ...times, run: times.total - times.swim - times.bike})
+      .then(() => reset())
+      .catch(error => setStatus(error.message))
+      .finally(() => setIsLoading(false))
+  };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <input {...register("bib")} />
+    <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
+      <input {...register("bib")} placeholder="Numéro de dossard" />
       <p>{errors.bib?.message}</p>
-      <input {...register("firstname")} />
+      <input {...register("firstname")} placeholder="Prénom" />
       <p>{errors.firstname?.message}</p>
-      <input {...register("lastname")} />
+      <input {...register("lastname")} placeholder="Nom" />
       <p>{errors.lastname?.message}</p>
       <select {...register("gender")}>
         <option value="M">Homme (M)</option>
@@ -33,13 +43,14 @@ const AddResultForm = () => {
         <option value="Benjamin">Benjamin (B)</option>
       </select>
       <p>{errors.category?.message}</p>
-      <input {...register("times.swim")} />
+      <input {...register("times.swim")} placeholder="Natation" />
       <p>{errors.times?.swim?.message}</p>
-      <input {...register("times.bike")} />
+      <input {...register("times.bike")} placeholder="Vélo" />
       <p>{errors.times?.bike?.message}</p>
-      <input {...register("times.total")} />
+      <input {...register("times.total")} placeholder="Total" />
       <p>{errors.times?.total?.message}</p>
-      <input type="submit" />
+      <input type="submit" disabled={isLoading} />
+      <p>{status}</p>
     </form>
   )
 };
