@@ -12,7 +12,7 @@ export default function Results() {
 
   useEffect(() => {
     const resultRef = ref(db, 'results')
-    onValue(resultRef, snapshot => setData(rankResults(snapshot.val()) || []))
+    onValue(resultRef, snapshot => setData(rankResults(Object.values(snapshot.val()) || [])))
   }, [])
 
   return (
