@@ -9,9 +9,9 @@ export const schema = yup.object({
   bib: yup.number().required(),
   category: yup.string().required(),
   times: yup.object({
-    swim: yup.number().required(),
-    bike: yup.number().required(),
-    total: yup.number().required(),
+    swim: yup.string().required(),
+    bike: yup.string().required(),
+    total: yup.string().required(),
   })
 
 });
