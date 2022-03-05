@@ -20,7 +20,7 @@ const ResultsPage = ({ results = [], totals = [] }) => (
 
 export default ResultsPage;
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
   const resultRef = child(ref(db), 'results')
   const results = await get(resultRef)
 
