@@ -2,6 +2,12 @@
 
 import React from 'react';
 import App from 'next/app';
+
+import '@fontsource/roboto/300.css';
+import '@fontsource/roboto/400.css';
+import '@fontsource/roboto/500.css';
+import '@fontsource/roboto/700.css';
+
 import Layout from '../components/Layout';
 import normalizeStyles from '../styles/Normalize';
 import COLORS from '../styles/colors';
@@ -15,22 +21,6 @@ class MyApp extends App {
         <Component {...pageProps} />
         <style jsx global>
           {normalizeStyles}
-        </style>
-        <style jsx global>
-          {`
-            @font-face {
-              font-family: 'OpenSans';
-              src: url('/fonts/opensans-regular-webfont.woff');
-              font-weight: normal;
-              font-style: normal;
-            }
-            @font-face {
-              font-family: 'OpenSansBold';
-              src: url('/fonts/opensans-bold-webfont.woff');
-              font-weight: bold;
-              font-style: normal;
-            }
-          `}
         </style>
         <style jsx global>
           {`
