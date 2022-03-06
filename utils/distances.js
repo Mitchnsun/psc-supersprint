@@ -5,7 +5,7 @@ export default {
     unit_label: 'mètres',
   },
   bike: {
-    length: 6,
+    length: 5.8,
     unit: 'km',
     unit_label: 'kilomètres',
   },
