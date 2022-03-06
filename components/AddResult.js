@@ -42,10 +42,10 @@ const AddResultForm = () => {
     <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
       <input {...register("bib")} placeholder="Numéro de dossard" />
       <p>{errors.bib?.message}</p>
-      <input {...register("firstname")} placeholder="Prénom" />
-      <p>{errors.firstname?.message}</p>
       <input {...register("lastname")} placeholder="Nom" />
       <p>{errors.lastname?.message}</p>
+      <input {...register("firstname")} placeholder="Prénom" />
+      <p>{errors.firstname?.message}</p>
       <select {...register("gender")}>
         <option value="M">Homme (M)</option>
         <option value="F">Femme (F)</option>
