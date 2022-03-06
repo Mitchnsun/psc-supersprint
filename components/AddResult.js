@@ -48,7 +48,7 @@ const AddResultForm = () => {
       <p>{errors.lastname?.message}</p>
       <select {...register("gender")}>
         <option value="M">Homme (M)</option>
-        <option value="F">Homme (F)</option>
+        <option value="F">Femme (F)</option>
       </select>
       <p>{errors.gender?.message}</p>
       <input {...register("birthYear")} placeholder="Année de naissance" onChange={onChangeBirthYear} maxLength={4} />
