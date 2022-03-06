@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import ResultsTable from './ResultsTable';
 import COLORS from '../styles/colors';
+import { CATEGORIES } from '../utils/categories.utils'
 
 export default function Board({ results, totals }) {
   const [search, setSearch] = useState({});
@@ -17,12 +18,7 @@ export default function Board({ results, totals }) {
         />
         <select onChange={e => setSearch({ ...search, cat: e.target.value })}>
           <option value="">Catégories:</option>
-          <option value="V">Vétéran (V)</option>
-          <option value="S">Senior (S)</option>
-          <option value="J">Junior (J)</option>
-          <option value="C">Cadet (C)</option>
-          <option value="M">Minime (M)</option>
-          <option value="B">Benjamin (B)</option>
+          {CATEGORIES.map(cat => <option value={cat.id}>{cat.label} ({cat.id})</option>)}
         </select>
         <select onChange={e => setSearch({ ...search, gender: e.target.value })}>
           <option value="">Genre:</option>

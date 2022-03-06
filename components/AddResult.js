@@ -6,6 +6,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { push, ref, set } from "firebase/database";
 import db from '../lib/firebase';
 import { schema } from '../utils/results';
+import { CATEGORIES, categoryFromBirthYear } from '../utils/categories.utils';
 
 const timeCalculus = ({ swim, bike, total }) => {
   const swimSeconds = swim.split(':').reverse().reduce((acc, val, index) => acc + (val * 60**index), 0);
@@ -18,9 +19,15 @@ const timeCalculus = ({ swim, bike, total }) => {
 const AddResultForm = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [status, setStatus] = useState(null);
-  const { control, register, reset, handleSubmit, formState:{ errors } } = useForm({
+  const { control, register, reset, setValue, handleSubmit, formState:{ errors } } = useForm({
     resolver: yupResolver(schema)
   });
+
+  const onChangeBirthYear = e => {
+    const birthYear = parseInt(e.target.value, 10);
+    const category = categoryFromBirthYear(birthYear);
+    setValue('category', category.id);
+  }
 
   const onSubmit = async ({ firstname, lastname, bib, gender, category, times }) => {
     setIsLoading(true);
@@ -44,13 +51,9 @@ const AddResultForm = () => {
         <option value="F">Homme (F)</option>
       </select>
       <p>{errors.gender?.message}</p>
+      <input {...register("birthYear")} placeholder="Année de naissance" onChange={onChangeBirthYear} maxLength={4} />
       <select {...register("category")}>
-        <option value="V">Vétéran (V)</option>
-        <option value="S">Senior (S)</option>
-        <option value="J">Junior (J)</option>
-        <option value="C">Cadet (C)</option>
-        <option value="M">Minime (M)</option>
-        <option value="Benjamin">Benjamin (B)</option>
+        {CATEGORIES.map(cat => <option value={cat.id}>{cat.label} ({cat.id})</option>)}
       </select>
       <p>{errors.category?.message}</p>
       <Controller
