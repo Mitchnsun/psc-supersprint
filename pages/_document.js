@@ -6,6 +6,8 @@ class MyDocument extends Document {
     return (
       <Html lang="fr">
         <Head>
+          <link rel="preload" href="/static/opensans-regular-webfont.woff" as="font" crossOrigin="" />
+          <link rel="preload" href="/static/opensans-bold-webfont.woff" as="font" crossOrigin="" />
           <link rel="icon" type="image/jpg" href="/static/Favicon.jpg" />
         </Head>
         <body>

@@ -9,7 +9,6 @@ const Title = ({ hLevel = 1, children }) => (
     sx={{
       color: COLORS.WHITE,
       backgroundColor: COLORS.SECONDARY,
-      margin: 0,
       padding: "10px 15px"
     }}
   >
