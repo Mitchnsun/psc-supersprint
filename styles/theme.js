@@ -7,6 +7,14 @@ import '@fontsource/roboto/700.css';
 import COLORS from './colors';
 
 const theme = createTheme({
+  palette: {
+    primary: {
+      main: COLORS.PRIMARY,
+    },
+    secondary: {
+      main: COLORS.SECONDARY,
+    },
+  },
   typography: {
     fontFamily: [
       'OpenSans',
