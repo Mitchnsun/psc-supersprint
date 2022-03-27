@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import { styled, useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material';
 import COLORS from '../styles/colors';
-import BREAKPOINT from '../styles/breakpoints';
 
 import LineResult from './LineResult';
 
@@ -9,7 +11,20 @@ const rEx = (item = '', value = '') => {
   return regex.test(item.toString().toLowerCase());
 };
 
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
+  color: COLORS.PRIMARY,
+  textAlign: 'center',
+  fontFamily: 'OpenSansBold',
+  fontWeight: 'bold',
+  fontSize: '1.1rem',
+  [theme.breakpoints.down('sm')]: {
+    padding: 2,
+  }
+}));
+
 const ResultsTable = ({ results, search = {}, totals }) => {
+  const theme = useTheme();
+  const isLargeScreen = useMediaQuery(theme.breakpoints.up('md'));
   const { input, cat, gender } = search;
   const list = results.filter(
     item =>
@@ -18,74 +33,36 @@ const ResultsTable = ({ results, search = {}, totals }) => {
       rEx(item.sex, gender),
   );
 
-  const [width, setWidth] = useState(process.browser ? window.innerWidth : BREAKPOINT + 1);
-  useEffect(() => {
-    const handleResize = () => {
-      setWidth(window.innerWidth);
-    };
-    window.addEventListener('resize', handleResize);
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
-
   return (
-    <React.Fragment>
-      <table style={{ textAlign: 'center' }}>
-        <thead>
-          <tr>
-            <th aria-label="Expand" />
-            <th>Rang</th>
-            <th>Nom</th>
-            <th>Dossard</th>
-            {width > BREAKPOINT && <th>Cat.</th>}
-            <th>Temps</th>
-            {width > BREAKPOINT && (
-              <React.Fragment>
-                <th>Nat.</th>
-                <th>Vélo</th>
-                <th>CAP</th>
-              </React.Fragment>
-            )}
-          </tr>
-        </thead>
-        <tbody>
-          {list.map((item, index) => (
-            <LineResult
-              key={item.bib}
-              result={item}
-              totals={totals}
-              rank={search.input ? item.ranks.scratch : index + 1}
-            />
-          ))}
-        </tbody>
-      </table>
-      <style jsx>
-        {`
-          table {
-            border-collapse: collapse;
-            margin-top: 1rem;
-            width: 100%;
-          }
-          thead {
-            color: ${COLORS.PRIMARY};
-            font-family: OpenSansBold;
-            font-weight: bold;
-            font-size: 1.1rem;
-          }
-          tbody {
-            border-spacing: 0;
-            border-collapse: collapse;
-          }
-          tr {
-            height: 2.5rem;
-            border-bottom: 1px solid ${COLORS.GRAY};
-            outline: 0;
-            vertical-align: middle;
-          }
-        `}
-      </style>
-    </React.Fragment>
+    <Table size="small">
+      <TableHead>
+        <TableRow>
+          <StyledTableCell aria-label="Expand" />
+          <StyledTableCell>Rang</StyledTableCell>
+          <StyledTableCell>Nom</StyledTableCell>
+          <StyledTableCell>Dossard</StyledTableCell>
+          {isLargeScreen && <StyledTableCell>Cat.</StyledTableCell>}
+          <StyledTableCell>Temps</StyledTableCell>
+          {isLargeScreen && (
+            <React.Fragment>
+              <StyledTableCell>Nat.</StyledTableCell>
+              <StyledTableCell>Vélo</StyledTableCell>
+              <StyledTableCell>CAP</StyledTableCell>
+            </React.Fragment>
+          )}
+        </TableRow>
+      </TableHead>
+      <TableBody>
+        {list.map((item, index) => (
+          <LineResult
+            key={item.bib}
+            result={item}
+            totals={totals}
+            rank={search.input ? item.ranks.scratch : index + 1}
+          />
+        ))}
+      </TableBody>
+    </Table>
   );
 };
 
