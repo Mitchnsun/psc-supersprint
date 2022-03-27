@@ -11,12 +11,15 @@ const rEx = (item = '', value = '') => {
   return regex.test(item.toString().toLowerCase());
 };
 
-const StyledTableCell = styled(TableCell)(() => ({
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
   color: COLORS.PRIMARY,
   textAlign: 'center',
   fontFamily: 'OpenSansBold',
   fontWeight: 'bold',
-  fontSize: '1.1rem'
+  fontSize: '1.1rem',
+  [theme.breakpoints.down('sm')]: {
+    padding: 2,
+  }
 }));
 
 const ResultsTable = ({ results, search = {}, totals }) => {
