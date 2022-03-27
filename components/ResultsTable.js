@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { styled } from '@mui/material/styles';
+import React from 'react';
+import { styled, useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import { Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material';
 import COLORS from '../styles/colors';
-import BREAKPOINT from '../styles/breakpoints';
 
 import LineResult from './LineResult';
 
@@ -23,6 +23,8 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 }));
 
 const ResultsTable = ({ results, search = {}, totals }) => {
+  const theme = useTheme();
+  const isLargeScreen = useMediaQuery(theme.breakpoints.up('md'));
   const { input, cat, gender } = search;
   const list = results.filter(
     item =>
@@ -30,17 +32,6 @@ const ResultsTable = ({ results, search = {}, totals }) => {
       rEx(item.cat, cat) &&
       rEx(item.sex, gender),
   );
-
-  const [width, setWidth] = useState(process.browser ? window.innerWidth : BREAKPOINT + 1);
-  useEffect(() => {
-    const handleResize = () => {
-      setWidth(window.innerWidth);
-    };
-    window.addEventListener('resize', handleResize);
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
 
   return (
     <Table size="small">
@@ -50,9 +41,9 @@ const ResultsTable = ({ results, search = {}, totals }) => {
           <StyledTableCell>Rang</StyledTableCell>
           <StyledTableCell>Nom</StyledTableCell>
           <StyledTableCell>Dossard</StyledTableCell>
-          {width > BREAKPOINT && <StyledTableCell>Cat.</StyledTableCell>}
+          {isLargeScreen && <StyledTableCell>Cat.</StyledTableCell>}
           <StyledTableCell>Temps</StyledTableCell>
-          {width > BREAKPOINT && (
+          {isLargeScreen && (
             <React.Fragment>
               <StyledTableCell>Nat.</StyledTableCell>
               <StyledTableCell>Vélo</StyledTableCell>

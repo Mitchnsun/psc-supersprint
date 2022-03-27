@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import styled from '@emotion/styled';
+import { styled } from '@mui/material/styles';
 import { FormControl, Grid, MenuItem, TextField } from '@mui/material';
 import ResultsTable from './ResultsTable';
 import COLORS from '../styles/colors';
 import { CATEGORIES } from '../utils/categories.utils'
 
-const Label = styled.p`
+const Label = styled('p')`
   margin: 0;
   font-size: 1.1rem;
   font-family: 'OpenSansBold';

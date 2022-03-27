@@ -1,14 +1,14 @@
 import React from 'react';
 import { Grid } from '@mui/material';
-import styled from '@emotion/styled'
+import { styled } from '@mui/material/styles';
 import RankIcon from './RankIcon';
 import COLORS from '../../styles/colors';
 
-const StyledTotal = styled.span`
+const StyledTotal = styled('span')`
   font-size: 0.8rem;
   color: ${COLORS.GRAY_DARK};
 `;
-const StyledRank = styled.p`
+const StyledRank = styled('p')`
   font-size: 0.9rem;
   margin: 0 0.75rem;
 `;

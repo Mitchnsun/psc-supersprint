@@ -1,8 +1,8 @@
 import React from 'react';
-import styled from '@emotion/styled';
+import { styled } from '@mui/material/styles';
 import COLORS from '../../styles/colors';
 
-const Button = styled.button`
+const Button = styled('button')`
   margin: 0;
   padding: 0;
   border: 0;

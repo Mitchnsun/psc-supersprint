@@ -1,21 +1,21 @@
 import React from 'react';
-import styled from '@emotion/styled';
+import { styled } from '@mui/material/styles';
 import { Grid } from '@mui/material';
 import COLORS from '../../styles/colors';
 
-const StyledSpeed = styled.p`
+const StyledSpeed = styled('p')`
   font-size: 0.9rem;
   margin: 0.25rem;
   text-align: center;
 `;
 
-const StyledUnit = styled.span`
+const StyledUnit = styled('span')`
   font-size: 0.8rem;
   padding-left: 2px;
   color: ${COLORS.GRAY_DARK};
 `;
 
-const StyledTime = styled.p`
+const StyledTime = styled('p')`
   display: inline-block;
   vertical-align: middle;
   margin: 0;
@@ -26,7 +26,7 @@ const StyledTime = styled.p`
   font-weight: bold;
 `;
 
-const StyledIcon = styled.div`
+const StyledIcon = styled('div')`
   display: inline-block;
   vertical-align: middle;
   width: 30px;
