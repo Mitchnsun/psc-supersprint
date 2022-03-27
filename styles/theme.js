@@ -4,6 +4,8 @@ import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 
+import COLORS from './colors';
+
 const theme = createTheme({
   typography: {
     fontFamily: [
@@ -29,6 +31,15 @@ const theme = createTheme({
           src: url('/static/opensans-bold-webfont.woff');
           font-weight: bold;
           font-style: normal;
+        }
+        body {
+          font-family: OpenSans, sans-serif;
+          background-color: ${COLORS.PRIMARY};
+        }
+        @media (max-width: 450px) {
+          body {
+            font-size: 0.9rem;
+          }
         }
       `,
     },

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import COLORS from '../styles/colors';
+import { TableRow, TableCell } from '@mui/material';
 import TimeCell from './atoms/TimeCell';
 import DetailsResult from './DetailsResult';
 import ArrowIcon from './atoms/ArrowIcon';
@@ -21,14 +21,14 @@ const LineResult = ({ result, totals, rank }) => {
 
   return (
     <React.Fragment>
-      <tr className="mainLine" onClick={() => setMoreDetails(!moreDetails)}>
-        <td>
+      <TableRow hover onClick={() => setMoreDetails(!moreDetails)}>
+        <TableCell align="center">
           <ArrowIcon down={moreDetails} />
-        </td>
-        <td>{rank}</td>
-        <td>{`${result.firstname} ${result.lastname}`}</td>
-        <td>{`#${result.bib}`}</td>
-        {width > BREAKPOINT && <td>{`${result.cat}${result.sex}`}</td>}
+        </TableCell>
+        <TableCell align="center">{rank}</TableCell>
+        <TableCell align="center">{`${result.firstname} ${result.lastname}`}</TableCell>
+        <TableCell align="center">{`#${result.bib}`}</TableCell>
+        {width > BREAKPOINT && <TableCell align="center">{`${result.cat}${result.sex}`}</TableCell>}
         <TimeCell time={result.total} isBold />
         {width > BREAKPOINT && (
           <React.Fragment>
@@ -37,31 +37,14 @@ const LineResult = ({ result, totals, rank }) => {
             <TimeCell time={result.run} />
           </React.Fragment>
         )}
-      </tr>
+      </TableRow>
       {moreDetails && (
-        <tr>
-          <td colSpan="9">
+        <TableRow>
+          <TableCell colSpan="9">
             <DetailsResult result={result} totals={totals} />
-          </td>
-        </tr>
+          </TableCell>
+        </TableRow>
       )}
-      <style jsx>
-        {`
-          tr {
-            height: 2.75rem;
-            border-bottom: 1px solid ${COLORS.GRAY};
-            outline: 0;
-            vertical-align: middle;
-          }
-          td {
-            text-align: center;
-          }
-          .mainLine:hover {
-            cursor: pointer;
-            background-color: ${COLORS.GRAY};
-          }
-        `}
-      </style>
     </React.Fragment>
   );
 };

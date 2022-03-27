@@ -1,49 +1,49 @@
 import React from 'react';
+import styled from '@emotion/styled';
+import { Grid } from '@mui/material';
 import COLORS from '../../styles/colors';
 
+const StyledSpeed = styled.p`
+  font-size: 0.9rem;
+  margin: 0.25rem;
+  text-align: center;
+`;
+
+const StyledUnit = styled.span`
+  font-size: 0.8rem;
+  padding-left: 2px;
+  color: ${COLORS.GRAY_DARK};
+`;
+
+const StyledTime = styled.p`
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0;
+  padding: 0 0.5rem;
+  color: ${COLORS.PURPLE};
+  font-family: OpenSansBold;
+  font-size: 1.3rem;
+  font-weight: bold;
+`;
+
+const StyledIcon = styled.div`
+  display: inline-block;
+  vertical-align: middle;
+  width: 30px;
+  height: 30px;
+`;
+
 const ActivityResult = ({ icon, label, time, speed, unit }) => (
-  <div className="activity" aria-label={label}>
-    <div style={{ verticalAlign: 'middle' }}>
-      <div className="icon">{icon}</div>
-      <p className="time">{time}</p>
+  <Grid item xs={6} md={3} aria-label={label}>
+    <div style={{ textAlign: 'center' }}>
+      <StyledIcon>{icon}</StyledIcon>
+      <StyledTime>{time}</StyledTime>
     </div>
-    <p className="speed">
+    <StyledSpeed>
       {speed}
-      <span>{unit}</span>
-    </p>
-    <style jsx>
-      {`
-        .activity {
-          text-align: center;
-        }
-        .icon {
-          display: inline-block;
-          vertical-align: middle;
-          width: 30px;
-          height: 30px;
-        }
-        .time {
-          display: inline-block;
-          vertical-align: middle;
-          margin: 0;
-          padding: 0 0.5rem;
-          color: ${COLORS.PURPLE};
-          font-family: OpenSansBold;
-          font-size: 1.3rem;
-          font-weight: bold;
-        }
-        .speed {
-          font-size: 0.9rem;
-          margin: 0.25rem;
-        }
-        .speed span {
-          font-size: 0.8rem;
-          padding-left: 2px;
-          color: ${COLORS.GRAY_DARK};
-        }
-      `}
-    </style>
-  </div>
+      <StyledUnit>{unit}</StyledUnit>
+    </StyledSpeed>
+  </Grid>
 );
 
 export default ActivityResult;

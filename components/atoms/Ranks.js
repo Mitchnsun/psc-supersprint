@@ -1,50 +1,38 @@
 import React from 'react';
+import { Grid } from '@mui/material';
+import styled from '@emotion/styled'
 import RankIcon from './RankIcon';
 import COLORS from '../../styles/colors';
 
+const StyledTotal = styled.span`
+  font-size: 0.8rem;
+  color: ${COLORS.GRAY_DARK};
+`;
+const StyledRank = styled.p`
+  font-size: 0.9rem;
+  margin: 0 0.75rem;
+`;
+
 const Ranks = ({ ranks, cat, gender, totals = {} }) => (
-  <div className="ranks">
-    <div className="icon">
+  <Grid container item xs={6} md={3} justifyContent="center" alignItems="center">
+    <Grid item style={{ width: 30, height: 30 }}>
       <RankIcon />
-    </div>
-    <div>
-      <p className="rank">
+    </Grid>
+    <Grid item style={{ textAlign: 'left' }}>
+      <StyledRank>
         {`Scratch: ${ranks.scratch}`}
-        <span>{`/${totals.overall}`}</span>
-      </p>
-      <p className="rank">
+        <StyledTotal>{`/${totals.overall}`}</StyledTotal>
+      </StyledRank>
+      <StyledRank>
         {`Cat. ${cat}${gender}: ${ranks.cat}`}
-        <span>{`/${totals[cat + gender]}`}</span>
-      </p>
-      <p className="rank">
+        <StyledTotal>{`/${totals[cat + gender]}`}</StyledTotal>
+      </StyledRank>
+      <StyledRank>
         {`${gender}: ${ranks.gender}`}
-        <span>{`/${totals[gender]}`}</span>
-      </p>
-    </div>
-    <style jsx>
-      {`
-        .ranks {
-          display: flex;
-          align-items: center;
-          text-align: left;
-        }
-        .icon {
-          display: inline-block;
-          vertical-align: middle;
-          width: 30px;
-          height: 30px;
-        }
-        .rank {
-          font-size: 0.9rem;
-          margin: 0.25rem 0.75rem;
-        }
-        .rank span {
-          font-size: 0.8rem;
-          color: ${COLORS.GRAY_DARK};
-        }
-      `}
-    </style>
-  </div>
+        <StyledTotal>{`/${totals[gender]}`}</StyledTotal>
+      </StyledRank>
+    </Grid>
+  </Grid>
 );
 
 export default Ranks;

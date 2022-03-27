@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { styled } from '@mui/material/styles';
+import { Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material';
 import COLORS from '../styles/colors';
 import BREAKPOINT from '../styles/breakpoints';
 
@@ -8,6 +10,14 @@ const rEx = (item = '', value = '') => {
   const regex = new RegExp(value.toLowerCase());
   return regex.test(item.toString().toLowerCase());
 };
+
+const StyledTableCell = styled(TableCell)(() => ({
+  color: COLORS.PRIMARY,
+  textAlign: 'center',
+  fontFamily: 'OpenSansBold',
+  fontWeight: 'bold',
+  fontSize: '1.1rem'
+}));
 
 const ResultsTable = ({ results, search = {}, totals }) => {
   const { input, cat, gender } = search;
@@ -30,62 +40,35 @@ const ResultsTable = ({ results, search = {}, totals }) => {
   }, []);
 
   return (
-    <React.Fragment>
-      <table style={{ textAlign: 'center' }}>
-        <thead>
-          <tr>
-            <th aria-label="Expand" />
-            <th>Rang</th>
-            <th>Nom</th>
-            <th>Dossard</th>
-            {width > BREAKPOINT && <th>Cat.</th>}
-            <th>Temps</th>
-            {width > BREAKPOINT && (
-              <React.Fragment>
-                <th>Nat.</th>
-                <th>Vélo</th>
-                <th>CAP</th>
-              </React.Fragment>
-            )}
-          </tr>
-        </thead>
-        <tbody>
-          {list.map((item, index) => (
-            <LineResult
-              key={item.bib}
-              result={item}
-              totals={totals}
-              rank={search.input ? item.ranks.scratch : index + 1}
-            />
-          ))}
-        </tbody>
-      </table>
-      <style jsx>
-        {`
-          table {
-            border-collapse: collapse;
-            margin-top: 1rem;
-            width: 100%;
-          }
-          thead {
-            color: ${COLORS.PRIMARY};
-            font-family: OpenSansBold;
-            font-weight: bold;
-            font-size: 1.1rem;
-          }
-          tbody {
-            border-spacing: 0;
-            border-collapse: collapse;
-          }
-          tr {
-            height: 2.5rem;
-            border-bottom: 1px solid ${COLORS.GRAY};
-            outline: 0;
-            vertical-align: middle;
-          }
-        `}
-      </style>
-    </React.Fragment>
+    <Table size="small">
+      <TableHead>
+        <TableRow>
+          <StyledTableCell aria-label="Expand" />
+          <StyledTableCell>Rang</StyledTableCell>
+          <StyledTableCell>Nom</StyledTableCell>
+          <StyledTableCell>Dossard</StyledTableCell>
+          {width > BREAKPOINT && <StyledTableCell>Cat.</StyledTableCell>}
+          <StyledTableCell>Temps</StyledTableCell>
+          {width > BREAKPOINT && (
+            <React.Fragment>
+              <StyledTableCell>Nat.</StyledTableCell>
+              <StyledTableCell>Vélo</StyledTableCell>
+              <StyledTableCell>CAP</StyledTableCell>
+            </React.Fragment>
+          )}
+        </TableRow>
+      </TableHead>
+      <TableBody>
+        {list.map((item, index) => (
+          <LineResult
+            key={item.bib}
+            result={item}
+            totals={totals}
+            rank={search.input ? item.ranks.scratch : index + 1}
+          />
+        ))}
+      </TableBody>
+    </Table>
   );
 };
 
