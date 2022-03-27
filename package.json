@@ -40,8 +40,6 @@
     "react-helmet": "^6.1.0",
     "react-hook-form": "^7.27.1",
     "react-simple-timefield": "^3.2.5",
-    "styled-jsx": "^4.0.1",
-    "swr": "^1.1.2",
     "yup": "^0.32.11"
   },
   "devDependencies": {
