@@ -23,11 +23,11 @@
     "prepare": "husky install"
   },
   "dependencies": {
-    "@emotion/react": "^11.8.2",
-    "@emotion/styled": "^11.8.1",
-    "@fontsource/roboto": "^4.5.3",
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
+    "@fontsource/roboto": "^4.5.8",
     "@hookform/resolvers": "^2.8.8",
-    "@mui/material": "^5.5.2",
+    "@mui/material": "^5.10.15",
     "firebase": "^9.6.3",
     "lodash": "^4.17.21",
     "next": "^13.0.5",
