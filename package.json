@@ -26,7 +26,7 @@
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
     "@fontsource/roboto": "^4.5.8",
-    "@hookform/resolvers": "^2.8.8",
+    "@hookform/resolvers": "^2.9.10",
     "@mui/material": "^5.10.15",
     "firebase": "^9.6.3",
     "lodash": "^4.17.21",
@@ -34,7 +34,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-helmet": "^6.1.0",
-    "react-hook-form": "^7.27.1",
+    "react-hook-form": "^7.39.5",
     "react-simple-timefield": "^3.2.5",
     "yup": "^0.32.11"
   },
