@@ -16,14 +16,7 @@ const theme = createTheme({
     },
   },
   typography: {
-    fontFamily: [
-      'OpenSans',
-      'OpenSansBold',
-      'Roboto',
-      '"Helvetica Neue"',
-      'Arial',
-      'sans-serif',
-    ].join(','),
+    fontFamily: ['OpenSans', 'OpenSansBold', 'Roboto', '"Helvetica Neue"', 'Arial', 'sans-serif'].join(','),
   },
   components: {
     MuiCssBaseline: {
@@ -54,4 +47,4 @@ const theme = createTheme({
   },
 });
 
-export default theme
+export default theme;
