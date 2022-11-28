@@ -1,12 +1,13 @@
-import { createContext } from 'react'
+import { createContext } from 'react';
+import { noop } from 'lodash';
 
-export const INITIAL_USER = { uid: null, isLoggedIn: false }
+export const INITIAL_USER = { uid: null, isLoggedIn: false };
 
 const initialUser = {
   user: INITIAL_USER,
-  setUser: () => {},
-}
+  setUser: noop,
+};
 
-const UserContext = createContext(initialUser)
+const UserContext = createContext(initialUser);
 
-export default UserContext
+export default UserContext;
