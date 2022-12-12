@@ -6,8 +6,9 @@ import db from '../lib/firebase';
 import { rankResults } from '../utils/results';
 import Title from '../components/atoms/Title';
 import Board from '../components/Board';
+import { ResultType } from '../utils/types';
 
-const ResultsPage = ({ results = [], totals = [] }) => (
+const ResultsPage = ({ results = [], totals = {} }: { results: ResultType[]; totals: Record<string, number> }) => (
   <React.Fragment>
     <Helmet>
       <title>PSC Supersprint | 2022</title>

@@ -6,9 +6,13 @@ import db from '../lib/firebase';
 import { rankResults } from '../utils/results';
 import Board from '../components/Board';
 import Title from '../components/atoms/Title';
+import { ResultType } from '../utils/types';
 
 export default function Results() {
-  const [data, setData] = useState({ results: [], totals: [] });
+  const [data, setData] = useState<{ results: ResultType[]; totals: Record<string, number> }>({
+    results: [],
+    totals: {},
+  });
 
   useEffect(() => {
     const resultRef = ref(db, 'results');
