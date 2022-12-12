@@ -1,14 +1,14 @@
-import React from 'react';
 import { Grid } from '@mui/material';
 import Time from '../utils/time';
+import { ResultType } from '../utils/types';
 import SwimIcon from './atoms/SwimIcon';
 import BikeIcon from './atoms/BikeIcon';
 import RunIcon from './atoms/RunIcon';
 import Ranks from './atoms/Ranks';
 import ActivityResult from './atoms/ActivityResult';
 
-const DetailsResult = ({ result, totals }) => (
-  <Grid container spacing={2} justifyContent="center" style={{ padding: "0.5rem" }}>
+const DetailsResult = ({ result, totals }: { result: ResultType; totals: Record<string, number> }) => (
+  <Grid container spacing={2} justifyContent="center" style={{ padding: '0.5rem' }}>
     <Ranks ranks={result.ranks} cat={result.cat} gender={result.sex} totals={totals} />
     <ActivityResult
       icon={<SwimIcon />}

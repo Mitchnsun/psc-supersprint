@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import TimeField from 'react-simple-timefield';
 import { push, ref, set } from 'firebase/database';
@@ -7,21 +7,31 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { Alert, Box, Button, MenuItem, Stack, TextField } from '@mui/material';
 import db from '../lib/firebase';
 import { schema } from '../utils/results';
-import { CATEGORIES, categoryFromBirthYear } from '../utils/categories.utils';
+import { CAT, CATEGORIES, categoryFromBirthYear } from '../utils/categories.utils';
 
-const timeCalculus = ({ swim, bike, total }) => {
+type FormValues = {
+  bib: string;
+  birthYear: string;
+  category: CAT;
+  firstname: string;
+  gender: string;
+  lastname: string;
+  times: { swim: string; bike: string; total: string };
+};
+
+const timeCalculus = ({ swim, bike, total }: { swim: string; bike: string; total: string }) => {
   const swimSeconds = swim
     .split(':')
     .reverse()
-    .reduce((acc, val, index) => acc + val * 60 ** index, 0);
+    .reduce((acc, val, index) => acc + parseInt(val, 10) * 60 ** index, 0);
   const bikeSeconds = bike
     .split(':')
     .reverse()
-    .reduce((acc, val, index) => acc + val * 60 ** index, 0);
+    .reduce((acc, val, index) => acc + parseInt(val, 10) * 60 ** index, 0);
   const totalSeconds = total
     .split(':')
     .reverse()
-    .reduce((acc, val, index) => acc + val * 60 ** index, 0);
+    .reduce((acc, val, index) => acc + parseInt(val, 10) * 60 ** index, 0);
 
   return { swim: swimSeconds, bike: bikeSeconds, run: totalSeconds - swimSeconds - bikeSeconds, total: totalSeconds };
 };
@@ -36,24 +46,24 @@ const AddResultForm = () => {
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm({
+  } = useForm<FormValues>({
     resolver: yupResolver(schema),
   });
 
   const birthYear = watch('birthYear');
 
   useEffect(() => {
-    const category = categoryFromBirthYear(parseInt(birthYear, 10));
+    const category = categoryFromBirthYear(parseInt(birthYear, 10)) || CATEGORIES[1];
     setValue('category', category.id);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [birthYear]);
 
-  const onSubmit = async ({ firstname, lastname, bib, gender, category, times }) => {
+  const onSubmit = async ({ firstname, lastname, bib, gender, category, times }: FormValues) => {
     setIsLoading(true);
     const { key } = await push(ref(db, 'results'));
     set(ref(db, `results/${key}`), { firstname, lastname, bib, sex: gender, cat: category, ...timeCalculus(times) })
       .then(() => reset())
-      .catch(error => setStatus(error.message))
+      .catch((error) => setStatus(error.message))
       .finally(() => setIsLoading(false));
   };
 
@@ -132,7 +142,7 @@ const AddResultForm = () => {
                 size="small"
                 error={!!errors.birthYear?.message}
                 helperText={errors.birthYear?.message}
-                maxLength={4}
+                inputProps={{ maxLength: 4 }}
               />
             )}
             name="birthYear"
@@ -150,7 +160,7 @@ const AddResultForm = () => {
                 helperText={errors.category?.message}
                 style={{ width: 150 }}
               >
-                {CATEGORIES.map(cat => (
+                {CATEGORIES.map((cat) => (
                   <MenuItem key={cat.id} value={cat.id}>
                     {cat.label} ({cat.id})
                   </MenuItem>
@@ -159,7 +169,7 @@ const AddResultForm = () => {
             )}
             name="category"
             control={control}
-            defaultValue=""
+            defaultValue={CATEGORIES[1].id}
           />
         </Stack>
         <Stack direction="row" spacing={2}>

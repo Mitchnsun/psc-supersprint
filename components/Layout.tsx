@@ -1,4 +1,4 @@
-import React from 'react';
+import { PropsWithChildren } from 'react';
 import { styled } from '@mui/material/styles';
 import COLORS from '../styles/colors';
 import Header from './Header';
@@ -10,7 +10,7 @@ const Container = styled('div')`
   border: 1px solid ${COLORS.SECONDARY};
 `;
 
-const Layout = ({ children }) => (
+const Layout = ({ children }: PropsWithChildren<unknown>) => (
   <div style={{ margin: 'auto', maxWidth: 1080 }}>
     <Header />
     <Container>{children}</Container>

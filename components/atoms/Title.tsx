@@ -1,15 +1,15 @@
-import React from 'react';
+import { PropsWithChildren, ElementType } from 'react';
 import { Typography } from '@mui/material';
 import COLORS from '../../styles/colors';
 
-const Title = ({ hLevel = 1, children }) => (
-  <Typography 
+const Title = ({ hLevel = 'h1', children }: PropsWithChildren<{ hLevel: ElementType }>) => (
+  <Typography
     variant="h4"
-    component={`h${hLevel}`}
+    component={hLevel}
     sx={{
       color: COLORS.WHITE,
       backgroundColor: COLORS.SECONDARY,
-      padding: "10px 15px"
+      padding: '10px 15px',
     }}
   >
     {children}
