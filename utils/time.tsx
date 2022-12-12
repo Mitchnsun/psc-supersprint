@@ -1,6 +1,6 @@
 import DISTANCES from './distances';
 
-const convert = time => {
+const convert = (time: number) => {
   if (Number.isNaN(time)) return '-';
   const hours = Math.floor(time / 3600);
   const minutes = Math.floor(time / 60);
@@ -9,19 +9,19 @@ const convert = time => {
 };
 
 export default {
-  convert: time => convert(time),
-  swim: time => {
+  convert: (time: number) => convert(time),
+  swim: (time: number) => {
     if (Number.isNaN(time)) return '-';
     const formatted = time / DISTANCES.swim.length;
     return convert(formatted * 100);
   },
-  bike: time => {
+  bike: (time: number) => {
     if (Number.isNaN(time)) return '-';
     // eslint-disable-next-line no-mixed-operators
     const formatted = (3600 / time) * DISTANCES.bike.length;
     return formatted.toFixed(2);
   },
-  run: time => {
+  run: (time: number) => {
     if (Number.isNaN(time)) return '-';
     const formatted = time / DISTANCES.run.length;
     return convert(formatted);

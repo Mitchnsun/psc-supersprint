@@ -1,7 +1,7 @@
-import React from 'react';
 import { Grid } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import RankIcon from './RankIcon';
+import { RanksType } from '../../utils/types';
 import COLORS from '../../styles/colors';
 
 const StyledTotal = styled('span')`
@@ -13,7 +13,17 @@ const StyledRank = styled('p')`
   margin: 0 0.75rem;
 `;
 
-const Ranks = ({ ranks, cat, gender, totals = {} }) => (
+const Ranks = ({
+  ranks,
+  cat,
+  gender,
+  totals = {},
+}: {
+  ranks: RanksType;
+  cat: string;
+  gender: string;
+  totals: Record<string, number>;
+}) => (
   <Grid container item xs={6} md={3} justifyContent="center" alignItems="center">
     <Grid item style={{ width: 30, height: 30 }}>
       <RankIcon />

@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useState, useContext } from 'react';
+import { useState, useContext } from 'react';
 import * as yup from 'yup';
 import { initializeApp } from 'firebase/app';
 import { useForm, Controller } from 'react-hook-form';
@@ -25,11 +25,11 @@ const LoginForm = () => {
   });
   const auth = getAuth();
   const { setUser } = useContext(UserContext);
-  const [firebaseMsg, setFirebaseMsg] = useState(null);
+  const [firebaseMsg, setFirebaseMsg] = useState<string | null>(null);
 
-  const onSubmit = ({ id, password }) =>
+  const onSubmit = ({ id, password }: { id: string; password: string }) =>
     signInWithEmailAndPassword(auth, id, password)
-      .then(userCredential => setUser({ uid: userCredential.user.uid, isLoggedIn: true }))
+      .then((userCredential) => setUser({ uid: userCredential.user.uid, isLoggedIn: true }))
       .catch(() => setFirebaseMsg('Identifiants incorrects'));
 
   return (

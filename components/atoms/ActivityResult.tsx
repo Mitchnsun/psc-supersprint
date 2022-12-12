@@ -1,4 +1,3 @@
-import React from 'react';
 import { styled } from '@mui/material/styles';
 import { Grid } from '@mui/material';
 import COLORS from '../../styles/colors';
@@ -33,7 +32,19 @@ const StyledIcon = styled('div')`
   height: 30px;
 `;
 
-const ActivityResult = ({ icon, label, time, speed, unit }) => (
+const ActivityResult = ({
+  icon,
+  label,
+  time,
+  speed,
+  unit,
+}: {
+  icon: JSX.Element;
+  label: string;
+  time: string;
+  speed: string;
+  unit: string;
+}) => (
   <Grid item xs={6} md={3} aria-label={label}>
     <div style={{ textAlign: 'center' }}>
       <StyledIcon>{icon}</StyledIcon>

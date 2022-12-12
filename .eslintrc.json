@@ -7,18 +7,21 @@
     "next/core-web-vitals",
     "plugin:react/recommended",
     "airbnb",
+    "plugin:react/jsx-runtime",
     "plugin:@typescript-eslint/recommended",
     "prettier"
   ],
   "parser": "@typescript-eslint/parser",
   "plugins": ["react", "@typescript-eslint"],
   "rules": {
-    "arrow-parens": ["error", "as-needed"],
+    "@typescript-eslint/no-shadow": "error",
     "import/extensions": ["error", "never"],
+    "no-shadow": "off",
     "object-curly-newline": "off",
     "react/jsx-filename-extension": "off",
     "react/jsx-fragments": "off",
     "react/function-component-definition": "off",
-    "react/prop-types": "off"
+    "react/prop-types": "off",
+    "react/require-default-props": "off"
   }
 }

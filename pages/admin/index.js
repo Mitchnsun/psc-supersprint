@@ -7,7 +7,7 @@ import AddResultForm from '../../components/AddResult';
 import LoginForm from '../../components/LoginForm';
 
 const AdminPage = () => {
-  const [user, setUser] = useState(INITIAL_USER)
+  const [user, setUser] = useState(INITIAL_USER);
   const userMemo = useMemo(() => ({ user, setUser }), [user]);
 
   return (
@@ -15,12 +15,12 @@ const AdminPage = () => {
       <Helmet>
         <title>PSC Supersprint</title>
       </Helmet>
-      <Title hLevel={1}>Administration Résultat</Title>
+      <Title hLevel="h1">Administration Résultat</Title>
       <UserContext.Provider value={userMemo}>
-        {user.isLoggedIn ? (<AddResultForm />): (<LoginForm />)}
+        {user.isLoggedIn ? <AddResultForm /> : <LoginForm />}
       </UserContext.Provider>
     </React.Fragment>
-  )
+  );
 };
 
-export default AdminPage
+export default AdminPage;

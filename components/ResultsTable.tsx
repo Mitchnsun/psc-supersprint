@@ -5,6 +5,7 @@ import { Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material'
 import COLORS from '../styles/colors';
 
 import LineResult from './LineResult';
+import { ResultType, SearchType } from '../utils/types';
 
 const rEx = (item = '', value = '') => {
   const regex = new RegExp(value.toLowerCase());
@@ -19,16 +20,24 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   fontSize: '1.1rem',
   [theme.breakpoints.down('sm')]: {
     padding: 2,
-  }
+  },
 }));
 
-const ResultsTable = ({ results, search = {}, totals }) => {
+const ResultsTable = ({
+  results,
+  search = {},
+  totals,
+}: {
+  results: ResultType[];
+  search?: SearchType;
+  totals: Record<string, number>;
+}) => {
   const theme = useTheme();
   const isLargeScreen = useMediaQuery(theme.breakpoints.up('md'));
   const { input, cat, gender } = search;
   const list = results.filter(
-    item =>
-      (rEx(item.bib, input) || rEx(item.firstname, input) || rEx(item.lastname, input)) &&
+    (item) =>
+      (rEx(item.bib.toString(), input) || rEx(item.firstname, input) || rEx(item.lastname, input)) &&
       rEx(item.cat, cat) &&
       rEx(item.sex, gender),
   );
