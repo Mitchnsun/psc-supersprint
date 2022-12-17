@@ -38,6 +38,7 @@
     "react-helmet": "^6.1.0",
     "react-hook-form": "^7.41.0",
     "react-simple-timefield": "^3.2.5",
+    "sharp": "^0.31.2",
     "yup": "^0.32.11"
   },
   "devDependencies": {
