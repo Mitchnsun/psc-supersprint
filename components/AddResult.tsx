@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import { useState, useEffect } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import TimeField from 'react-simple-timefield';

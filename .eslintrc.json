@@ -8,6 +8,7 @@
     "plugin:react/recommended",
     "airbnb",
     "plugin:react/jsx-runtime",
+    "plugin:storybook/recommended",
     "plugin:@typescript-eslint/recommended",
     "prettier"
   ],
@@ -21,6 +22,7 @@
     "react/jsx-filename-extension": "off",
     "react/jsx-fragments": "off",
     "react/function-component-definition": "off",
+    "react/jsx-props-no-spreading": "off",
     "react/prop-types": "off",
     "react/require-default-props": "off"
   }

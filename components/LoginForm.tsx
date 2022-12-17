@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import { useState, useContext } from 'react';
 import * as yup from 'yup';
 import { initializeApp } from 'firebase/app';
