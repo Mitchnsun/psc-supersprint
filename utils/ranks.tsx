@@ -1,7 +1,7 @@
-import { ResultType } from './types';
+import { ResultTypeWithId } from './types';
 
 export default {
-  byCat: (data: ResultType[]) => {
+  byCat: (data: ResultTypeWithId[]) => {
     let femaleRankInc = 0;
     let maleRankInc = 0;
     let rankBM = 0;
@@ -17,7 +17,7 @@ export default {
     let rankVM = 0;
     let rankVF = 0;
 
-    const rankedResults = data.map((item: ResultType) => {
+    const rankedResults = data.map((item: ResultTypeWithId) => {
       if (item.sex === 'M') {
         maleRankInc += 1;
         // By Cat for M

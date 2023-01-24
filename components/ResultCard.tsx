@@ -26,7 +26,8 @@ const ResultCard = ({ result }: { result: ResultType }) => (
     sx={{
       backgroundColor: 'primary.main',
       borderColor: 'secondary.main',
-      maxWidth: '40%',
+      margin: 'auto',
+      maxWidth: '450px',
       textAlign: 'center',
       paddingBottom: 2,
     }}

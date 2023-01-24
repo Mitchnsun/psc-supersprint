@@ -5,7 +5,7 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import TimeCell from './atoms/TimeCell';
 import DetailsResult from './DetailsResult';
 import ArrowIcon from './atoms/ArrowIcon';
-import { ResultType } from '../utils/types';
+import { ResultTypeWithId } from '../utils/types';
 
 const CustomTableCell = styled(TableCell)(({ theme }) => ({
   [theme.breakpoints.down('sm')]: {
@@ -13,7 +13,15 @@ const CustomTableCell = styled(TableCell)(({ theme }) => ({
   },
 }));
 
-const LineResult = ({ result, totals, rank }: { result: ResultType; totals: Record<string, number>; rank: number }) => {
+const LineResult = ({
+  result,
+  totals,
+  rank,
+}: {
+  result: ResultTypeWithId;
+  totals: Record<string, number>;
+  rank: number;
+}) => {
   const theme = useTheme();
   const isLargeScreen = useMediaQuery(theme.breakpoints.up('md'));
   const [moreDetails, setMoreDetails] = useState(false);

@@ -45,7 +45,7 @@ const ActivityResult = ({
   speed?: string;
   unit?: string;
 }) => (
-  <Grid item xs={6} md={3} aria-label={label}>
+  <Grid item xs={6} md={2} aria-label={label}>
     <div style={{ textAlign: 'center' }}>
       <StyledIcon>{icon}</StyledIcon>
       <StyledTime>{time}</StyledTime>
