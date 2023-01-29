@@ -36,9 +36,9 @@ const ResultCard = ({ result }: { result: ResultType }) => (
     <Title hLevel="h3">
       {result.firstname} {result.lastname}
     </Title>
-    <Card sx={{ margin: 3, padding: 1 }}>
+    <Card sx={{ margin: '4rem 2rem', padding: 1 }}>
       <StyledTotal>{Time.convert(result.total)}</StyledTotal>
-      <Grid container justifyContent="center" alignItems="center">
+      <Grid container spacing={2} justifyContent="center" alignItems="center">
         <ActivityResult icon={<SwimIcon />} label="Natation" time={Time.convert(result.swim)} />
         <ActivityResult icon={<BikeIcon />} label="Vélo" time={Time.convert(result.bike)} />
         <ActivityResult icon={<RunIcon />} label="Course à pied" time={Time.convert(result.run)} />
