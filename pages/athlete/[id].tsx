@@ -1,7 +1,7 @@
 import { GetServerSidePropsContext } from 'next';
 import { ref, child, get } from 'firebase/database';
 import { useRef, useState } from 'react';
-import { toBlob } from 'html-to-image';
+import html2canvas from 'html2canvas';
 import { saveAs } from 'file-saver';
 import { Alert, Button } from '@mui/material';
 
@@ -10,40 +10,49 @@ import { ResultType } from '../../utils/types';
 import ResultCard from '../../components/ResultCard';
 
 const AthletePage = (props: ResultType) => {
-  const resultRef = useRef(null);
+  const resultRef = useRef<HTMLDivElement>(null);
   const [isError, setIsError] = useState(false);
   const { firstname, lastname } = props;
 
   const handleShare = async () => {
+    if (resultRef.current === null) {
+      return;
+    }
+
     setIsError(false);
     const imageName = `Supersprint-Paris20-${firstname}-${lastname}.png`;
-    const image = (await toBlob(resultRef.current as unknown as HTMLElement)) as Blob;
-    const data = {
-      files: [
-        new File([image], imageName, {
-          type: image.type,
-        }),
-      ],
-      title: 'Image',
-      text: 'image',
-    };
 
-    if (navigator.canShare && navigator.canShare(data)) {
-      console.log('can share');
-      navigator
-        .share(data)
-        .then(() => console.log('Share was successful.'))
-        .catch((error) => console.log('Sharing failed', error));
-    } else {
-      console.log('save as');
-      saveAs(image, imageName);
+    try {
+      const canvas = await html2canvas(resultRef.current);
+      const image = canvas.toDataURL('image/png', 1.0);
+
+      const blob = await (await fetch(image)).blob();
+      const data = {
+        files: [
+          new File([blob], imageName, {
+            type: blob.type,
+          }),
+        ],
+        title: `Supersprint - ${firstname} ${lastname}`,
+        text: `Finisher du Supersprint de Paris 20ième 2023: ${firstname} ${lastname}`,
+      };
+
+      if (navigator.canShare && navigator.canShare(data)) {
+        navigator.share(data);
+      } else {
+        saveAs(image, imageName);
+      }
+    } catch {
+      setIsError(true);
     }
   };
 
   return (
     <div>
-      <div ref={resultRef}>
-        <ResultCard result={props} />
+      <div style={{ margin: 'auto', maxWidth: '450px' }}>
+        <div ref={resultRef}>
+          <ResultCard result={props} />
+        </div>
       </div>
       <div style={{ margin: 'auto', maxWidth: '450px', paddingTop: '1rem' }}>
         {isError && (

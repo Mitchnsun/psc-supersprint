@@ -1,10 +1,8 @@
-import Image from 'next/image';
 import { styled } from '@mui/material/styles';
 import { Card, Grid } from '@mui/material';
 import { ResultType } from '../utils/types';
 import Time from '../utils/time';
 import COLORS from '../styles/colors';
-import Bandeau from '../public/static/Bandeau_2022.jpg';
 import SwimIcon from './atoms/SwimIcon';
 import BikeIcon from './atoms/BikeIcon';
 import RunIcon from './atoms/RunIcon';
@@ -26,10 +24,9 @@ const ResultCard = ({ result }: { result: ResultType }) => (
     sx={{
       backgroundColor: 'primary.main',
       borderColor: 'secondary.main',
-      margin: 'auto',
-      maxWidth: '450px',
       textAlign: 'center',
       paddingBottom: 2,
+      borderRadius: 0,
     }}
   >
     <Title hLevel="h2">Finisher</Title>
@@ -44,13 +41,6 @@ const ResultCard = ({ result }: { result: ResultType }) => (
         <ActivityResult icon={<RunIcon />} label="Course à pied" time={Time.convert(result.run)} />
       </Grid>
     </Card>
-    <Image
-      src={Bandeau}
-      width={1080}
-      height={112}
-      style={{ width: '100%', height: 'auto' }}
-      alt="Bandeau Supersprint Paris 20ième 2022"
-    />
   </Card>
 );
 
