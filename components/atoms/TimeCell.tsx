@@ -1,6 +1,6 @@
 import { TableCell } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import Time from '../../utils/time';
+import Time from '@/utils/time';
 
 const CustomTableCell = styled(TableCell)(({ theme }) => ({
   [theme.breakpoints.down('sm')]: {

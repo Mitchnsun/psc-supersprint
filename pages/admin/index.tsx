@@ -1,10 +1,10 @@
 import React, { useState, useMemo } from 'react';
 import { Helmet } from 'react-helmet';
 
-import UserContext, { INITIAL_USER } from '../../utils/context/user.context';
-import Title from '../../components/atoms/Title';
-import AddResultForm from '../../components/AddResult';
-import LoginForm from '../../components/LoginForm';
+import Title from '@/components/atoms/Title';
+import AddResultForm from '@/components/AddResult';
+import LoginForm from '@/components/LoginForm';
+import UserContext, { INITIAL_USER } from '@/utils/context/user.context';
 
 const AdminPage = () => {
   const [user, setUser] = useState(INITIAL_USER);

@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { TableRow, TableCell } from '@mui/material';
 import { styled, useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import { ResultTypeWithId } from '@/utils/types';
 import TimeCell from './atoms/TimeCell';
-import DetailsResult from './DetailsResult';
 import ArrowIcon from './atoms/ArrowIcon';
-import { ResultTypeWithId } from '../utils/types';
+import DetailsResult from './DetailsResult';
 
 const CustomTableCell = styled(TableCell)(({ theme }) => ({
   [theme.breakpoints.down('sm')]: {

@@ -4,9 +4,9 @@ import TimeField from 'react-simple-timefield';
 import { push, ref, set } from 'firebase/database';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Alert, Box, Button, MenuItem, Stack, TextField } from '@mui/material';
-import db from '../lib/firebase';
-import { schema } from '../utils/results';
-import { CAT, CATEGORIES, categoryFromBirthYear } from '../utils/categories.utils';
+import db from '@/lib/firebase';
+import { schema } from '@/utils/results';
+import { CAT, CATEGORIES, categoryFromBirthYear } from '@/utils/categories.utils';
 
 type FormValues = {
   bib: string;

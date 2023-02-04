@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import Bandeau from '../public/static/Bandeau_2022.jpg';
+import Bandeau from '@/public/static/Bandeau_2022.jpg';
 
 const Header = () => (
   <header>

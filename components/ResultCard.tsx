@@ -1,8 +1,8 @@
 import { styled } from '@mui/material/styles';
 import { Card, Grid } from '@mui/material';
-import { ResultType } from '../utils/types';
-import Time from '../utils/time';
-import COLORS from '../styles/colors';
+import COLORS from '@/styles/colors';
+import { ResultType } from '@/utils/types';
+import Time from '@/utils/time';
 import SwimIcon from './atoms/SwimIcon';
 import BikeIcon from './atoms/BikeIcon';
 import RunIcon from './atoms/RunIcon';

@@ -2,10 +2,10 @@ import React from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material';
-import COLORS from '../styles/colors';
+import COLORS from '@/styles/colors';
+import { ResultTypeWithId, SearchType } from '@/utils/types';
 
 import LineResult from './LineResult';
-import { ResultTypeWithId, SearchType } from '../utils/types';
 
 const rEx = (item = '', value = '') => {
   const regex = new RegExp(value.toLowerCase());

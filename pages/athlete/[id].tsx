@@ -1,9 +1,9 @@
 import { GetServerSidePropsContext } from 'next';
 import { ref, child, get } from 'firebase/database';
+import db from '@/lib/firebase';
 
-import db from '../../lib/firebase';
-import { ResultType } from '../../utils/types';
-import Share from '../../components/Share';
+import Share from '@/components/Share';
+import { ResultType } from '@/utils/types';
 
 const AthletePage = (props: ResultType) => <Share {...props} />;
 

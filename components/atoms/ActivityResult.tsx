@@ -1,6 +1,6 @@
 import { styled } from '@mui/material/styles';
 import { Grid } from '@mui/material';
-import COLORS from '../../styles/colors';
+import COLORS from '@/styles/colors';
 
 const StyledSpeed = styled('p')`
   font-size: 0.9rem;

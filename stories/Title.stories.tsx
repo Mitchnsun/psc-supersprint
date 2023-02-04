@@ -1,7 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import Title from '../components/atoms/Title';
+import Title from '@/components/atoms/Title';
 
 export default {
   title: 'Components/Title',

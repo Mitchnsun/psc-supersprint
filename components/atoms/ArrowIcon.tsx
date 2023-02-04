@@ -1,5 +1,5 @@
 import { styled } from '@mui/material/styles';
-import COLORS from '../../styles/colors';
+import COLORS from '@/styles/colors';
 
 const Button = styled('button')`
   margin: 0;

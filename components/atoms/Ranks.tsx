@@ -1,8 +1,9 @@
 import { Grid } from '@mui/material';
 import { styled } from '@mui/material/styles';
+import COLORS from '@/styles/colors';
+import { RanksType } from '@/utils/types';
+
 import RankIcon from './RankIcon';
-import { RanksType } from '../../utils/types';
-import COLORS from '../../styles/colors';
 
 const StyledTotal = styled('span')`
   font-size: 0.8rem;

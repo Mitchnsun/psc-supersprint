@@ -1,12 +1,12 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import { ref, child, get } from 'firebase/database';
+import db from '@/lib/firebase';
 
-import db from '../lib/firebase';
-import { rankResults } from '../utils/results';
-import Title from '../components/atoms/Title';
-import Board from '../components/Board';
-import { ResultType, ResultTypeWithId } from '../utils/types';
+import Board from '@/components/Board';
+import Title from '@/components/atoms/Title';
+import { rankResults } from '@/utils/results';
+import { ResultType, ResultTypeWithId } from '@/utils/types';
 
 const ResultsPage = ({
   results = [],

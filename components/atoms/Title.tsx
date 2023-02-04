@@ -1,6 +1,6 @@
 import { PropsWithChildren, ElementType } from 'react';
 import { Typography } from '@mui/material';
-import COLORS from '../../styles/colors';
+import COLORS from '@/styles/colors';
 
 const Title = ({ hLevel = 'h1', children }: PropsWithChildren<{ hLevel: ElementType }>) => (
   <Typography

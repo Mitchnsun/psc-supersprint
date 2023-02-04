@@ -1,8 +1,8 @@
 import Link from 'next/link';
 import { Grid } from '@mui/material';
 import ShareIcon from '@mui/icons-material/IosShare';
-import Time from '../utils/time';
-import { ResultTypeWithId } from '../utils/types';
+import Time from '@/utils/time';
+import { ResultTypeWithId } from '@/utils/types';
 import SwimIcon from './atoms/SwimIcon';
 import BikeIcon from './atoms/BikeIcon';
 import RunIcon from './atoms/RunIcon';
