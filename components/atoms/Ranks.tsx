@@ -24,7 +24,7 @@ const Ranks = ({
   gender: string;
   totals: Record<string, number>;
 }) => (
-  <Grid container item xs={6} md={3} justifyContent="center" alignItems="center">
+  <Grid container item xs={6} md={4} justifyContent="center" alignItems="center">
     <Grid item style={{ width: 30, height: 30 }}>
       <RankIcon />
     </Grid>

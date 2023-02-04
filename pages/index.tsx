@@ -6,9 +6,15 @@ import db from '../lib/firebase';
 import { rankResults } from '../utils/results';
 import Title from '../components/atoms/Title';
 import Board from '../components/Board';
-import { ResultType } from '../utils/types';
+import { ResultType, ResultTypeWithId } from '../utils/types';
 
-const ResultsPage = ({ results = [], totals = {} }: { results: ResultType[]; totals: Record<string, number> }) => (
+const ResultsPage = ({
+  results = [],
+  totals = {},
+}: {
+  results: ResultTypeWithId[];
+  totals: Record<string, number>;
+}) => (
   <React.Fragment>
     <Helmet>
       <title>PSC Supersprint | 2022</title>
@@ -25,6 +31,8 @@ export async function getStaticProps() {
   const results = await get(resultRef);
 
   return {
-    props: rankResults(Object.values(results.val()) || []),
+    props: rankResults(
+      Object.entries(results.val() || []).map(([key, value]: [string, ResultType]) => ({ ...value, id: key })),
+    ),
   };
 }

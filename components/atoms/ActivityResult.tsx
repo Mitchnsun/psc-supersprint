@@ -42,18 +42,20 @@ const ActivityResult = ({
   icon: JSX.Element;
   label: string;
   time: string;
-  speed: string;
-  unit: string;
+  speed?: string;
+  unit?: string;
 }) => (
-  <Grid item xs={6} md={3} aria-label={label}>
+  <Grid item xs={6} md={2} aria-label={label}>
     <div style={{ textAlign: 'center' }}>
       <StyledIcon>{icon}</StyledIcon>
       <StyledTime>{time}</StyledTime>
     </div>
-    <StyledSpeed>
-      {speed}
-      <StyledUnit>{unit}</StyledUnit>
-    </StyledSpeed>
+    {speed && (
+      <StyledSpeed>
+        {speed}
+        <StyledUnit>{unit}</StyledUnit>
+      </StyledSpeed>
+    )}
   </Grid>
 );
 

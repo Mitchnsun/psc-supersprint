@@ -1,7 +1,7 @@
 import { compact } from 'lodash';
 import * as yup from 'yup';
 import Ranks from './ranks';
-import { ResultType } from './types';
+import { ResultTypeWithId } from './types';
 
 export const schema = yup.object({
   firstname: yup.string().required(),
@@ -17,14 +17,14 @@ export const schema = yup.object({
   }),
 });
 
-const sortResults = (data: ResultType[]) =>
+const sortResults = (data: ResultTypeWithId[]) =>
   compact(data)
     .sort((a, b) => a.total - b.total)
     .map((item, index) => ({ ...item, ranks: { scratch: index + 1 } }));
 
-export const rankResults = (data: ResultType[]) => {
+export const rankResults = (data: ResultTypeWithId[]) => {
   const sortedResults = sortResults(data);
-  return Ranks.byCat(sortedResults as ResultType[]);
+  return Ranks.byCat(sortedResults as ResultTypeWithId[]);
 };
 
 export default {

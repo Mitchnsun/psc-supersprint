@@ -1,7 +1,7 @@
 import DISTANCES from './distances';
 
 const convert = (time: number) => {
-  if (Number.isNaN(time)) return '-';
+  if (typeof time !== 'number') return '-';
   const hours = Math.floor(time / 3600);
   const minutes = Math.floor(time / 60);
   const seconds = time % 60 < 10 ? `0${Math.round(time % 60)}` : Math.round(time % 60);

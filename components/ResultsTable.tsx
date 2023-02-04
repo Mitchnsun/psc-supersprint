@@ -5,7 +5,7 @@ import { Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material'
 import COLORS from '../styles/colors';
 
 import LineResult from './LineResult';
-import { ResultType, SearchType } from '../utils/types';
+import { ResultTypeWithId, SearchType } from '../utils/types';
 
 const rEx = (item = '', value = '') => {
   const regex = new RegExp(value.toLowerCase());
@@ -28,7 +28,7 @@ const ResultsTable = ({
   search = {},
   totals,
 }: {
-  results: ResultType[];
+  results: ResultTypeWithId[];
   search?: SearchType;
   totals: Record<string, number>;
 }) => {

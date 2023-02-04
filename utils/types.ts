@@ -24,3 +24,7 @@ export interface ResultType {
   swim: number;
   total: number;
 }
+
+export interface ResultTypeWithId extends ResultType {
+  id: string;
+}

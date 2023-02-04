@@ -4,7 +4,7 @@ import { FormControl, Grid, MenuItem, TextField } from '@mui/material';
 import ResultsTable from './ResultsTable';
 import COLORS from '../styles/colors';
 import { CATEGORIES } from '../utils/categories.utils';
-import { ResultType, SearchType } from '../utils/types';
+import { ResultTypeWithId, SearchType } from '../utils/types';
 
 const Label = styled('p')`
   margin: 0;
@@ -13,7 +13,7 @@ const Label = styled('p')`
   color: ${COLORS.PRIMARY};
 `;
 
-export default function Board({ results, totals }: { results: ResultType[]; totals: Record<string, number> }) {
+export default function Board({ results, totals }: { results: ResultTypeWithId[]; totals: Record<string, number> }) {
   const [search, setSearch] = useState<SearchType>({});
 
   return (

@@ -6,17 +6,23 @@ import db from '../lib/firebase';
 import { rankResults } from '../utils/results';
 import Board from '../components/Board';
 import Title from '../components/atoms/Title';
-import { ResultType } from '../utils/types';
+import { ResultType, ResultTypeWithId } from '../utils/types';
 
 export default function Results() {
-  const [data, setData] = useState<{ results: ResultType[]; totals: Record<string, number> }>({
+  const [data, setData] = useState<{ results: ResultTypeWithId[]; totals: Record<string, number> }>({
     results: [],
     totals: {},
   });
 
   useEffect(() => {
     const resultRef = ref(db, 'results');
-    onValue(resultRef, (snapshot) => setData(rankResults(Object.values(snapshot.val()) || [])));
+    onValue(resultRef, (snapshot) =>
+      setData(
+        rankResults(
+          Object.entries(snapshot.val() || []).map(([key, value]: [string, ResultType]) => ({ ...value, id: key })),
+        ),
+      ),
+    );
   }, []);
 
   return (
