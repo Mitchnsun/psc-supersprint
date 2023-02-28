@@ -7,6 +7,7 @@ import Title from '@/components/atoms/Title';
 import db from '@/lib/firebase';
 import { rankResults } from '@/utils/results';
 import { ResultType, ResultTypeWithId } from '@/utils/types';
+import { YEAR } from '@/utils/constants';
 
 export default function Results() {
   const [data, setData] = useState<{ results: ResultTypeWithId[]; totals: Record<string, number> }>({
@@ -28,9 +29,9 @@ export default function Results() {
   return (
     <React.Fragment>
       <Helmet>
-        <title>PSC Supersprint | 2022</title>
+        <title>{`PSC Supersprint | ${YEAR}`}</title>
       </Helmet>
-      <Title hLevel="h1">Résultats 2022</Title>
+      <Title hLevel="h1">{`Résultats ${YEAR}`}</Title>
       <Board results={data.results} totals={data.totals} />
     </React.Fragment>
   );

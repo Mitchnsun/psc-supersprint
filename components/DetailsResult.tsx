@@ -3,6 +3,7 @@ import { Grid } from '@mui/material';
 import ShareIcon from '@mui/icons-material/IosShare';
 import Time from '@/utils/time';
 import { ResultTypeWithId } from '@/utils/types';
+import COLORS from '@/styles/colors';
 import SwimIcon from './atoms/SwimIcon';
 import BikeIcon from './atoms/BikeIcon';
 import RunIcon from './atoms/RunIcon';
@@ -35,7 +36,7 @@ const DetailsResult = ({ result, totals }: { result: ResultTypeWithId; totals: R
     />
     <Grid item xs={2} sx={{ textAlign: 'center', margin: 'auto' }}>
       <Link href={`/athlete/${result.id}`}>
-        <ShareIcon color="secondary" />
+        <ShareIcon sx={{ fill: COLORS.PURPLE }} />
       </Link>
     </Grid>
   </Grid>

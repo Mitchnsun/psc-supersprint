@@ -15,7 +15,7 @@ const rEx = (item = '', value = '') => {
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   color: COLORS.PRIMARY,
   textAlign: 'center',
-  fontFamily: 'OpenSansBold',
+  fontFamily: 'FontBold',
   fontWeight: 'bold',
   fontSize: '1.1rem',
   [theme.breakpoints.down('sm')]: {

@@ -20,7 +20,7 @@ const StyledTime = styled('p')`
   margin: 0;
   padding: 0 0.5rem;
   color: ${COLORS.PURPLE};
-  font-family: OpenSansBold;
+  font-family: FontBold;
   font-size: 1.3rem;
   font-weight: bold;
 `;

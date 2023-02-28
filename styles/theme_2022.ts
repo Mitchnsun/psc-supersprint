@@ -4,7 +4,7 @@ import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 
-import COLORS from './colors';
+import COLORS from './colors_2022';
 
 const theme = createTheme({
   palette: {
@@ -22,20 +22,14 @@ const theme = createTheme({
     MuiCssBaseline: {
       styleOverrides: `
         @font-face {
-          font-family: 'FontFantasy';
-          src: url('/static/GochiHand-Regular.ttf');
-          font-weight: normal;
-          font-style: normal;
-        }
-        @font-face {
           font-family: 'FontRegular';
-          src: url('/static/Gilroy-Light.otf');
+          src: url('/static/opensans-regular-webfont.woff');
           font-weight: normal;
           font-style: normal;
         }
         @font-face {
           font-family: 'FontBold';
-          src: url('/static/Gilroy-ExtraBold.otf');
+          src: url('/static/opensans-bold-webfont.woff');
           font-weight: bold;
           font-style: normal;
         }

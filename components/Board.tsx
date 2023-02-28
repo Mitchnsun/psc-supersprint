@@ -9,7 +9,7 @@ import ResultsTable from './ResultsTable';
 const Label = styled('p')`
   margin: 0;
   font-size: 1.1rem;
-  font-family: 'OpenSansBold';
+  font-family: 'FontBold';
   color: ${COLORS.PRIMARY};
 `;
 

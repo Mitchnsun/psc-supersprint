@@ -9,6 +9,7 @@ const Title = ({ hLevel = 'h1', children }: PropsWithChildren<{ hLevel: ElementT
     sx={{
       color: COLORS.WHITE,
       backgroundColor: COLORS.SECONDARY,
+      fontFamily: 'FontBold',
       padding: '10px 15px',
     }}
   >
