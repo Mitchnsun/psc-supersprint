@@ -1,4 +1,4 @@
-import React from 'react';
+import { useMemo, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { ref, child, get } from 'firebase/database';
 import db from '@/lib/firebase';
@@ -9,6 +9,7 @@ import Title from '@/components/atoms/Title';
 import { rankResults } from '@/utils/results';
 import { ResultType, ResultTypeWithId } from '@/utils/types';
 import { YEAR, DATE } from '@/utils/constants';
+import GlobalContext from '@/utils/context/global.context';
 
 const ResultsPage = ({
   results = [],
@@ -16,19 +17,24 @@ const ResultsPage = ({
 }: {
   results: ResultTypeWithId[];
   totals: Record<string, number>;
-}) => (
-  <React.Fragment>
-    <Helmet>
-      <title>{`PSC Supersprint | ${YEAR}`}</title>
-    </Helmet>
-    <Title hLevel="h1">{`Résultats ${YEAR}`}</Title>
-    {results.length === 0 ? (
-      <Typography sx={{ marginTop: '1rem' }}>{`Rendez-vous le ${DATE}`}</Typography>
-    ) : (
-      <Board results={results} totals={totals} />
-    )}
-  </React.Fragment>
-);
+}) => {
+  const [context, setContext] = useState({ year: YEAR });
+  const contextMemo = useMemo(() => ({ context, setContext }), [context]);
+
+  return (
+    <GlobalContext.Provider value={contextMemo}>
+      <Helmet>
+        <title>{`PSC Supersprint | ${YEAR}`}</title>
+      </Helmet>
+      <Title hLevel="h1">{`Résultats ${YEAR}`}</Title>
+      {results.length === 0 ? (
+        <Typography sx={{ marginTop: '1rem' }}>{`Rendez-vous le ${DATE}`}</Typography>
+      ) : (
+        <Board results={results} totals={totals} />
+      )}
+    </GlobalContext.Provider>
+  );
+};
 
 export default ResultsPage;
 

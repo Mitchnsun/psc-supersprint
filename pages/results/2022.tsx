@@ -1,4 +1,4 @@
-import React from 'react';
+import { useMemo, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { ref, child, get } from 'firebase/database';
 import db from '@/lib/firebase';
@@ -7,6 +7,7 @@ import Board from '@/components/Board';
 import Title from '@/components/atoms/Title';
 import { rankResults } from '@/utils/results';
 import { ResultType, ResultTypeWithId } from '@/utils/types';
+import GlobalContext from '@/utils/context/global.context';
 
 const ResultsPage = ({
   results = [],
@@ -14,15 +15,20 @@ const ResultsPage = ({
 }: {
   results: ResultTypeWithId[];
   totals: Record<string, number>;
-}) => (
-  <React.Fragment>
-    <Helmet>
-      <title>PSC Supersprint | 2022</title>
-    </Helmet>
-    <Title hLevel="h1">Résultats 2022</Title>
-    <Board results={results} totals={totals} />
-  </React.Fragment>
-);
+}) => {
+  const [context, setContext] = useState({ year: 2022 });
+  const contextMemo = useMemo(() => ({ context, setContext }), [context]);
+
+  return (
+    <GlobalContext.Provider value={contextMemo}>
+      <Helmet>
+        <title>PSC Supersprint | 2022</title>
+      </Helmet>
+      <Title hLevel="h1">Résultats 2022</Title>
+      <Board results={results} totals={totals} />
+    </GlobalContext.Provider>
+  );
+};
 
 export default ResultsPage;
 
