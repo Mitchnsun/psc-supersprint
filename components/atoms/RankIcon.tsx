@@ -1,4 +1,4 @@
-import COLORS from '../../styles/colors';
+import COLORS from '@/styles/colors';
 
 const RankIcon = () => (
   <svg

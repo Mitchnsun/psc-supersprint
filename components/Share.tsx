@@ -2,7 +2,8 @@ import { useRef, useState } from 'react';
 import html2canvas from 'html2canvas';
 import { saveAs } from 'file-saver';
 import { Alert, Button } from '@mui/material';
-import { ResultType } from '../utils/types';
+import { ResultType } from '@/utils/types';
+
 import ResultCard from './ResultCard';
 
 const Share = (props: ResultType) => {

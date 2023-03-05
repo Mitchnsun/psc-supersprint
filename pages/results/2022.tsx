@@ -3,12 +3,10 @@ import { Helmet } from 'react-helmet';
 import { ref, child, get } from 'firebase/database';
 import db from '@/lib/firebase';
 
-import { Typography } from '@mui/material';
 import Board from '@/components/Board';
 import Title from '@/components/atoms/Title';
 import { rankResults } from '@/utils/results';
 import { ResultType, ResultTypeWithId } from '@/utils/types';
-import { YEAR, DATE } from '@/utils/constants';
 import GlobalContext from '@/utils/context/global.context';
 
 const ResultsPage = ({
@@ -18,20 +16,16 @@ const ResultsPage = ({
   results: ResultTypeWithId[];
   totals: Record<string, number>;
 }) => {
-  const [context, setContext] = useState({ year: YEAR });
+  const [context, setContext] = useState({ year: 2022 });
   const contextMemo = useMemo(() => ({ context, setContext }), [context]);
 
   return (
     <GlobalContext.Provider value={contextMemo}>
       <Helmet>
-        <title>{`PSC Supersprint | ${YEAR}`}</title>
+        <title>PSC Supersprint | 2022</title>
       </Helmet>
-      <Title hLevel="h1">{`Résultats ${YEAR}`}</Title>
-      {results.length === 0 ? (
-        <Typography sx={{ marginTop: '1rem' }}>{`Rendez-vous le ${DATE}`}</Typography>
-      ) : (
-        <Board results={results} totals={totals} />
-      )}
+      <Title hLevel="h1">Résultats 2022</Title>
+      <Board results={results} totals={totals} />
     </GlobalContext.Provider>
   );
 };
@@ -39,7 +33,7 @@ const ResultsPage = ({
 export default ResultsPage;
 
 export async function getStaticProps() {
-  const resultRef = child(ref(db), YEAR.toString());
+  const resultRef = child(ref(db), '2022');
   const results = await get(resultRef);
 
   return {

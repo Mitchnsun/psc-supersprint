@@ -1,8 +1,8 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import ResultCard from '../components/ResultCard';
-import { CAT } from '../utils/categories.utils';
+import ResultCard from '@/components/ResultCard';
+import { CAT } from '@/utils/categories.utils';
 
 export default {
   title: 'Components/ResultCard',

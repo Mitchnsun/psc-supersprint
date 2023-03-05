@@ -1,6 +1,6 @@
 import { styled } from '@mui/material/styles';
 import { Grid } from '@mui/material';
-import COLORS from '../../styles/colors';
+import COLORS from '@/styles/colors';
 
 const StyledSpeed = styled('p')`
   font-size: 0.9rem;
@@ -20,7 +20,7 @@ const StyledTime = styled('p')`
   margin: 0;
   padding: 0 0.5rem;
   color: ${COLORS.PURPLE};
-  font-family: OpenSansBold;
+  font-family: FontBold;
   font-size: 1.3rem;
   font-weight: bold;
 `;

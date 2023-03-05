@@ -4,9 +4,10 @@ import TimeField from 'react-simple-timefield';
 import { push, ref, set } from 'firebase/database';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Alert, Box, Button, MenuItem, Stack, TextField } from '@mui/material';
-import db from '../lib/firebase';
-import { schema } from '../utils/results';
-import { CAT, CATEGORIES, categoryFromBirthYear } from '../utils/categories.utils';
+import db from '@/lib/firebase';
+import { schema } from '@/utils/results';
+import { CAT, CATEGORIES, categoryFromBirthYear } from '@/utils/categories.utils';
+import { YEAR } from '@/utils/constants';
 
 type FormValues = {
   bib: string;
@@ -59,8 +60,8 @@ const AddResultForm = () => {
 
   const onSubmit = async ({ firstname, lastname, bib, gender, category, times }: FormValues) => {
     setIsLoading(true);
-    const { key } = await push(ref(db, 'results'));
-    set(ref(db, `results/${key}`), { firstname, lastname, bib, sex: gender, cat: category, ...timeCalculus(times) })
+    const { key } = await push(ref(db, YEAR.toString()));
+    set(ref(db, `${YEAR}/${key}`), { firstname, lastname, bib, sex: gender, cat: category, ...timeCalculus(times) })
       .then(() => reset())
       .catch((error) => setStatus(error.message))
       .finally(() => setIsLoading(false));

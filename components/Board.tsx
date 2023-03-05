@@ -1,15 +1,15 @@
 import { useState } from 'react';
 import { styled } from '@mui/material/styles';
 import { FormControl, Grid, MenuItem, TextField } from '@mui/material';
+import COLORS from '@/styles/colors';
+import { CATEGORIES } from '@/utils/categories.utils';
+import { ResultTypeWithId, SearchType } from '@/utils/types';
 import ResultsTable from './ResultsTable';
-import COLORS from '../styles/colors';
-import { CATEGORIES } from '../utils/categories.utils';
-import { ResultTypeWithId, SearchType } from '../utils/types';
 
 const Label = styled('p')`
   margin: 0;
   font-size: 1.1rem;
-  font-family: 'OpenSansBold';
+  font-family: 'FontBold';
   color: ${COLORS.PRIMARY};
 `;
 

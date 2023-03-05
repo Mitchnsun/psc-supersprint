@@ -1,12 +1,12 @@
 import { useState, useContext } from 'react';
 import * as yup from 'yup';
-import { initializeApp } from 'firebase/app';
 import { useForm, Controller } from 'react-hook-form';
+import { initializeApp } from 'firebase/app';
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Alert, Box, Button, TextField, Typography } from '@mui/material';
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
-import { firebaseConfig } from '../lib/firebase';
-import UserContext from '../utils/context/user.context';
+import { firebaseConfig } from '@/lib/firebase';
+import UserContext from '@/utils/context/user.context';
 
 initializeApp(firebaseConfig);
 

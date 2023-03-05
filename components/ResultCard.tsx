@@ -1,8 +1,8 @@
 import { styled } from '@mui/material/styles';
 import { Card, Grid } from '@mui/material';
-import { ResultType } from '../utils/types';
-import Time from '../utils/time';
-import COLORS from '../styles/colors';
+import COLORS from '@/styles/colors';
+import { ResultType } from '@/utils/types';
+import Time from '@/utils/time';
 import SwimIcon from './atoms/SwimIcon';
 import BikeIcon from './atoms/BikeIcon';
 import RunIcon from './atoms/RunIcon';
@@ -13,7 +13,7 @@ const StyledTotal = styled('p')`
   margin: 0;
   padding: 0 0.5rem;
   color: ${COLORS.PURPLE};
-  font-family: OpenSansBold;
+  font-family: FontBold;
   font-size: 3rem;
   font-weight: bold;
 `;

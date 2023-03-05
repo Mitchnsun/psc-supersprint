@@ -1,6 +1,6 @@
 import { PropsWithChildren } from 'react';
 import { styled } from '@mui/material/styles';
-import COLORS from '../styles/colors';
+import COLORS from '@/styles/colors';
 import Header from './Header';
 
 const Container = styled('div')`
