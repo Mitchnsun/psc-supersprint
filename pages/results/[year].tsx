@@ -10,21 +10,23 @@ import { ResultType, ResultTypeWithId } from '@/utils/types';
 import GlobalContext from '@/utils/context/global.context';
 
 const ResultsPage = ({
+  year,
   results = [],
   totals = {},
 }: {
+  year: string;
   results: ResultTypeWithId[];
   totals: Record<string, number>;
 }) => {
-  const [context, setContext] = useState({ year: 2022 });
+  const [context, setContext] = useState({ year });
   const contextMemo = useMemo(() => ({ context, setContext }), [context]);
 
   return (
     <GlobalContext.Provider value={contextMemo}>
       <Helmet>
-        <title>PSC Supersprint | 2022</title>
+        <title>PSC Supersprint | {year}</title>
       </Helmet>
-      <Title hLevel="h1">Résultats 2022</Title>
+      <Title hLevel="h1">Résultats {year}</Title>
       <Board results={results} totals={totals} />
     </GlobalContext.Provider>
   );
@@ -32,13 +34,28 @@ const ResultsPage = ({
 
 export default ResultsPage;
 
-export async function getStaticProps() {
-  const resultRef = child(ref(db), '2022');
+export async function getStaticPaths() {
+  return {
+    paths: [{ params: { year: '2022' } }, { params: { year: '2023' } }],
+    fallback: false,
+  };
+}
+
+export async function getStaticProps({
+  params,
+}: {
+  params: { year: string };
+}): Promise<{ props: { year: string; results: ResultTypeWithId[]; totals: Record<string, number> } }> {
+  const { year } = params;
+  const resultRef = child(ref(db), year);
   const results = await get(resultRef);
 
   return {
-    props: rankResults(
-      Object.entries(results.val() || []).map(([key, value]: [string, ResultType]) => ({ ...value, id: key })),
-    ),
+    props: {
+      year,
+      ...rankResults(
+        Object.entries(results.val() || []).map(([key, value]: [string, ResultType]) => ({ ...value, id: key })),
+      ),
+    },
   };
 }
