@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Helmet } from 'react-helmet';
-import { ref, onValue } from 'firebase/database';
+import { child, ref, onValue } from 'firebase/database';
 
 import Board from '@/components/Board';
 import Title from '@/components/atoms/Title';
@@ -19,7 +19,7 @@ export default function Results() {
   });
 
   useEffect(() => {
-    const resultRef = ref(db, 'results');
+    const resultRef = child(ref(db), YEAR.toString());
     onValue(resultRef, (snapshot) =>
       setData(
         rankResults(
