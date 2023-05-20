@@ -1,17 +1,16 @@
-/* eslint-disable import/no-extraneous-dependencies */
-import { ComponentStory, ComponentMeta } from '@storybook/react';
-
+import type { Meta, StoryObj } from '@storybook/react';
 import Title from '@/components/atoms/Title';
 
-export default {
+const meta: Meta<typeof Title> = {
   title: 'Components/Title',
   component: Title,
-} as ComponentMeta<typeof Title>;
+};
+export default meta;
 
-const Template: ComponentStory<typeof Title> = (args) => <Title {...args} />;
-
-export const Sandbox = Template.bind({});
-Sandbox.args = {
-  hLevel: 'h1',
-  children: 'Hello World',
+type Story = StoryObj<typeof Title>;
+export const Sandbox: Story = {
+  args: {
+    hLevel: 'h1',
+    children: 'Hello World',
+  },
 };
