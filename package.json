@@ -13,7 +13,7 @@
   "bugs": {
     "url": "https://github.com/Mitchnsun/psc-supersprint/issues"
   },
-  "homepage": "https://psc-supersprint.now.sh/",
+  "homepage": "https://psc-supersprint.vercel.app/",
   "scripts": {
     "dev": "next",
     "build": "next build",
