@@ -41,7 +41,7 @@ const DetailsResult = ({ result, totals }: { result: ResultTypeWithId; totals: R
       />
       <Grid item xs={2} sx={{ textAlign: 'center', margin: 'auto' }}>
         <Link href={`/athlete/${context.year || YEAR}/${result.id}`}>
-          <ShareIcon sx={{ fill: COLORS.PURPLE }} />
+          <ShareIcon sx={{ fill: COLORS.LOGO }} />
         </Link>
       </Grid>
     </Grid>

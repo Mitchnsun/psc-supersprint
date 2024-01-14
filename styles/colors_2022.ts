@@ -14,6 +14,7 @@ export default {
   ...base,
   PRIMARY: base.BLUE,
   SECONDARY: base.PURPLE,
+  LOGO: base.BLUE,
   SUCCESS: base.GREEN,
   WARNING: base.BRONZE,
   ERROR: base.RED,
