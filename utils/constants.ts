@@ -1,2 +1,2 @@
-export const YEAR = '2023';
-export const DATE = '19/03/2023';
+export const YEAR = '2024';
+export const DATE = '17/03/2024';
