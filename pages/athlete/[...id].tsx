@@ -1,10 +1,11 @@
 import { GetServerSidePropsContext } from 'next';
+import dynamic from 'next/dynamic';
 import { ref, child, get } from 'firebase/database';
-import db from '@/lib/firebase';
 
-import Share from '@/components/Share';
+import db from '@/lib/firebase';
 import { ResultType } from '@/utils/types';
 
+const Share = dynamic(() => import('@/components/Share'), { ssr: false });
 const AthletePage = (props: ResultType) => <Share {...props} />;
 
 export async function getServerSideProps(context: GetServerSidePropsContext): Promise<{ props: ResultType }> {

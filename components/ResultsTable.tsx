@@ -1,4 +1,3 @@
-import React from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material';
@@ -53,11 +52,11 @@ const ResultsTable = ({
           {isLargeScreen && <StyledTableCell>Cat.</StyledTableCell>}
           <StyledTableCell>Temps</StyledTableCell>
           {isLargeScreen && (
-            <React.Fragment>
+            <>
               <StyledTableCell>Nat.</StyledTableCell>
               <StyledTableCell>Vélo</StyledTableCell>
               <StyledTableCell>CAP</StyledTableCell>
-            </React.Fragment>
+            </>
           )}
         </TableRow>
       </TableHead>
