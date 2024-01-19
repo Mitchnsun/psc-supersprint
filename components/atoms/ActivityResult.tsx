@@ -19,7 +19,7 @@ const StyledTime = styled('p')`
   vertical-align: middle;
   margin: 0;
   padding: 0 0.5rem;
-  color: ${COLORS.PURPLE};
+  color: ${COLORS.LOGO};
   font-family: FontBold;
   font-size: 1.3rem;
   font-weight: bold;

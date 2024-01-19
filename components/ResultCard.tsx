@@ -12,7 +12,7 @@ import Title from './atoms/Title';
 const StyledTotal = styled('p')`
   margin: 0;
   padding: 0 0.5rem;
-  color: ${COLORS.PURPLE};
+  color: ${COLORS.LOGO};
   font-family: FontBold;
   font-size: 3rem;
   font-weight: bold;
