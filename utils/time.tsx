@@ -17,7 +17,6 @@ export default {
   },
   bike: (time: number) => {
     if (Number.isNaN(time)) return '-';
-    // eslint-disable-next-line no-mixed-operators
     const formatted = (3600 / time) * DISTANCES.bike.length;
     return formatted.toFixed(2);
   },
