@@ -10,7 +10,7 @@ export default {
     unit_label: 'kilomètres',
   },
   run: {
-    length: 2.4,
+    length: 2.45,
     unit: 'km',
     unit_label: 'kilomètres',
   },
