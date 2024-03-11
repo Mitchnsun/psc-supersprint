@@ -18,6 +18,7 @@
       "@/lib/*": ["lib/*"],
       "@/public/*": ["public/*"],
       "@/styles/*": ["styles/*"],
+      "@/views/*": ["views/*"],
       "@/utils/*": ["utils/*"]
     },
     "resolveJsonModule": true,
