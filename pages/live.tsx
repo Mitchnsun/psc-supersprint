@@ -12,6 +12,7 @@ import GlobalContext from '@/utils/context/global.context';
 
 export default function Results() {
   const [context, setContext] = useState({ year: YEAR });
+  const [scrollStep, setScrollStep] = useState(3);
   const contextMemo = useMemo(() => ({ context, setContext }), [context]);
   const [data, setData] = useState<{ results: ResultTypeWithId[]; totals: Record<string, number> }>({
     results: [],
@@ -28,6 +29,20 @@ export default function Results() {
       ),
     );
   }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (window.innerHeight + Math.round(window.scrollY) >= document.body.offsetHeight) {
+        setScrollStep(-3);
+      }
+      if (window.scrollY === 0) {
+        setScrollStep(3);
+      }
+      window.scrollTo({ top: window.scrollY + scrollStep, behavior: 'smooth' });
+    }, 100);
+
+    return () => clearInterval(interval);
+  });
 
   return (
     <GlobalContext.Provider value={contextMemo}>
