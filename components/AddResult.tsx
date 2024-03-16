@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import { useForm, Controller } from 'react-hook-form';
-import TimeField from 'react-simple-timefield';
 import { push, ref, set } from 'firebase/database';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Alert, Box, Button, MenuItem, Stack, TextField } from '@mui/material';
 import db from '@/lib/firebase';
+import Time from '@/utils/time';
 import { schema } from '@/utils/results';
 import { CAT, CATEGORIES, categoryFromBirthYear } from '@/utils/categories.utils';
 import { YEAR } from '@/utils/constants';
@@ -175,19 +175,15 @@ const AddResultForm = () => {
         <Stack direction="row" spacing={2}>
           <Controller
             render={({ field }) => (
-              <TimeField
+              <TextField
                 {...field}
-                showSeconds
+                label="Swim"
+                size="small"
+                variant="outlined"
                 style={{ width: 150 }}
-                input={
-                  <TextField
-                    label="Swim"
-                    size="small"
-                    variant="outlined"
-                    error={!!errors.times?.swim?.message}
-                    helperText={errors.times?.swim?.message}
-                  />
-                }
+                onChange={(e) => field.onChange(Time.maskInput(e.target.value))}
+                error={!!errors.times?.swim?.message || !Time.valid(field.value)}
+                helperText={errors.times?.swim?.message}
               />
             )}
             name="times.swim"
@@ -196,19 +192,15 @@ const AddResultForm = () => {
           />
           <Controller
             render={({ field }) => (
-              <TimeField
+              <TextField
                 {...field}
-                showSeconds
+                label="Bike"
+                size="small"
+                variant="outlined"
                 style={{ width: 150 }}
-                input={
-                  <TextField
-                    label="Bike"
-                    size="small"
-                    variant="outlined"
-                    error={!!errors.times?.bike?.message}
-                    helperText={errors.times?.bike?.message}
-                  />
-                }
+                onChange={(e) => field.onChange(Time.maskInput(e.target.value))}
+                error={!!errors.times?.bike?.message || !Time.valid(field.value)}
+                helperText={errors.times?.bike?.message}
               />
             )}
             name="times.bike"
@@ -217,19 +209,15 @@ const AddResultForm = () => {
           />
           <Controller
             render={({ field }) => (
-              <TimeField
+              <TextField
                 {...field}
-                showSeconds
+                label="Total"
+                size="small"
+                variant="outlined"
                 style={{ width: 150 }}
-                input={
-                  <TextField
-                    label="Total"
-                    size="small"
-                    variant="outlined"
-                    error={!!errors.times?.total?.message}
-                    helperText={errors.times?.total?.message}
-                  />
-                }
+                onChange={(e) => field.onChange(Time.maskInput(e.target.value))}
+                error={!!errors.times?.total?.message || !Time.valid(field.value)}
+                helperText={errors.times?.total?.message}
               />
             )}
             name="times.total"
