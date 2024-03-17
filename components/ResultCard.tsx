@@ -1,3 +1,4 @@
+import isEmpty from 'lodash/isEmpty';
 import { styled } from '@mui/material/styles';
 import { Card, Grid } from '@mui/material';
 import COLORS from '@/styles/colors';
@@ -34,7 +35,7 @@ const ResultCard = ({ result }: { result: ResultType }) => (
       {result.firstname} {result.lastname}
     </Title>
     <Card sx={{ margin: '4rem 2rem', padding: 1 }}>
-      <StyledTotal>{Time.convert(result.total)}</StyledTotal>
+      <StyledTotal>{isEmpty(result.status) ? Time.convert(result.total) : result.status}</StyledTotal>
       <Grid container spacing={2} justifyContent="center" alignItems="center">
         <ActivityResult icon={<SwimIcon />} label="Natation" time={Time.convert(result.swim)} />
         <ActivityResult icon={<BikeIcon />} label="Vélo" time={Time.convert(result.bike)} />

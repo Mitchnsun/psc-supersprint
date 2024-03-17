@@ -15,6 +15,7 @@ type FormValues = {
   category: CAT;
   firstname: string;
   gender: string;
+  status: string;
   lastname: string;
   times: { swim: string; bike: string; total: string };
 };
@@ -33,7 +34,8 @@ const timeCalculus = ({ swim, bike, total }: { swim: string; bike: string; total
     .reverse()
     .reduce((acc, val, index) => acc + parseInt(val, 10) * 60 ** index, 0);
 
-  return { swim: swimSeconds, bike: bikeSeconds, run: totalSeconds - swimSeconds - bikeSeconds, total: totalSeconds };
+  const run = totalSeconds - swimSeconds - bikeSeconds;
+  return { swim: swimSeconds, bike: bikeSeconds, run: run > 0 ? run : 0, total: totalSeconds };
 };
 
 const AddResultForm = () => {
@@ -58,10 +60,18 @@ const AddResultForm = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [birthYear]);
 
-  const onSubmit = async ({ firstname, lastname, bib, gender, category, times }: FormValues) => {
+  const onSubmit = async ({ firstname, lastname, bib, gender, category, status: raceStatus, times }: FormValues) => {
     setIsLoading(true);
     const { key } = await push(ref(db, YEAR.toString()));
-    set(ref(db, `${YEAR}/${key}`), { firstname, lastname, bib, sex: gender, cat: category, ...timeCalculus(times) })
+    set(ref(db, `${YEAR}/${key}`), {
+      firstname,
+      lastname,
+      bib,
+      sex: gender,
+      status: raceStatus,
+      cat: category,
+      ...timeCalculus(times),
+    })
       .then(() => reset())
       .catch((error) => setStatus(error.message))
       .finally(() => setIsLoading(false));
@@ -221,6 +231,29 @@ const AddResultForm = () => {
               />
             )}
             name="times.total"
+            control={control}
+            defaultValue=""
+          />
+        </Stack>
+        <Stack direction="row" spacing={2}>
+          <Controller
+            render={({ field }) => (
+              <TextField
+                {...field}
+                label="Status"
+                size="small"
+                select
+                error={!!errors.status?.message}
+                helperText={errors.status?.message}
+                style={{ width: 150 }}
+              >
+                <MenuItem value="">Finisher</MenuItem>
+                <MenuItem value="DNF">DNF</MenuItem>
+                <MenuItem value="DNS">DNS</MenuItem>
+                <MenuItem value="DNQ">DNQ</MenuItem>
+              </TextField>
+            )}
+            name="status"
             control={control}
             defaultValue=""
           />

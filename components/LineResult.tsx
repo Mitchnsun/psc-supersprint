@@ -36,7 +36,7 @@ const LineResult = ({
         <CustomTableCell align="center">{`${result.firstname} ${result.lastname}`}</CustomTableCell>
         <CustomTableCell align="center">{`#${result.bib}`}</CustomTableCell>
         {isLargeScreen && <TableCell align="center">{`${result.cat}${result.sex}`}</TableCell>}
-        <TimeCell time={result.total} isBold />
+        <TimeCell time={result.total} status={result.status} isBold />
         {isLargeScreen && (
           <>
             <TimeCell time={result.swim} />
