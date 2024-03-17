@@ -1,4 +1,4 @@
-import { compact } from 'lodash';
+import { compact, isEmpty } from 'lodash';
 import * as yup from 'yup';
 import Ranks from './ranks';
 import { ResultTypeWithId } from './types';
@@ -18,10 +18,17 @@ export const schema = yup.object({
   }),
 });
 
-const sortResults = (data: ResultTypeWithId[]) =>
-  compact(data)
+const sortResults = (data: ResultTypeWithId[]) => {
+  let scratchRankInc = 0;
+  return compact(data)
     .sort((a, b) => a.total - b.total)
-    .map((item, index) => ({ ...item, ranks: { scratch: index + 1 } }));
+    .map((item) => {
+      if (isEmpty(item.status)) {
+        scratchRankInc += 1;
+      }
+      return { ...item, ranks: { scratch: isEmpty(item.status) ? scratchRankInc : '-' } };
+    });
+};
 
 export const rankResults = (data: ResultTypeWithId[]) => {
   const sortedResults = sortResults(data);

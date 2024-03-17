@@ -1,3 +1,4 @@
+import isEmpty from 'lodash/isEmpty';
 import { ResultTypeWithId } from './types';
 
 export default {
@@ -17,33 +18,37 @@ export default {
     let rankVM = 0;
     let rankVF = 0;
 
-    const rankedResults = data.map((item: ResultTypeWithId) => {
+    const rankedResults = data.reduce((acc: ResultTypeWithId[], item: ResultTypeWithId) => {
+      if (!isEmpty(item.status)) {
+        return [...acc, item];
+      }
+
       if (item.sex === 'M') {
         maleRankInc += 1;
         // By Cat for M
         if (item.cat === 'B') {
           rankBM += 1;
-          return { ...item, ranks: { ...item.ranks, gender: maleRankInc, cat: rankBM } };
+          acc.push({ ...item, ranks: { ...item.ranks, gender: maleRankInc, cat: rankBM } });
         }
         if (item.cat === 'M') {
           rankMM += 1;
-          return { ...item, ranks: { ...item.ranks, gender: maleRankInc, cat: rankMM } };
+          acc.push({ ...item, ranks: { ...item.ranks, gender: maleRankInc, cat: rankMM } });
         }
         if (item.cat === 'C') {
           rankCM += 1;
-          return { ...item, ranks: { ...item.ranks, gender: maleRankInc, cat: rankCM } };
+          acc.push({ ...item, ranks: { ...item.ranks, gender: maleRankInc, cat: rankCM } });
         }
         if (item.cat === 'J') {
           rankJM += 1;
-          return { ...item, ranks: { ...item.ranks, gender: maleRankInc, cat: rankJM } };
+          acc.push({ ...item, ranks: { ...item.ranks, gender: maleRankInc, cat: rankJM } });
         }
         if (item.cat === 'S') {
           rankSM += 1;
-          return { ...item, ranks: { ...item.ranks, gender: maleRankInc, cat: rankSM } };
+          acc.push({ ...item, ranks: { ...item.ranks, gender: maleRankInc, cat: rankSM } });
         }
         if (item.cat === 'V') {
           rankVM += 1;
-          return { ...item, ranks: { ...item.ranks, gender: maleRankInc, cat: rankVM } };
+          acc.push({ ...item, ranks: { ...item.ranks, gender: maleRankInc, cat: rankVM } });
         }
       }
 
@@ -51,32 +56,32 @@ export default {
         femaleRankInc += 1;
         if (item.cat === 'B') {
           rankBF += 1;
-          return { ...item, ranks: { ...item.ranks, gender: femaleRankInc, cat: rankBF } };
+          acc.push({ ...item, ranks: { ...item.ranks, gender: femaleRankInc, cat: rankBF } });
         }
         if (item.cat === 'M') {
           rankMF += 1;
-          return { ...item, ranks: { ...item.ranks, gender: femaleRankInc, cat: rankMF } };
+          acc.push({ ...item, ranks: { ...item.ranks, gender: femaleRankInc, cat: rankMF } });
         }
         if (item.cat === 'C') {
           rankCF += 1;
-          return { ...item, ranks: { ...item.ranks, gender: femaleRankInc, cat: rankCF } };
+          acc.push({ ...item, ranks: { ...item.ranks, gender: femaleRankInc, cat: rankCF } });
         }
         if (item.cat === 'J') {
           rankJF += 1;
-          return { ...item, ranks: { ...item.ranks, cat: rankJF, gender: femaleRankInc } };
+          acc.push({ ...item, ranks: { ...item.ranks, cat: rankJF, gender: femaleRankInc } });
         }
         if (item.cat === 'S') {
           rankSF += 1;
-          return { ...item, ranks: { ...item.ranks, cat: rankSF, gender: femaleRankInc } };
+          acc.push({ ...item, ranks: { ...item.ranks, cat: rankSF, gender: femaleRankInc } });
         }
         if (item.cat === 'V') {
           rankVF += 1;
-          return { ...item, ranks: { ...item.ranks, cat: rankVF, gender: femaleRankInc } };
+          acc.push({ ...item, ranks: { ...item.ranks, cat: rankVF, gender: femaleRankInc } });
         }
       }
 
-      return item;
-    });
+      return acc;
+    }, []);
 
     return {
       results: rankedResults,

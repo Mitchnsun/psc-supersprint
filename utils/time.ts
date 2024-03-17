@@ -42,17 +42,17 @@ export default {
   maskInput: (value: string) => maskInput(value),
   valid: (value: string) => validTime(value),
   swim: (time: number) => {
-    if (Number.isNaN(time)) return '-';
+    if (Number.isNaN(time) || time === 0) return '-';
     const formatted = time / DISTANCES.swim.length;
     return convert(formatted * 100);
   },
   bike: (time: number) => {
-    if (Number.isNaN(time)) return '-';
+    if (Number.isNaN(time) || time === 0) return '-';
     const formatted = (3600 / time) * DISTANCES.bike.length;
     return formatted.toFixed(2);
   },
   run: (time: number) => {
-    if (Number.isNaN(time)) return '-';
+    if (Number.isNaN(time) || time === 0) return '-';
     const formatted = time / DISTANCES.run.length;
     return convert(formatted);
   },

@@ -31,15 +31,15 @@ const Ranks = ({
     </Grid>
     <Grid item style={{ textAlign: 'left' }}>
       <StyledRank>
-        {`Scratch: ${ranks.scratch}`}
+        {`Scratch: ${ranks.scratch || '-'}`}
         <StyledTotal>{`/${totals.overall}`}</StyledTotal>
       </StyledRank>
       <StyledRank>
-        {`Cat. ${cat}${gender}: ${ranks.cat}`}
+        {`Cat. ${cat}${gender}: ${ranks.cat || '-'}`}
         <StyledTotal>{`/${totals[cat + gender]}`}</StyledTotal>
       </StyledRank>
       <StyledRank>
-        {`${gender}: ${ranks.gender}`}
+        {`${gender}: ${ranks.gender || '-'}`}
         <StyledTotal>{`/${totals[gender]}`}</StyledTotal>
       </StyledRank>
     </Grid>
