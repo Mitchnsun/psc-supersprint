@@ -20,6 +20,7 @@ export const Sandbox: Story = {
       ranks: { scratch: 1, gender: 1, cat: 1 },
       run: 676,
       sex: 'M',
+      status: '',
       swim: 299,
       total: 1530,
     },

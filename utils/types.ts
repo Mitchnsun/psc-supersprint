@@ -21,6 +21,7 @@ export interface ResultType {
   ranks: RanksType;
   run: number;
   sex: string;
+  status: string;
   swim: number;
   total: number;
 }

@@ -1,3 +1,4 @@
+import isEmpty from 'lodash/isEmpty';
 import { styled, useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material';
@@ -38,8 +39,10 @@ const ResultsTable = ({
     (item) =>
       (rEx(item.bib.toString(), input) || rEx(item.firstname, input) || rEx(item.lastname, input)) &&
       rEx(item.cat, cat) &&
-      rEx(item.sex, gender),
+      rEx(item.sex, gender) &&
+      isEmpty(item.status),
   );
+  const statusList = results.filter((item) => !isEmpty(item.status));
 
   return (
     <Table size="small">
@@ -61,7 +64,7 @@ const ResultsTable = ({
         </TableRow>
       </TableHead>
       <TableBody>
-        {list.map((item, index) => (
+        {[...list, ...statusList].map((item, index) => (
           <LineResult
             key={item.bib}
             result={item}

@@ -7,6 +7,7 @@ export const schema = yup.object({
   firstname: yup.string().required(),
   lastname: yup.string().required(),
   gender: yup.string().required(),
+  status: yup.string(),
   bib: yup.number().required(),
   birthYear: yup.number().required(),
   category: yup.string().required(),

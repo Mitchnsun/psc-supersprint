@@ -12,7 +12,7 @@ import GlobalContext from '@/utils/context/global.context';
 
 export default function Results() {
   const [context, setContext] = useState({ year: YEAR });
-  const [scrollStep, setScrollStep] = useState(3);
+  const [scrollStep, setScrollStep] = useState(1);
   const contextMemo = useMemo(() => ({ context, setContext }), [context]);
   const [data, setData] = useState<{ results: ResultTypeWithId[]; totals: Record<string, number> }>({
     results: [],
@@ -36,7 +36,7 @@ export default function Results() {
         setScrollStep(-3);
       }
       if (window.scrollY === 0) {
-        setScrollStep(3);
+        setScrollStep(1);
       }
       window.scrollTo({ top: window.scrollY + scrollStep, behavior: 'smooth' });
     }, 100);
