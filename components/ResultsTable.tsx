@@ -42,7 +42,8 @@ const ResultsTable = ({
       rEx(item.sex, gender) &&
       isEmpty(item.status),
   );
-  const statusList = results.filter((item) => !isEmpty(item.status));
+  const hasFilters = input || cat || gender;
+  const statusList = results.filter((item) => !isEmpty(item.status) && !hasFilters);
 
   return (
     <Table size="small">
