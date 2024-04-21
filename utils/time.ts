@@ -1,10 +1,18 @@
 import DISTANCES from './distances';
 
+const prependZero = (value: number, skip: boolean): string => {
+  if (skip) {
+    return value.toString();
+  }
+
+  return value < 10 ? `0${value}` : value.toString();
+};
+
 const convert = (time: number) => {
   if (typeof time !== 'number' || time === 0) return '-';
   const hours = Math.floor(time / 3600);
-  const minutes = Math.floor(time / 60);
-  const seconds = time % 60 < 10 ? `0${Math.round(time % 60)}` : Math.round(time % 60);
+  const minutes = prependZero(Math.floor((time - hours * 3600) / 60), hours === 0);
+  const seconds = prependZero(Math.round(time % 60), false);
   return `${hours ? `${hours}:` : ''}${minutes}:${seconds}`;
 };
 
