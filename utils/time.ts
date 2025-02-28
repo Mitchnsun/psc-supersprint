@@ -52,7 +52,7 @@ export default {
   swim: (time: number) => {
     if (Number.isNaN(time) || time === 0) return '-';
     const formatted = time / DISTANCES.swim.length;
-    return convert(formatted * 100);
+    return convert(Math.trunc(formatted * 100));
   },
   bike: (time: number) => {
     if (Number.isNaN(time) || time === 0) return '-';
