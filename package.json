@@ -85,5 +85,6 @@
     "typescript": "^4.9.4",
     "vite-tsconfig-paths": "^4.3.2",
     "vitest": "^1.4.0"
-  }
+  },
+  "packageManager": "yarn@1.22.22"
 }
