@@ -1,6 +1,8 @@
 const base = {
   BLUE: '#183772',
+  BLUE_2025: '#082ccb',
   BRONZE: 'hsl(33, 100%, 34%)',
+  CYAN: '#a9dcde',
   GRAY: '#e3e2e3',
   GRAY_DARK: '#5F5E5D',
   GREEN: 'hsl(144, 52%, 34%)',
@@ -15,8 +17,8 @@ const base = {
 
 export default {
   ...base,
-  PRIMARY: base.GREEN_DARK,
-  SECONDARY: base.MINT,
+  PRIMARY: base.CYAN,
+  SECONDARY: base.BLUE_2025,
   LOGO: base.BLUE,
   SUCCESS: base.GREEN,
   WARNING: base.BRONZE,
