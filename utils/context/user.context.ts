@@ -1,5 +1,5 @@
 import { createContext } from 'react';
-import { noop } from 'lodash';
+import noop from 'lodash/noop';
 
 export const INITIAL_USER = { uid: null, isLoggedIn: false };
 

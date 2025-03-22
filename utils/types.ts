@@ -10,6 +10,8 @@ export interface RanksType {
   cat: number;
   gender: number;
   scratch: number;
+  swim: number;
+  bike: number;
 }
 
 export interface ResultType {
