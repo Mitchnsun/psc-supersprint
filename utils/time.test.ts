@@ -78,9 +78,9 @@ describe('Utils: Time', () => {
       expect(Time.run(0)).toBe('-');
     });
 
-    test('should return the swim speed', () => {
-      expect(Time.run(750)).toBe('5:06');
-      expect(Time.run(1000)).toBe('6:48');
+    test('should return the run speed', () => {
+      expect(Time.run(750)).toBe('5:00');
+      expect(Time.run(1000)).toBe('6:40');
     });
   });
 });

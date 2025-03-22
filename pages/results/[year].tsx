@@ -36,7 +36,7 @@ export default ResultsPage;
 
 export async function getStaticPaths() {
   return {
-    paths: [{ params: { year: '2022' } }, { params: { year: '2023' } }],
+    paths: [{ params: { year: '2022' } }, { params: { year: '2023' } }, { params: { year: '2024' } }],
     fallback: false,
   };
 }
