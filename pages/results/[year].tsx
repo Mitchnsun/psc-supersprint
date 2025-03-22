@@ -35,8 +35,9 @@ const ResultsPage = ({
 export default ResultsPage;
 
 export async function getStaticPaths() {
+  const YEARS = ['2022', '2023', '2024', '2025'];
   return {
-    paths: [{ params: { year: '2022' } }, { params: { year: '2023' } }, { params: { year: '2024' } }],
+    paths: YEARS.map((year) => ({ params: { year } })),
     fallback: false,
   };
 }
