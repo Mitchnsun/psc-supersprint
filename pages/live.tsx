@@ -53,7 +53,7 @@ export default function Results() {
       </Helmet>
       <Title hLevel="h1">{`Résultats ${YEAR}`}</Title>
       <Board results={data.results} totals={data.totals} hideSearchBar />
-      <Image src={QRCode} width={200} height={200} alt="QR Code" style={{ position: 'absolute', left: 0, bottom: 0 }} />
+      <Image src={QRCode} width={150} height={150} alt="QR Code" style={{ position: 'fixed', left: 0, bottom: 0 }} />
     </GlobalContext.Provider>
   );
 }
