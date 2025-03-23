@@ -4,7 +4,7 @@ import isEmpty from 'lodash/isEmpty';
 import { ref, child, get } from 'firebase/database';
 import db from '@/lib/firebase';
 
-import PodiumView from '@/views/Podium.view';
+import PodiumView from '@/views/Podiums.view';
 import { rankResults } from '@/utils/results';
 import { ResultType, ResultTypeWithId } from '@/utils/types';
 import GlobalContext from '@/utils/context/global.context';
