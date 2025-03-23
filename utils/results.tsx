@@ -1,4 +1,5 @@
-import { compact, isEmpty } from 'lodash';
+import compact from 'lodash/compact';
+import isEmpty from 'lodash/isEmpty';
 import * as yup from 'yup';
 import Ranks from './ranks';
 import { ResultTypeWithId } from './types';
@@ -20,13 +21,30 @@ export const schema = yup.object({
 
 const sortResults = (data: ResultTypeWithId[]) => {
   let scratchRankInc = 0;
+  let swimRankInc = 0;
+  let bikeRankInc = 0;
+
   return compact(data)
+    .sort((a, b) => a.swim - b.swim)
+    .map((item) => {
+      if (isEmpty(item.status)) {
+        swimRankInc += 1;
+      }
+      return { ...item, ranks: { swim: isEmpty(item.status) ? swimRankInc : '-' } };
+    })
+    .sort((a, b) => a.bike - b.bike)
+    .map((item) => {
+      if (isEmpty(item.status)) {
+        bikeRankInc += 1;
+      }
+      return { ...item, ranks: { ...item.ranks, bike: isEmpty(item.status) ? bikeRankInc : '-' } };
+    })
     .sort((a, b) => a.total - b.total)
     .map((item) => {
       if (isEmpty(item.status)) {
         scratchRankInc += 1;
       }
-      return { ...item, ranks: { scratch: isEmpty(item.status) ? scratchRankInc : '-' } };
+      return { ...item, ranks: { ...item.ranks, scratch: isEmpty(item.status) ? scratchRankInc : '-' } };
     });
 };
 

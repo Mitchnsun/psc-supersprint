@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { child, ref, onValue } from 'firebase/database';
+import Image from 'next/image';
 
 import Board from '@/components/Board';
 import Title from '@/components/atoms/Title';
@@ -9,6 +10,7 @@ import { rankResults } from '@/utils/results';
 import { ResultType, ResultTypeWithId } from '@/utils/types';
 import { YEAR } from '@/utils/constants';
 import GlobalContext from '@/utils/context/global.context';
+import QRCode from '@/public/static/qr-code.png';
 
 export default function Results() {
   const [context, setContext] = useState({ year: YEAR });
@@ -50,7 +52,8 @@ export default function Results() {
         <title>{`PSC Supersprint | ${YEAR}`}</title>
       </Helmet>
       <Title hLevel="h1">{`Résultats ${YEAR}`}</Title>
-      <Board results={data.results} totals={data.totals} />
+      <Board results={data.results} totals={data.totals} hideSearchBar />
+      <Image src={QRCode} width={200} height={200} alt="QR Code" style={{ position: 'absolute', left: 0, bottom: 0 }} />
     </GlobalContext.Provider>
   );
 }

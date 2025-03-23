@@ -17,7 +17,7 @@ export const Sandbox: Story = {
       cat: CAT.S,
       firstname: 'Matthiou',
       lastname: 'Compète',
-      ranks: { scratch: 1, gender: 1, cat: 1 },
+      ranks: { scratch: 1, gender: 1, cat: 1, swim: 1, bike: 1 },
       run: 676,
       sex: 'M',
       status: '',
