@@ -35,7 +35,7 @@ export default function Results() {
   useEffect(() => {
     const interval = setInterval(() => {
       if (window.innerHeight + Math.round(window.scrollY) >= document.body.offsetHeight) {
-        setScrollStep(-3);
+        setScrollStep(-2);
       }
       if (window.scrollY === 0) {
         setScrollStep(1);
