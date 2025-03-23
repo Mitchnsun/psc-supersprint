@@ -13,7 +13,7 @@ const rEx = (item = '', value = '') => {
 };
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
-  color: COLORS.PRIMARY,
+  color: COLORS.SECONDARY,
   textAlign: 'center',
   fontFamily: 'FontBold',
   fontWeight: 'bold',

@@ -10,7 +10,7 @@ const Label = styled('p')`
   margin: 0;
   font-size: 1.1rem;
   font-family: 'FontBold';
-  color: ${COLORS.PRIMARY};
+  color: ${COLORS.SECONDARY};
 `;
 
 export default function Board({
