@@ -1,10 +1,5 @@
-import { PropsWithChildren } from 'react';
-import { ThemeProvider } from '@mui/material/styles';
-import { CssBaseline } from '@mui/material';
-import { Analytics } from '@vercel/analytics/react';
-
 import Layout from '@/components/Layout';
-import theme from '@/styles/theme';
+import ClientProviders from './providers';
 
 export const metadata = {
   icons: {
@@ -12,15 +7,13 @@ export const metadata = {
   },
 };
 
-export default function RootLayout({ children }: PropsWithChildren) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="fr">
       <body>
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
+        <ClientProviders>
           <Layout>{children}</Layout>
-          <Analytics />
-        </ThemeProvider>
+        </ClientProviders>
       </body>
     </html>
   );

@@ -1,10 +1,12 @@
-import dynamic from 'next/dynamic';
+import dynamicImport from 'next/dynamic';
 import { ref, child, get } from 'firebase/database';
 
 import db from '@/lib/firebase';
 import { ResultType } from '@/utils/types';
 
-const Share = dynamic(() => import('@/components/Share'), { ssr: false });
+const Share = dynamicImport(() => import('@/components/Share'), { ssr: false });
+
+export const dynamic = 'force-dynamic';
 
 type PageProps = {
   params: {

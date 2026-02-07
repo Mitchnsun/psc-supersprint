@@ -6,6 +6,8 @@ import { ResultType } from '@/utils/types';
 import { YEAR } from '@/utils/constants';
 import ResultsPageClient from './page.client';
 
+export const dynamic = 'force-dynamic';
+
 export const metadata = {
   title: `PSC Supersprint | ${YEAR}`,
 };

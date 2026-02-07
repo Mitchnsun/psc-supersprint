@@ -5,16 +5,13 @@ import { rankResults } from '@/utils/results';
 import { ResultType } from '@/utils/types';
 import ResultatsPageClient from './page.client';
 
+export const dynamic = 'force-dynamic';
+
 type PageProps = {
   params: {
     year: string;
   };
 };
-
-export async function generateStaticParams() {
-  const YEARS = ['2022', '2023', '2024', '2025'];
-  return YEARS.map((year) => ({ year }));
-}
 
 export async function generateMetadata({ params }: PageProps) {
   const { year } = params;
