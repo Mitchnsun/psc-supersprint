@@ -38,7 +38,7 @@ This project has been migrated to Next.js 16 and React 19. Below are the key cha
 
 The project requires Firebase configuration through environment variables. Create a `.env.local` file with the following variables:
 
-```
+```bash
 NEXT_PUBLIC_FIREBASE_PUBLIC_API_KEY=your_api_key
 NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=your_auth_domain
 NEXT_PUBLIC_FIREBASE_DATABASE_URL=your_database_url

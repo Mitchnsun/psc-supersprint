@@ -39,14 +39,14 @@ const Podiums = ({ category, results }: { category: string; results: ResultTypeW
         </Grid>
         <Grid size={6}>
           {men.slice(0, 3).map((item, index) => (
-            <Typography>
+            <Typography key={`${item.firstname}-${item.lastname}-${index}`}>
               {index + 1}. {item.firstname} {item.lastname} - {Time.convert(item.total)}
             </Typography>
           ))}
         </Grid>
         <Grid size={6}>
           {women.slice(0, 3).map((item, index) => (
-            <Typography>
+            <Typography key={`${item.firstname}-${item.lastname}-${index}`}>
               {index + 1}. {item.firstname} {item.lastname} - {Time.convert(item.total)}
             </Typography>
           ))}
@@ -68,7 +68,7 @@ const Podiums = ({ category, results }: { category: string; results: ResultTypeW
             .sort((a, b) => a.swim - b.swim)
             .slice(0, 3)
             .map((item, index) => (
-              <Typography>
+              <Typography key={`${item.firstname}-${item.lastname}-${index}`}>
                 {index + 1}. {item.firstname} {item.lastname} - {Time.convert(item.swim)}
               </Typography>
             ))}
@@ -78,7 +78,7 @@ const Podiums = ({ category, results }: { category: string; results: ResultTypeW
             .sort((a, b) => a.swim - b.swim)
             .slice(0, 3)
             .map((item, index) => (
-              <Typography>
+              <Typography key={`${item.firstname}-${item.lastname}-${index}`}>
                 {index + 1}. {item.firstname} {item.lastname} - {Time.convert(item.swim)}
               </Typography>
             ))}
@@ -100,7 +100,7 @@ const Podiums = ({ category, results }: { category: string; results: ResultTypeW
             .sort((a, b) => a.bike - b.bike)
             .slice(0, 3)
             .map((item, index) => (
-              <Typography>
+              <Typography key={`${item.firstname}-${item.lastname}-${index}`}>
                 {index + 1}. {item.firstname} {item.lastname} - {Time.convert(item.bike)}
               </Typography>
             ))}
@@ -110,7 +110,7 @@ const Podiums = ({ category, results }: { category: string; results: ResultTypeW
             .sort((a, b) => a.bike - b.bike)
             .slice(0, 3)
             .map((item, index) => (
-              <Typography>
+              <Typography key={`${item.firstname}-${item.lastname}-${index}`}>
                 {index + 1}. {item.firstname} {item.lastname} - {Time.convert(item.bike)}
               </Typography>
             ))}

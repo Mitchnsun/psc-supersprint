@@ -61,8 +61,10 @@ const AddResultForm = () => {
   const birthYear = watch('birthYear');
 
   useEffect(() => {
-    const category = categoryFromBirthYear(birthYear) || CATEGORIES[1];
-    setValue('category', category.id);
+    const parsedYear = Number(birthYear);
+    const isValidYear = birthYear && !isNaN(parsedYear) && parsedYear > 0;
+    const category = isValidYear ? categoryFromBirthYear(birthYear) : null;
+    setValue('category', category?.id || CATEGORIES[1].id);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [birthYear]);
 
