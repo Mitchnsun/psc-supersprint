@@ -3,22 +3,14 @@ import { useForm, Controller } from 'react-hook-form';
 import { push, ref, set } from 'firebase/database';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Alert, Box, Button, MenuItem, Stack, TextField } from '@mui/material';
+import * as yup from 'yup';
 import db from '@/lib/firebase';
 import Time from '@/utils/time';
 import { schema } from '@/utils/results';
-import { CAT, CATEGORIES, categoryFromBirthYear } from '@/utils/categories.utils';
+import { CATEGORIES, categoryFromBirthYear } from '@/utils/categories.utils';
 import { YEAR } from '@/utils/constants';
 
-type FormValues = {
-  bib: string;
-  birthYear: string;
-  category: CAT;
-  firstname: string;
-  gender: string;
-  status: string;
-  lastname: string;
-  times: { swim: string; bike: string; total: string };
-};
+type FormValues = yup.InferType<typeof schema>;
 
 const timeCalculus = ({ swim, bike, total }: { swim: string; bike: string; total: string }) => {
   const swimSeconds = swim
@@ -50,13 +42,29 @@ const AddResultForm = () => {
     formState: { errors },
   } = useForm<FormValues>({
     resolver: yupResolver(schema),
+    defaultValues: {
+      bib: '' as any,
+      lastname: '',
+      firstname: '',
+      gender: '',
+      birthYear: '' as any,
+      category: CATEGORIES[1].id,
+      status: '',
+      times: {
+        swim: '',
+        bike: '',
+        total: '',
+      },
+    },
   });
 
   const birthYear = watch('birthYear');
 
   useEffect(() => {
-    const category = categoryFromBirthYear(parseInt(birthYear, 10)) || CATEGORIES[1];
-    setValue('category', category.id);
+    const parsedYear = Number(birthYear);
+    const isValidYear = birthYear && !isNaN(parsedYear) && parsedYear > 0;
+    const category = isValidYear ? categoryFromBirthYear(birthYear) : null;
+    setValue('category', category?.id || CATEGORIES[1].id);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [birthYear]);
 
@@ -92,7 +100,6 @@ const AddResultForm = () => {
           )}
           name="bib"
           control={control}
-          defaultValue=""
         />
         <Stack direction="row" spacing={2}>
           <Controller
@@ -157,7 +164,6 @@ const AddResultForm = () => {
             )}
             name="birthYear"
             control={control}
-            defaultValue=""
           />
           <Controller
             render={({ field }) => (

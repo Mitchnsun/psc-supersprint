@@ -34,8 +34,8 @@ const PodiumView = ({ year, results = [] }: { year: string; results: ResultTypeW
               onChange={(e) => setCat(e.target.value)}
             >
               <MenuItem value="">Aucun filtre</MenuItem>
-              {CATEGORIES.map((cat) => (
-                <MenuItem key={cat.id} value={cat.id}>
+              {CATEGORIES.map((cat, index) => (
+                <MenuItem key={`${cat.id}-${cat.label}-${index}`} value={cat.id}>
                   {cat.label} ({cat.id})
                 </MenuItem>
               ))}
