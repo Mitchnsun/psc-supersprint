@@ -1,12 +1,12 @@
 import { redirect } from 'next/navigation';
 
 type PageProps = {
-  params: {
+  params: Promise<{
     year: string;
-  };
+  }>;
 };
 
-export default function ResultsPage({ params }: PageProps) {
-  const { year } = params;
+export default async function ResultsPage({ params }: PageProps) {
+  const { year } = await params;
   redirect(`/resultats/${year}`);
 }

@@ -40,8 +40,22 @@ const AddResultForm = () => {
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm({
+  } = useForm<FormValues>({
     resolver: yupResolver(schema),
+    defaultValues: {
+      bib: '' as any,
+      lastname: '',
+      firstname: '',
+      gender: '',
+      birthYear: '' as any,
+      category: CATEGORIES[1].id,
+      status: '',
+      times: {
+        swim: '',
+        bike: '',
+        total: '',
+      },
+    },
   });
 
   const birthYear = watch('birthYear');
@@ -84,8 +98,6 @@ const AddResultForm = () => {
           )}
           name="bib"
           control={control}
-          // Type assertion needed: react-hook-form expects string from TextField but yup schema validates as number
-          defaultValue={undefined as any}
         />
         <Stack direction="row" spacing={2}>
           <Controller
@@ -150,8 +162,6 @@ const AddResultForm = () => {
             )}
             name="birthYear"
             control={control}
-            // Type assertion needed: react-hook-form expects string from TextField but yup schema validates as number
-            defaultValue={undefined as any}
           />
           <Controller
             render={({ field }) => (

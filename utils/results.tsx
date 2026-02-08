@@ -8,15 +8,23 @@ export const schema = yup.object({
   firstname: yup.string().required(),
   lastname: yup.string().required(),
   gender: yup.string().required(),
-  status: yup.string(),
-  bib: yup.number().required(),
-  birthYear: yup.number().required(),
+  status: yup.string().optional().default(''),
+  bib: yup
+    .number()
+    .transform((value, originalValue) => (originalValue === '' ? undefined : value))
+    .required(),
+  birthYear: yup
+    .number()
+    .transform((value, originalValue) => (originalValue === '' ? undefined : value))
+    .required(),
   category: yup.string().required(),
-  times: yup.object({
-    swim: yup.string().required(),
-    bike: yup.string().required(),
-    total: yup.string().required(),
-  }),
+  times: yup
+    .object({
+      swim: yup.string().required(),
+      bike: yup.string().required(),
+      total: yup.string().required(),
+    })
+    .required(),
 });
 
 const sortResults = (data: ResultTypeWithId[]) => {

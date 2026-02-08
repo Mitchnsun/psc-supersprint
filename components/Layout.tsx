@@ -5,6 +5,11 @@ import { styled } from '@mui/material/styles';
 import COLORS from '@/styles/colors';
 import Header from './Header';
 
+const Wrapper = styled('div')`
+  margin: auto;
+  max-width: 1080px;
+`;
+
 const Container = styled('div')`
   margin: 0 1rem 1rem;
   padding: 20px;
@@ -13,10 +18,10 @@ const Container = styled('div')`
 `;
 
 const Layout = ({ children }: PropsWithChildren<unknown>) => (
-  <div style={{ margin: 'auto', maxWidth: 1080 }}>
+  <Wrapper>
     <Header />
     <Container>{children}</Container>
-  </div>
+  </Wrapper>
 );
 
 export default Layout;

@@ -7,10 +7,10 @@ import Share from '@/components/Share';
 export const dynamic = 'force-dynamic';
 
 type PageProps = {
-  params: {
+  params: Promise<{
     year: string;
     id: string;
-  };
+  }>;
 };
 
 async function getAthleteData(year: string, id: string): Promise<ResultType> {
@@ -21,7 +21,7 @@ async function getAthleteData(year: string, id: string): Promise<ResultType> {
 }
 
 export default async function AthletePage({ params }: PageProps) {
-  const { year, id } = params;
+  const { year, id } = await params;
   const data = await getAthleteData(year, id);
 
   return <Share {...data} />;

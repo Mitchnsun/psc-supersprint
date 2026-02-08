@@ -8,13 +8,13 @@ import ResultatsPageClient from './page.client';
 export const dynamic = 'force-dynamic';
 
 type PageProps = {
-  params: {
+  params: Promise<{
     year: string;
-  };
+  }>;
 };
 
 export async function generateMetadata({ params }: PageProps) {
-  const { year } = params;
+  const { year } = await params;
   return {
     title: `PSC Supersprint | ${year}`,
   };
@@ -33,7 +33,7 @@ async function getData(year: string) {
 }
 
 export default async function ResultatsPage({ params }: PageProps) {
-  const { year } = params;
+  const { year } = await params;
   const data = await getData(year);
 
   return <ResultatsPageClient {...data} />;
