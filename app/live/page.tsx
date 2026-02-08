@@ -1,5 +1,6 @@
+'use client';
+
 import { useEffect, useMemo, useState } from 'react';
-import { Helmet } from 'react-helmet';
 import { child, ref, onValue } from 'firebase/database';
 import Image from 'next/image';
 
@@ -12,7 +13,7 @@ import { YEAR } from '@/utils/constants';
 import GlobalContext from '@/utils/context/global.context';
 import QRCode from '@/public/static/qr-code.png';
 
-export default function Results() {
+export default function LivePage() {
   const [context, setContext] = useState({ year: YEAR });
   const [scrollStep, setScrollStep] = useState(1);
   const contextMemo = useMemo(() => ({ context, setContext }), [context]);
@@ -48,9 +49,6 @@ export default function Results() {
 
   return (
     <GlobalContext.Provider value={contextMemo}>
-      <Helmet>
-        <title>{`PSC Supersprint | ${YEAR}`}</title>
-      </Helmet>
       <Title hLevel="h1">{`Résultats ${YEAR}`}</Title>
       <Board results={data.results} totals={data.totals} hideSearchBar />
       <Image src={QRCode} width={150} height={150} alt="QR Code" style={{ position: 'fixed', left: 0, bottom: 0 }} />

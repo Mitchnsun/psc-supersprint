@@ -10,7 +10,6 @@ export default defineConfig({
     setupFiles: './tests/setup.ts',
     coverage: {
       include: ['**/*.{ts,tsx}'], // specify files to include
-      exclude: ['storybook-static/**', '**/*.stories.tsx'], // specify files to exclude
       reporter: ['text', 'html'], // customize reporters. don't forget to include 'html' if you use vitest-ui
     },
   },
