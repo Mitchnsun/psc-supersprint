@@ -1,66 +1,70 @@
-@import 'tailwindcss';
-
-@theme {
-  /* Custom Colors from colors.ts */
-  --color-primary: #a9dcde; /* CYAN */
-  --color-secondary: #082ccb; /* BLUE_2025 */
-  --color-logo: #183772; /* BLUE */
-  --color-success: hsl(144, 52%, 34%); /* GREEN */
-  --color-warning: hsl(33, 100%, 34%); /* BRONZE */
-  --color-error: hsl(0, 78%, 49%); /* RED */
-
-  /* Base colors */
-  --color-blue: #183772;
-  --color-blue-2025: #082ccb;
-  --color-bronze: hsl(33, 100%, 34%);
-  --color-cyan: #a9dcde;
-  --color-gray: #e3e2e3;
-  --color-gray-dark: #5f5e5d;
-  --color-green: hsl(144, 52%, 34%);
-  --color-green-dark: #045249;
-  --color-mint: #6bb996;
-  --color-purple: #3f3c55;
-  --color-purple-dark: rgb(51, 35, 130);
-  --color-red: hsl(0, 78%, 49%);
-  --color-salmon: #c9807a;
-  --color-white: hsl(0, 0%, 100%);
-
-  /* Font families */
-  --font-family-fantasy: 'FontFantasy', cursive;
-  --font-family-regular: 'FontRegular', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
-  --font-family-bold: 'FontBold', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 /* Custom Fonts */
-@font-face {
-  font-family: 'FontFantasy';
-  src: url('/static/GochiHand-Regular.ttf');
-  font-weight: normal;
-  font-style: normal;
-}
+@layer base {
+  @font-face {
+    font-family: 'FontFantasy';
+    src: url('/static/GochiHand-Regular.ttf');
+    font-weight: normal;
+    font-style: normal;
+  }
 
-@font-face {
-  font-family: 'FontRegular';
-  src: url('/static/Gilroy-Light.otf');
-  font-weight: normal;
-  font-style: normal;
-}
+  @font-face {
+    font-family: 'FontRegular';
+    src: url('/static/Gilroy-Light.otf');
+    font-weight: normal;
+    font-style: normal;
+  }
 
-@font-face {
-  font-family: 'FontBold';
-  src: url('/static/Gilroy-ExtraBold.otf');
-  font-weight: bold;
-  font-style: normal;
-}
+  @font-face {
+    font-family: 'FontBold';
+    src: url('/static/Gilroy-ExtraBold.otf');
+    font-weight: bold;
+    font-style: normal;
+  }
 
-/* Global Styles */
-body {
-  font-family: var(--font-family-regular);
-  background-color: var(--color-primary);
-}
+  :root {
+    /* Custom Colors from colors.ts */
+    --color-primary: #a9dcde; /* CYAN */
+    --color-secondary: #082ccb; /* BLUE_2025 */
+    --color-logo: #183772; /* BLUE */
+    --color-success: hsl(144, 52%, 34%); /* GREEN */
+    --color-warning: hsl(33, 100%, 34%); /* BRONZE */
+    --color-error: hsl(0, 78%, 49%); /* RED */
 
-@media (max-width: 450px) {
+    /* Base colors */
+    --color-blue: #183772;
+    --color-blue-2025: #082ccb;
+    --color-bronze: hsl(33, 100%, 34%);
+    --color-cyan: #a9dcde;
+    --color-gray: #e3e2e3;
+    --color-gray-dark: #5f5e5d;
+    --color-green: hsl(144, 52%, 34%);
+    --color-green-dark: #045249;
+    --color-mint: #6bb996;
+    --color-purple: #3f3c55;
+    --color-purple-dark: rgb(51, 35, 130);
+    --color-red: hsl(0, 78%, 49%);
+    --color-salmon: #c9807a;
+    --color-white: hsl(0, 0%, 100%);
+
+    /* Font families */
+    --font-family-fantasy: 'FontFantasy', cursive;
+    --font-family-regular: 'FontRegular', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+    --font-family-bold: 'FontBold', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+  }
+
+  /* Global Styles */
   body {
-    font-size: 0.9rem;
+    font-family: var(--font-family-regular);
+    background-color: var(--color-primary);
+  }
+
+  @media (max-width: 450px) {
+    body {
+      font-size: 0.9rem;
+    }
   }
 }
