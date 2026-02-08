@@ -6,12 +6,6 @@ import { ResultTypeWithId } from '@/utils/types';
 import COLORS from '@/styles/colors';
 import { CATEGORIES } from '@/utils/categories.utils';
 
-const Label = ({ children }: { children: React.ReactNode }) => (
-  <p className="m-0 text-lg" style={{ fontFamily: 'FontBold', color: COLORS.PRIMARY }}>
-    {children}
-  </p>
-);
-
 const PodiumView = ({ year, results = [] }: { year: string; results: ResultTypeWithId[] }) => {
   const [cat, setCat] = useState<string>('');
 
@@ -19,7 +13,9 @@ const PodiumView = ({ year, results = [] }: { year: string; results: ResultTypeW
     <>
       <Title hLevel="h1">Podiums {year}</Title>
       <div className="flex items-center gap-2 my-2">
-        <Label>Filtrer par:</Label>
+        <p className="m-0 text-lg" style={{ fontFamily: 'FontBold', color: COLORS.PRIMARY }}>
+          Filtrer par:
+        </p>
         <div className="w-[150px]">
           <Select value={cat || ''} onValueChange={(value) => setCat(value)}>
             <SelectTrigger>
