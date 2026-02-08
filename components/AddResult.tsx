@@ -1,8 +1,12 @@
 import { useState, useEffect } from 'react';
-import { useForm, Controller } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { push, ref, set } from 'firebase/database';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Alert, Box, Button, MenuItem, Stack, TextField } from '@mui/material';
+import { Alert, AlertDescription } from '@/components/ui/alert';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import * as yup from 'yup';
 import db from '@/lib/firebase';
 import Time from '@/utils/time';
@@ -86,190 +90,182 @@ const AddResultForm = () => {
   };
 
   return (
-    <Box component="form" autoComplete="off" onSubmit={handleSubmit(onSubmit)} sx={{ padding: '1rem' }}>
-      <Stack spacing={2}>
-        <Controller
+    <form autoComplete="off" onSubmit={handleSubmit(onSubmit)} className="p-4 space-y-4">
+      <FormField
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel>Numéro de dossard</FormLabel>
+            <Input {...field} />
+            <FormMessage>{errors.bib?.message}</FormMessage>
+          </FormItem>
+        )}
+        name="bib"
+        control={control}
+      />
+
+      <div className="flex gap-4">
+        <FormField
           render={({ field }) => (
-            <TextField
-              {...field}
-              label="Numéro de dossard"
-              size="small"
-              error={!!errors.bib?.message}
-              helperText={errors.bib?.message}
-            />
+            <FormItem className="flex-1">
+              <FormLabel>Nom</FormLabel>
+              <Input {...field} />
+              <FormMessage>{errors.lastname?.message}</FormMessage>
+            </FormItem>
           )}
-          name="bib"
-          control={control}
-        />
-        <Stack direction="row" spacing={2}>
-          <Controller
-            render={({ field }) => (
-              <TextField
-                {...field}
-                label="Nom"
-                size="small"
-                error={!!errors.lastname?.message}
-                helperText={errors.lastname?.message}
-              />
-            )}
-            name="lastname"
-            control={control}
-            defaultValue=""
-          />
-          <Controller
-            render={({ field }) => (
-              <TextField
-                {...field}
-                label="Prénom"
-                size="small"
-                error={!!errors.firstname?.message}
-                helperText={errors.firstname?.message}
-              />
-            )}
-            name="firstname"
-            control={control}
-            defaultValue=""
-          />
-        </Stack>
-        <Controller
-          render={({ field }) => (
-            <TextField
-              {...field}
-              label="Gender"
-              size="small"
-              select
-              error={!!errors.gender?.message}
-              helperText={errors.gender?.message}
-              style={{ width: 150 }}
-            >
-              <MenuItem value="M">Homme (M)</MenuItem>
-              <MenuItem value="F">Femme (F)</MenuItem>
-            </TextField>
-          )}
-          name="gender"
+          name="lastname"
           control={control}
           defaultValue=""
         />
-        <Stack direction="row" spacing={2}>
-          <Controller
-            render={({ field }) => (
-              <TextField
-                {...field}
-                label="Année de naissance"
-                size="small"
-                error={!!errors.birthYear?.message}
-                helperText={errors.birthYear?.message}
-                inputProps={{ maxLength: 4 }}
-              />
-            )}
-            name="birthYear"
-            control={control}
-          />
-          <Controller
-            render={({ field }) => (
-              <TextField
-                {...field}
-                label="Catégorie"
-                size="small"
-                select
-                error={!!errors.category?.message}
-                helperText={errors.category?.message}
-                style={{ width: 150 }}
-              >
-                {CATEGORIES.map((cat) => (
-                  <MenuItem key={cat.id} value={cat.id}>
-                    {cat.label} ({cat.id})
-                  </MenuItem>
-                ))}
-              </TextField>
-            )}
-            name="category"
-            control={control}
-            defaultValue={CATEGORIES[1].id}
-          />
-        </Stack>
-        <Stack direction="row" spacing={2}>
-          <Controller
-            render={({ field }) => (
-              <TextField
-                {...field}
-                label="Swim"
-                size="small"
-                variant="outlined"
-                style={{ width: 150 }}
-                onChange={(e) => field.onChange(Time.maskInput(e.target.value))}
-                error={!!errors.times?.swim?.message || !Time.valid(field.value)}
-                helperText={errors.times?.swim?.message}
-              />
-            )}
-            name="times.swim"
-            control={control}
-            defaultValue=""
-          />
-          <Controller
-            render={({ field }) => (
-              <TextField
-                {...field}
-                label="Bike"
-                size="small"
-                variant="outlined"
-                style={{ width: 150 }}
-                onChange={(e) => field.onChange(Time.maskInput(e.target.value))}
-                error={!!errors.times?.bike?.message || !Time.valid(field.value)}
-                helperText={errors.times?.bike?.message}
-              />
-            )}
-            name="times.bike"
-            control={control}
-            defaultValue=""
-          />
-          <Controller
-            render={({ field }) => (
-              <TextField
-                {...field}
-                label="Total"
-                size="small"
-                variant="outlined"
-                style={{ width: 150 }}
-                onChange={(e) => field.onChange(Time.maskInput(e.target.value))}
-                error={!!errors.times?.total?.message || !Time.valid(field.value)}
-                helperText={errors.times?.total?.message}
-              />
-            )}
-            name="times.total"
-            control={control}
-            defaultValue=""
-          />
-        </Stack>
-        <Stack direction="row" spacing={2}>
-          <Controller
-            render={({ field }) => (
-              <TextField
-                {...field}
-                label="Status"
-                size="small"
-                select
-                error={!!errors.status?.message}
-                helperText={errors.status?.message}
-                style={{ width: 150 }}
-              >
-                <MenuItem value="">Finisher</MenuItem>
-                <MenuItem value="DNF">DNF</MenuItem>
-                <MenuItem value="DNS">DNS</MenuItem>
-                <MenuItem value="DNQ">DNQ</MenuItem>
-              </TextField>
-            )}
-            name="status"
-            control={control}
-            defaultValue=""
-          />
-        </Stack>
-        <Button type="submit" variant="contained" color="secondary" disabled={isLoading}>
-          Submit
-        </Button>
-      </Stack>
-      {status && <Alert severity="error">{status}</Alert>}
-    </Box>
+        <FormField
+          render={({ field }) => (
+            <FormItem className="flex-1">
+              <FormLabel>Prénom</FormLabel>
+              <Input {...field} />
+              <FormMessage>{errors.firstname?.message}</FormMessage>
+            </FormItem>
+          )}
+          name="firstname"
+          control={control}
+          defaultValue=""
+        />
+      </div>
+
+      <FormField
+        render={({ field }) => (
+          <FormItem className="w-[150px]">
+            <FormLabel>Gender</FormLabel>
+            <Select value={field.value} onValueChange={field.onChange}>
+              <SelectTrigger>
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="M">Homme (M)</SelectItem>
+                <SelectItem value="F">Femme (F)</SelectItem>
+              </SelectContent>
+            </Select>
+            <FormMessage>{errors.gender?.message}</FormMessage>
+          </FormItem>
+        )}
+        name="gender"
+        control={control}
+        defaultValue=""
+      />
+
+      <div className="flex gap-4">
+        <FormField
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Année de naissance</FormLabel>
+              <Input {...field} maxLength={4} />
+              <FormMessage>{errors.birthYear?.message}</FormMessage>
+            </FormItem>
+          )}
+          name="birthYear"
+          control={control}
+        />
+        <FormField
+          render={({ field }) => (
+            <FormItem className="w-[150px]">
+              <FormLabel>Catégorie</FormLabel>
+              <Select value={field.value} onValueChange={field.onChange}>
+                <SelectTrigger>
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  {CATEGORIES.map((cat) => (
+                    <SelectItem key={cat.id} value={cat.id}>
+                      {cat.label} ({cat.id})
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+              <FormMessage>{errors.category?.message}</FormMessage>
+            </FormItem>
+          )}
+          name="category"
+          control={control}
+          defaultValue={CATEGORIES[1].id}
+        />
+      </div>
+
+      <div className="flex gap-4">
+        <FormField
+          render={({ field }) => (
+            <FormItem className="w-[150px]">
+              <FormLabel>Swim</FormLabel>
+              <Input {...field} onChange={(e) => field.onChange(Time.maskInput(e.target.value))} />
+              <FormMessage>
+                {errors.times?.swim?.message || (!Time.valid(field.value) && field.value ? 'Invalid time' : '')}
+              </FormMessage>
+            </FormItem>
+          )}
+          name="times.swim"
+          control={control}
+          defaultValue=""
+        />
+        <FormField
+          render={({ field }) => (
+            <FormItem className="w-[150px]">
+              <FormLabel>Bike</FormLabel>
+              <Input {...field} onChange={(e) => field.onChange(Time.maskInput(e.target.value))} />
+              <FormMessage>
+                {errors.times?.bike?.message || (!Time.valid(field.value) && field.value ? 'Invalid time' : '')}
+              </FormMessage>
+            </FormItem>
+          )}
+          name="times.bike"
+          control={control}
+          defaultValue=""
+        />
+        <FormField
+          render={({ field }) => (
+            <FormItem className="w-[150px]">
+              <FormLabel>Total</FormLabel>
+              <Input {...field} onChange={(e) => field.onChange(Time.maskInput(e.target.value))} />
+              <FormMessage>
+                {errors.times?.total?.message || (!Time.valid(field.value) && field.value ? 'Invalid time' : '')}
+              </FormMessage>
+            </FormItem>
+          )}
+          name="times.total"
+          control={control}
+          defaultValue=""
+        />
+      </div>
+
+      <FormField
+        render={({ field }) => (
+          <FormItem className="w-[150px]">
+            <FormLabel>Status</FormLabel>
+            <Select value={field.value} onValueChange={field.onChange}>
+              <SelectTrigger>
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="">Finisher</SelectItem>
+                <SelectItem value="DNF">DNF</SelectItem>
+                <SelectItem value="DNS">DNS</SelectItem>
+                <SelectItem value="DNQ">DNQ</SelectItem>
+              </SelectContent>
+            </Select>
+            <FormMessage>{errors.status?.message}</FormMessage>
+          </FormItem>
+        )}
+        name="status"
+        control={control}
+        defaultValue=""
+      />
+
+      <Button type="submit" variant="secondary" disabled={isLoading}>
+        Submit
+      </Button>
+
+      {status && (
+        <Alert variant="destructive">
+          <AlertDescription>{status}</AlertDescription>
+        </Alert>
+      )}
+    </form>
   );
 };
 

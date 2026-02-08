@@ -3,7 +3,8 @@
 import { useRef, useState } from 'react';
 import html2canvas from 'html2canvas';
 import { saveAs } from 'file-saver';
-import { Alert, Button } from '@mui/material';
+import { Alert, AlertDescription } from '@/components/ui/alert';
+import { Button } from '@/components/ui/button';
 import { ResultType } from '@/utils/types';
 
 import ResultCard from './ResultCard';
@@ -46,18 +47,18 @@ const Share = (props: ResultType) => {
 
   return (
     <div>
-      <div style={{ margin: 'auto', maxWidth: '450px' }}>
+      <div className="mx-auto max-w-[450px]">
         <div ref={resultRef}>
           <ResultCard result={props} />
         </div>
       </div>
-      <div style={{ margin: 'auto', maxWidth: '450px', paddingTop: '1rem' }}>
+      <div className="mx-auto max-w-[450px] pt-4">
         {isError && (
-          <Alert sx={{ marginBottom: '1rem' }} severity="warning">
-            Nous sommes désolés le partage ne fonctionne pas sur cet appareil
+          <Alert variant="warning" className="mb-4">
+            <AlertDescription>Nous sommes désolés le partage ne fonctionne pas sur cet appareil</AlertDescription>
           </Alert>
         )}
-        <Button variant="contained" color="secondary" onClick={handleShare} fullWidth>
+        <Button variant="secondary" onClick={handleShare} className="w-full">
           Partager
         </Button>
       </div>

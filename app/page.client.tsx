@@ -1,7 +1,6 @@
 'use client';
 
 import { useMemo, useState } from 'react';
-import { Typography } from '@mui/material';
 import Board from '@/components/Board';
 import Title from '@/components/atoms/Title';
 import { ResultTypeWithId } from '@/utils/types';
@@ -22,7 +21,7 @@ export default function ResultsPageClient({
     <GlobalContext.Provider value={contextMemo}>
       <Title hLevel="h1">{`Résultats ${YEAR}`}</Title>
       {results.length === 0 ? (
-        <Typography sx={{ marginTop: '1rem' }}>{`Rendez-vous le ${DATE}`}</Typography>
+        <p className="mt-4">{`Rendez-vous le ${DATE}`}</p>
       ) : (
         <Board results={results} totals={totals} />
       )}

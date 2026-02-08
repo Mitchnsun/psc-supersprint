@@ -1,17 +1,16 @@
 import { useState } from 'react';
-import { TableRow, TableCell } from '@mui/material';
-import { styled, useTheme } from '@mui/material/styles';
-import useMediaQuery from '@mui/material/useMediaQuery';
+import { TableRow, TableCell } from '@/components/ui/table';
+import { useMediaQuery } from '@/lib/hooks/useMediaQuery';
 import { ResultTypeWithId } from '@/utils/types';
 import TimeCell from './atoms/TimeCell';
 import ArrowIcon from './atoms/ArrowIcon';
 import DetailsResult from './DetailsResult';
 
-const CustomTableCell = styled(TableCell)(({ theme }) => ({
-  [theme.breakpoints.down('sm')]: {
-    padding: 1,
-  },
-}));
+const CustomTableCell = ({ children, ...props }: React.ComponentProps<typeof TableCell>) => (
+  <TableCell {...props} className="md:p-2 p-0.5">
+    {children}
+  </TableCell>
+);
 
 const LineResult = ({
   result,
@@ -22,20 +21,19 @@ const LineResult = ({
   totals: Record<string, number>;
   rank: number;
 }) => {
-  const theme = useTheme();
-  const isLargeScreen = useMediaQuery(theme.breakpoints.up('md'));
+  const isLargeScreen = useMediaQuery('(min-width: 900px)');
   const [moreDetails, setMoreDetails] = useState(false);
 
   return (
     <>
-      <TableRow hover onClick={() => setMoreDetails(!moreDetails)}>
-        <CustomTableCell align="center">
+      <TableRow onClick={() => setMoreDetails(!moreDetails)} className="cursor-pointer">
+        <CustomTableCell className="text-center">
           <ArrowIcon down={moreDetails} />
         </CustomTableCell>
-        <CustomTableCell align="center">{rank}</CustomTableCell>
-        <CustomTableCell align="center">{`${result.firstname} ${result.lastname}`}</CustomTableCell>
-        <CustomTableCell align="center">{`#${result.bib}`}</CustomTableCell>
-        {isLargeScreen && <TableCell align="center">{`${result.cat}${result.sex}`}</TableCell>}
+        <CustomTableCell className="text-center">{rank}</CustomTableCell>
+        <CustomTableCell className="text-center">{`${result.firstname} ${result.lastname}`}</CustomTableCell>
+        <CustomTableCell className="text-center">{`#${result.bib}`}</CustomTableCell>
+        {isLargeScreen && <TableCell className="text-center">{`${result.cat}${result.sex}`}</TableCell>}
         <TimeCell time={result.total} status={result.status} isBold />
         {isLargeScreen && (
           <>

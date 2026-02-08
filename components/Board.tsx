@@ -1,17 +1,16 @@
 import { useState } from 'react';
-import { styled } from '@mui/material/styles';
-import { FormControl, Grid, MenuItem, TextField } from '@mui/material';
+import { Input } from '@/components/ui/input';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import COLORS from '@/styles/colors';
 import { CATEGORIES } from '@/utils/categories.utils';
 import { ResultTypeWithId, SearchType } from '@/utils/types';
 import ResultsTable from './ResultsTable';
 
-const Label = styled('p')`
-  margin: 0;
-  font-size: 1.1rem;
-  font-family: 'FontBold';
-  color: ${COLORS.SECONDARY};
-`;
+const Label = ({ children }: { children: React.ReactNode }) => (
+  <p className="m-0 text-lg" style={{ fontFamily: 'FontBold', color: COLORS.SECONDARY }}>
+    {children}
+  </p>
+);
 
 export default function Board({
   results,
@@ -27,52 +26,42 @@ export default function Board({
   return (
     <>
       {!hideSearchBar && (
-        <Grid container spacing={1} alignItems="center" style={{ margin: '0.5rem 0' }}>
-          <Grid item>
-            <Label>Filtrer par:</Label>
-          </Grid>
-          <Grid item>
-            <TextField
-              size="small"
-              value={search.input}
-              placeholder="Nom ou dossard"
-              onChange={(e) => setSearch({ ...search, input: e.target.value })}
-            />
-          </Grid>
-          <Grid item width={150}>
-            <FormControl fullWidth>
-              <TextField
-                size="small"
-                value={search.cat || ''}
-                label="Catégories"
-                select
-                onChange={(e) => setSearch({ ...search, cat: e.target.value })}
-              >
-                <MenuItem value="">Aucun filtre</MenuItem>
+        <div className="flex items-center gap-2 my-2">
+          <Label>Filtrer par:</Label>
+          <Input
+            className="h-9"
+            value={search.input || ''}
+            placeholder="Nom ou dossard"
+            onChange={(e) => setSearch({ ...search, input: e.target.value })}
+          />
+          <div className="w-[150px]">
+            <Select value={search.cat || ''} onValueChange={(value) => setSearch({ ...search, cat: value })}>
+              <SelectTrigger>
+                <SelectValue placeholder="Catégories" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="">Aucun filtre</SelectItem>
                 {CATEGORIES.map((cat) => (
-                  <MenuItem key={cat.id} value={cat.id}>
+                  <SelectItem key={cat.id} value={cat.id}>
                     {cat.label} ({cat.id})
-                  </MenuItem>
+                  </SelectItem>
                 ))}
-              </TextField>
-            </FormControl>
-          </Grid>
-          <Grid item width={150}>
-            <FormControl fullWidth>
-              <TextField
-                size="small"
-                value={search.gender || ''}
-                label="Genre"
-                select
-                onChange={(e) => setSearch({ ...search, gender: e.target.value })}
-              >
-                <MenuItem value="">Aucun filtre</MenuItem>
-                <MenuItem value="M">Homme (M)</MenuItem>
-                <MenuItem value="F">Femme (F)</MenuItem>
-              </TextField>
-            </FormControl>
-          </Grid>
-        </Grid>
+              </SelectContent>
+            </Select>
+          </div>
+          <div className="w-[150px]">
+            <Select value={search.gender || ''} onValueChange={(value) => setSearch({ ...search, gender: value })}>
+              <SelectTrigger>
+                <SelectValue placeholder="Genre" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="">Aucun filtre</SelectItem>
+                <SelectItem value="M">Homme (M)</SelectItem>
+                <SelectItem value="F">Femme (F)</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+        </div>
       )}
       <ResultsTable results={results} search={search} totals={totals} />
     </>

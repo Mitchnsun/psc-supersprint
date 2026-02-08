@@ -1,7 +1,6 @@
 import isEmpty from 'lodash/isEmpty';
-import { styled, useTheme } from '@mui/material/styles';
-import useMediaQuery from '@mui/material/useMediaQuery';
-import { Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import { useMediaQuery } from '@/lib/hooks/useMediaQuery';
 import COLORS from '@/styles/colors';
 import { ResultTypeWithId, SearchType } from '@/utils/types';
 
@@ -12,16 +11,18 @@ const rEx = (item = '', value = '') => {
   return regex.test(item.toString().toLowerCase());
 };
 
-const StyledTableCell = styled(TableCell)(({ theme }) => ({
-  color: COLORS.SECONDARY,
-  textAlign: 'center',
-  fontFamily: 'FontBold',
-  fontWeight: 'bold',
-  fontSize: '1.1rem',
-  [theme.breakpoints.down('sm')]: {
-    padding: 2,
-  },
-}));
+const StyledTableCell = ({ children, ...props }: React.ComponentProps<typeof TableHead>) => (
+  <TableHead
+    {...props}
+    className="text-center font-bold text-base md:p-2 p-0.5"
+    style={{
+      color: COLORS.SECONDARY,
+      fontFamily: 'FontBold',
+    }}
+  >
+    {children}
+  </TableHead>
+);
 
 const ResultsTable = ({
   results,
@@ -32,8 +33,7 @@ const ResultsTable = ({
   search?: SearchType;
   totals: Record<string, number>;
 }) => {
-  const theme = useTheme();
-  const isLargeScreen = useMediaQuery(theme.breakpoints.up('md'));
+  const isLargeScreen = useMediaQuery('(min-width: 900px)');
   const { input, cat, gender } = search;
   const list = results.filter(
     (item) =>
@@ -46,8 +46,8 @@ const ResultsTable = ({
   const statusList = results.filter((item) => !isEmpty(item.status) && !hasFilters);
 
   return (
-    <Table size="small">
-      <TableHead>
+    <Table>
+      <TableHeader>
         <TableRow>
           <StyledTableCell aria-label="Expand" />
           <StyledTableCell>Rang</StyledTableCell>
@@ -63,7 +63,7 @@ const ResultsTable = ({
             </>
           )}
         </TableRow>
-      </TableHead>
+      </TableHeader>
       <TableBody>
         {[...list, ...statusList].map((item, index) => (
           <LineResult
