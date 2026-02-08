@@ -84,6 +84,7 @@ const AddResultForm = () => {
           )}
           name="bib"
           control={control}
+          // Type assertion needed: react-hook-form expects string from TextField but yup schema validates as number
           defaultValue={undefined as any}
         />
         <Stack direction="row" spacing={2}>
@@ -149,6 +150,7 @@ const AddResultForm = () => {
             )}
             name="birthYear"
             control={control}
+            // Type assertion needed: react-hook-form expects string from TextField but yup schema validates as number
             defaultValue={undefined as any}
           />
           <Controller
