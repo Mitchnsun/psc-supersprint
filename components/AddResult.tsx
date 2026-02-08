@@ -3,22 +3,14 @@ import { useForm, Controller } from 'react-hook-form';
 import { push, ref, set } from 'firebase/database';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Alert, Box, Button, MenuItem, Stack, TextField } from '@mui/material';
+import * as yup from 'yup';
 import db from '@/lib/firebase';
 import Time from '@/utils/time';
 import { schema } from '@/utils/results';
-import { CAT, CATEGORIES, categoryFromBirthYear } from '@/utils/categories.utils';
+import { CATEGORIES, categoryFromBirthYear } from '@/utils/categories.utils';
 import { YEAR } from '@/utils/constants';
 
-type FormValues = {
-  bib: string;
-  birthYear: string;
-  category: CAT;
-  firstname: string;
-  gender: string;
-  status: string;
-  lastname: string;
-  times: { swim: string; bike: string; total: string };
-};
+type FormValues = yup.InferType<typeof schema>;
 
 const timeCalculus = ({ swim, bike, total }: { swim: string; bike: string; total: string }) => {
   const swimSeconds = swim
@@ -48,14 +40,14 @@ const AddResultForm = () => {
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm<FormValues>({
+  } = useForm({
     resolver: yupResolver(schema),
   });
 
   const birthYear = watch('birthYear');
 
   useEffect(() => {
-    const category = categoryFromBirthYear(parseInt(birthYear, 10)) || CATEGORIES[1];
+    const category = categoryFromBirthYear(birthYear) || CATEGORIES[1];
     setValue('category', category.id);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [birthYear]);
@@ -92,7 +84,7 @@ const AddResultForm = () => {
           )}
           name="bib"
           control={control}
-          defaultValue=""
+          defaultValue={undefined as any}
         />
         <Stack direction="row" spacing={2}>
           <Controller
@@ -157,7 +149,7 @@ const AddResultForm = () => {
             )}
             name="birthYear"
             control={control}
-            defaultValue=""
+            defaultValue={undefined as any}
           />
           <Controller
             render={({ field }) => (
