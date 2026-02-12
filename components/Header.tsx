@@ -1,9 +1,8 @@
-import Image from 'next/image';
-import Bandeau from '@/public/static/Bandeau_2025.jpg';
+import Bandeau from './Bandeau_2026';
 
 const Header = () => (
   <header>
-    <Image className="w-full h-auto" src={Bandeau} alt="Bandeau Supersprint Paris 20ième 2025" />
+    <Bandeau />
   </header>
 );
 

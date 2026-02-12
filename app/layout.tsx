@@ -1,18 +1,26 @@
 import './globals.css';
 import { ReactNode } from 'react';
+import { Poppins } from 'next/font/google';
 import Layout from '@/components/Layout';
 import ClientProviders from './providers';
 
+const poppins = Poppins({
+  subsets: ['latin'],
+  weight: ['300', '700'],
+  variable: '--font-poppins',
+  display: 'swap',
+});
+
 export const metadata = {
   icons: {
-    icon: '/static/Favicon.jpg',
+    icon: '/static/favicon.png',
   },
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="fr">
-      <body>
+    <html lang="fr" className={poppins.variable}>
+      <body className={poppins.className}>
         <ClientProviders>
           <Layout>{children}</Layout>
         </ClientProviders>
