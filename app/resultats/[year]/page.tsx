@@ -1,4 +1,5 @@
 import { ref, child, get } from 'firebase/database';
+import { notFound } from 'next/navigation';
 import db from '@/lib/firebase';
 
 import { rankResults } from '@/utils/results';
@@ -22,14 +23,22 @@ export async function generateMetadata({ params }: PageProps) {
 
 async function getData(year: string) {
   const resultRef = child(ref(db), year);
-  const results = await get(resultRef);
 
-  return {
-    year,
-    ...rankResults(
-      Object.entries(results.val() || []).map(([key, value]: [string, ResultType]) => ({ ...value, id: key })),
-    ),
-  };
+  try {
+    const results = await get(resultRef);
+
+    return {
+      year,
+      ...rankResults(
+        Object.entries(results.val() || []).map(([key, value]: [string, ResultType]) => ({ ...value, id: key })),
+      ),
+    };
+  } catch {
+    notFound();
+  }
+
+  // TypeScript needs this even though notFound() throws
+  return { year, results: [], totals: {} };
 }
 
 export default async function ResultatsPage({ params }: PageProps) {

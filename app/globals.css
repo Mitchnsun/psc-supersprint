@@ -2,36 +2,22 @@
 
 /* Custom theme configuration */
 @theme {
-  --color-primary: #a9dcde;
-  --color-secondary: #082ccb;
-  --color-logo: #183772;
+  --color-primary: #d62a2b;
+  --color-secondary: #57bfff;
+  --color-logo: #d62a2b;
   --color-success: hsl(144, 52%, 34%);
   --color-warning: hsl(33, 100%, 34%);
-  --color-error: hsl(0, 78%, 49%);
-  --color-destructive: hsl(0, 78%, 49%);
-  --color-gray-dark: #5f5e5d;
+  --color-error: #fb3c41;
+  --color-destructive: #fb3c41;
+  --color-gray-dark: #c5bbb4;
 }
 
-/* Custom Fonts */
+/* Custom Fonts - Poppins is loaded via next/font in layout.tsx */
 @layer base {
-  @font-face {
-    font-family: 'Gilroy';
-    src: url('/static/Gilroy-Light.otf');
-    font-weight: 300;
-    font-style: normal;
-  }
-
-  @font-face {
-    font-family: 'Gilroy';
-    src: url('/static/Gilroy-ExtraBold.otf');
-    font-weight: 700;
-    font-style: normal;
-  }
-
   :root {
     /* Font families */
-    --font-family-regular: 'Gilroy', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
-    --font-family-bold: 'Gilroy', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+    --font-family-regular: var(--font-poppins), 'Roboto', 'Helvetica Neue', arial, sans-serif;
+    --font-family-bold: var(--font-poppins), 'Roboto', 'Helvetica Neue', arial, sans-serif;
   }
 
   /* Global Styles */
