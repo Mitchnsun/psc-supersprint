@@ -47,12 +47,12 @@ const Share = (props: ResultType) => {
 
   return (
     <div>
-      <div className="mx-auto max-w-[450px]">
+      <div className="mx-auto max-w-115">
         <div ref={resultRef}>
           <ResultCard result={props} />
         </div>
       </div>
-      <div className="mx-auto max-w-[450px] pt-4">
+      <div className="mx-auto max-w-115 pt-4">
         {isError && (
           <Alert variant="warning" className="mb-4">
             <AlertDescription>Nous sommes désolés le partage ne fonctionne pas sur cet appareil</AlertDescription>

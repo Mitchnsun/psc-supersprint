@@ -1,3 +1,4 @@
+import { ComponentProps } from 'react';
 import { Table, TableBody, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { isEmpty } from '@/lib/utils';
 import { ResultTypeWithId, SearchType } from '@/utils/types';
@@ -10,7 +11,7 @@ const rEx = (item = '', value = '') => {
   return regex.test(item.toString().toLowerCase());
 };
 
-const StyledTableCell = ({ children, className, ...props }: React.ComponentProps<typeof TableHead>) => (
+const StyledTableCell = ({ children, className, ...props }: ComponentProps<typeof TableHead>) => (
   <TableHead {...props} className={cn('text-center font-bold text-base md:p-2 p-0.5 text-secondary', className)}>
     {children}
   </TableHead>

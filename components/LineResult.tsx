@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { ComponentProps, useState } from 'react';
 import { TableRow, TableCell } from '@/components/ui/table';
 import { cn } from '@/lib/utils';
 import { ResultTypeWithId } from '@/utils/types';
@@ -6,7 +6,7 @@ import TimeCell from './atoms/TimeCell';
 import ArrowIcon from './atoms/ArrowIcon';
 import DetailsResult from './DetailsResult';
 
-const CustomTableCell = ({ children, className, ...props }: React.ComponentProps<typeof TableCell>) => (
+const CustomTableCell = ({ children, className, ...props }: ComponentProps<typeof TableCell>) => (
   <TableCell {...props} className={cn('md:p-2 p-0.5 text-center', className)}>
     {children}
   </TableCell>

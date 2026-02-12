@@ -17,7 +17,7 @@ const PodiumView = ({ year, results = [] }: { year: string; results: ResultTypeW
     <>
       <Title hLevel="h1">Podiums {year}</Title>
       <div className="flex items-center gap-2 my-2">
-        <p className="m-0 text-lg font-bold text-primary">Filtrer par:</p>
+        <p className="m-0 text-lg font-bold text-secondary">Filtrer par:</p>
         <div className="w-35">
           {isMounted ? (
             <Select value={cat} onValueChange={(value) => setCat(value === 'none' ? '' : value)}>

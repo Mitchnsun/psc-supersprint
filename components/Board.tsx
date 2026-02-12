@@ -1,11 +1,11 @@
-import { useState } from 'react';
+import { useState, ReactNode } from 'react';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { CATEGORIES } from '@/utils/categories.utils';
 import { ResultTypeWithId, SearchType } from '@/utils/types';
 import ResultsTable from './ResultsTable';
 
-const Label = ({ children }: { children: React.ReactNode }) => (
+const Label = ({ children }: { children: ReactNode }) => (
   <p className="m-0 text-lg font-bold text-secondary">{children}</p>
 );
 

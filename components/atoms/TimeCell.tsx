@@ -14,7 +14,7 @@ const TimeCell = ({
   status?: string;
   isBold?: boolean;
 }) => (
-  <TableCell className={cn('text-center md:p-2 p-0.5', { 'font-bold': isBold, 'font-regular': !isBold }, className)}>
+  <TableCell className={cn('text-center md:p-2 p-0.5', { 'font-bold': isBold }, className)}>
     {isEmpty(status) ? Time.convert(time) : status}
   </TableCell>
 );

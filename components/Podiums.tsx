@@ -9,12 +9,8 @@ const Podiums = ({ category, results }: { category: string; results: ResultTypeW
   return (
     <div className="grow">
       <div className="grid grid-cols-2 gap-1">
-        <div>
-          <h2 className="text-xl text-secondary font-bold">Hommes</h2>
-        </div>
-        <div>
-          <h2 className="text-xl text-secondary font-bold">Femmes</h2>
-        </div>
+        <h2 className="text-xl text-secondary font-bold">Hommes</h2>
+        <h2 className="text-xl text-secondary font-bold">Femmes</h2>
         <div>
           {men.slice(0, 3).map((item, index) => (
             <p key={`${item.firstname}-${item.lastname}-${index}`}>
@@ -29,12 +25,10 @@ const Podiums = ({ category, results }: { category: string; results: ResultTypeW
             </p>
           ))}
         </div>
-        <div className="col-span-2">
-          <h2 className="text-lg text-secondary font-bold">Natation</h2>
-        </div>
+        <h2 className="text-lg text-secondary font-bold col-span-2">Natation</h2>
         <div>
           {men
-            .sort((a, b) => a.swim - b.swim)
+            .toSorted((a, b) => a.swim - b.swim)
             .slice(0, 3)
             .map((item, index) => (
               <p key={`${item.firstname}-${item.lastname}-${index}`}>
@@ -44,7 +38,7 @@ const Podiums = ({ category, results }: { category: string; results: ResultTypeW
         </div>
         <div>
           {women
-            .sort((a, b) => a.swim - b.swim)
+            .toSorted((a, b) => a.swim - b.swim)
             .slice(0, 3)
             .map((item, index) => (
               <p key={`${item.firstname}-${item.lastname}-${index}`}>
@@ -52,12 +46,10 @@ const Podiums = ({ category, results }: { category: string; results: ResultTypeW
               </p>
             ))}
         </div>
-        <div className="col-span-2">
-          <h2 className="text-lg text-secondary font-bold">Vélo</h2>
-        </div>
+        <h2 className="text-lg text-secondary font-bold col-span-2">Vélo</h2>
         <div>
           {men
-            .sort((a, b) => a.bike - b.bike)
+            .toSorted((a, b) => a.bike - b.bike)
             .slice(0, 3)
             .map((item, index) => (
               <p key={`${item.firstname}-${item.lastname}-${index}`}>
@@ -67,7 +59,7 @@ const Podiums = ({ category, results }: { category: string; results: ResultTypeW
         </div>
         <div>
           {women
-            .sort((a, b) => a.bike - b.bike)
+            .toSorted((a, b) => a.bike - b.bike)
             .slice(0, 3)
             .map((item, index) => (
               <p key={`${item.firstname}-${item.lastname}-${index}`}>
