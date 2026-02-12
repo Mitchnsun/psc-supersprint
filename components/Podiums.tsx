@@ -1,5 +1,5 @@
 import { ResultTypeWithId } from '@/utils/types';
-import isEmpty from 'lodash/isEmpty';
+import { isEmpty } from '@/lib/utils';
 import Time from '@/utils/time';
 
 const Podiums = ({ category, results }: { category: string; results: ResultTypeWithId[] }) => {

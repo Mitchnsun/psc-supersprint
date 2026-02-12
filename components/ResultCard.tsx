@@ -1,5 +1,5 @@
-import isEmpty from 'lodash/isEmpty';
 import { Card } from '@/components/ui/card';
+import { isEmpty } from '@/lib/utils';
 import { ResultType } from '@/utils/types';
 import Time from '@/utils/time';
 import SwimIcon from './atoms/SwimIcon';

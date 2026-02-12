@@ -1,5 +1,5 @@
-import isEmpty from 'lodash/isEmpty';
 import { TableCell } from '@/components/ui/table';
+import { isEmpty } from '@/lib/utils';
 import Time from '@/utils/time';
 import { cn } from '@/lib/utils';
 

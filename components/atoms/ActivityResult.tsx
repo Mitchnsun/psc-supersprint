@@ -1,3 +1,5 @@
+import { ReactNode } from 'react';
+
 const ActivityResult = ({
   icon,
   label,
@@ -5,7 +7,7 @@ const ActivityResult = ({
   speed,
   unit,
 }: {
-  icon: JSX.Element;
+  icon: ReactNode;
   label: string;
   time: string;
   speed?: string;

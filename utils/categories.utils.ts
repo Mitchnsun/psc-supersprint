@@ -1,4 +1,4 @@
-import isEmpty from 'lodash/isEmpty';
+import { isEmpty } from '@/lib/utils';
 
 export enum CAT {
   V = 'V',

@@ -1,5 +1,5 @@
-import isEmpty from 'lodash/isEmpty';
 import { Table, TableBody, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import { isEmpty } from '@/lib/utils';
 import { ResultTypeWithId, SearchType } from '@/utils/types';
 import { cn } from '@/lib/utils';
 
