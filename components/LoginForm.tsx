@@ -38,13 +38,13 @@ const LoginForm = () => {
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
       <p className="text-base my-4">Vous devez être connecté pour accéder à cette page</p>
 
-      <div className="flex gap-4">
+      <div className="flex gap-4 w-1/2">
         <FormField
           control={control}
           name="id"
           defaultValue=""
           render={({ field }) => (
-            <FormItem>
+            <FormItem className="basis-1/2">
               <FormLabel>Identifiant</FormLabel>
               <Input {...field} />
               <FormMessage>{errors.id?.message}</FormMessage>
@@ -56,7 +56,7 @@ const LoginForm = () => {
           name="password"
           defaultValue=""
           render={({ field }) => (
-            <FormItem>
+            <FormItem className="basis-1/2">
               <FormLabel>Mot de passe</FormLabel>
               <Input {...field} type="password" />
               <FormMessage>{errors.password?.message}</FormMessage>

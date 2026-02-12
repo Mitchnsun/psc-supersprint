@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import { TableRow, TableCell } from '@/components/ui/table';
-import { useMediaQuery } from '@/lib/hooks/useMediaQuery';
+import { cn } from '@/lib/utils';
 import { ResultTypeWithId } from '@/utils/types';
 import TimeCell from './atoms/TimeCell';
 import ArrowIcon from './atoms/ArrowIcon';
 import DetailsResult from './DetailsResult';
 
-const CustomTableCell = ({ children, ...props }: React.ComponentProps<typeof TableCell>) => (
-  <TableCell {...props} className="md:p-2 p-0.5">
+const CustomTableCell = ({ children, className, ...props }: React.ComponentProps<typeof TableCell>) => (
+  <TableCell {...props} className={cn('md:p-2 p-0.5 text-center', className)}>
     {children}
   </TableCell>
 );
@@ -21,7 +21,6 @@ const LineResult = ({
   totals: Record<string, number>;
   rank: number;
 }) => {
-  const isLargeScreen = useMediaQuery('(min-width: 900px)');
   const [moreDetails, setMoreDetails] = useState(false);
 
   return (
@@ -33,15 +32,11 @@ const LineResult = ({
         <CustomTableCell className="text-center">{rank}</CustomTableCell>
         <CustomTableCell className="text-center">{`${result.firstname} ${result.lastname}`}</CustomTableCell>
         <CustomTableCell className="text-center">{`#${result.bib}`}</CustomTableCell>
-        {isLargeScreen && <TableCell className="text-center">{`${result.cat}${result.sex}`}</TableCell>}
+        <TableCell className="text-center hidden lg:table-cell">{`${result.cat}${result.sex}`}</TableCell>
         <TimeCell time={result.total} status={result.status} isBold />
-        {isLargeScreen && (
-          <>
-            <TimeCell time={result.swim} />
-            <TimeCell time={result.bike} />
-            <TimeCell time={result.run} />
-          </>
-        )}
+        <TimeCell className="hidden lg:table-cell" time={result.swim} />
+        <TimeCell className="hidden lg:table-cell" time={result.bike} />
+        <TimeCell className="hidden lg:table-cell" time={result.run} />
       </TableRow>
       {moreDetails && (
         <TableRow>

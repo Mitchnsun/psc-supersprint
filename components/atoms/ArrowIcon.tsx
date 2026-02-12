@@ -1,4 +1,4 @@
-import COLORS from '@/styles/colors';
+import { cn } from '@/lib/utils';
 
 const ArrowIcon = ({ down }: { down: boolean }) => (
   <button
@@ -6,12 +6,12 @@ const ArrowIcon = ({ down }: { down: boolean }) => (
     aria-disabled="false"
     aria-label="Détails des résultats"
     aria-expanded={down}
-    className="m-0 p-0 border-0 bg-transparent w-5 h-5 transition-transform duration-150"
-    style={{
-      transform: down ? 'rotate(0deg)' : 'rotate(-90deg)',
-    }}
+    className={cn('m-0 p-0 border-0 bg-transparent w-5 h-5 transition-transform duration-150', {
+      'rotate-0': down,
+      '-rotate-90': !down,
+    })}
   >
-    <svg focusable="false" viewBox="0 0 24 24" aria-hidden="true" role="presentation" fill={COLORS.GRAY_DARK}>
+    <svg className="fill-gray-dark" focusable="false" viewBox="0 0 24 24" aria-hidden="true" role="presentation">
       <path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z" />
     </svg>
   </button>

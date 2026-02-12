@@ -1,8 +1,7 @@
 import isEmpty from 'lodash/isEmpty';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { useMediaQuery } from '@/lib/hooks/useMediaQuery';
-import COLORS from '@/styles/colors';
+import { Table, TableBody, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { ResultTypeWithId, SearchType } from '@/utils/types';
+import { cn } from '@/lib/utils';
 
 import LineResult from './LineResult';
 
@@ -11,15 +10,8 @@ const rEx = (item = '', value = '') => {
   return regex.test(item.toString().toLowerCase());
 };
 
-const StyledTableCell = ({ children, ...props }: React.ComponentProps<typeof TableHead>) => (
-  <TableHead
-    {...props}
-    className="text-center font-bold text-base md:p-2 p-0.5"
-    style={{
-      color: COLORS.SECONDARY,
-      fontFamily: 'FontBold',
-    }}
-  >
+const StyledTableCell = ({ children, className, ...props }: React.ComponentProps<typeof TableHead>) => (
+  <TableHead {...props} className={cn('text-center font-bold text-base md:p-2 p-0.5 text-secondary', className)}>
     {children}
   </TableHead>
 );
@@ -33,7 +25,6 @@ const ResultsTable = ({
   search?: SearchType;
   totals: Record<string, number>;
 }) => {
-  const isLargeScreen = useMediaQuery('(min-width: 900px)');
   const { input, cat, gender } = search;
   const list = results.filter(
     (item) =>
@@ -53,15 +44,11 @@ const ResultsTable = ({
           <StyledTableCell>Rang</StyledTableCell>
           <StyledTableCell>Nom</StyledTableCell>
           <StyledTableCell>Dossard</StyledTableCell>
-          {isLargeScreen && <StyledTableCell>Cat.</StyledTableCell>}
+          <StyledTableCell className="hidden lg:table-cell">Cat.</StyledTableCell>
           <StyledTableCell>Temps</StyledTableCell>
-          {isLargeScreen && (
-            <>
-              <StyledTableCell>Nat.</StyledTableCell>
-              <StyledTableCell>Vélo</StyledTableCell>
-              <StyledTableCell>CAP</StyledTableCell>
-            </>
-          )}
+          <StyledTableCell className="hidden lg:table-cell">Nat.</StyledTableCell>
+          <StyledTableCell className="hidden lg:table-cell">Vélo</StyledTableCell>
+          <StyledTableCell className="hidden lg:table-cell">CAP</StyledTableCell>
         </TableRow>
       </TableHeader>
       <TableBody>

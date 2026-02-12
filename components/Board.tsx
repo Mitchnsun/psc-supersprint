@@ -1,15 +1,12 @@
 import { useState } from 'react';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import COLORS from '@/styles/colors';
 import { CATEGORIES } from '@/utils/categories.utils';
 import { ResultTypeWithId, SearchType } from '@/utils/types';
 import ResultsTable from './ResultsTable';
 
 const Label = ({ children }: { children: React.ReactNode }) => (
-  <p className="m-0 text-lg" style={{ fontFamily: 'FontBold', color: COLORS.SECONDARY }}>
-    {children}
-  </p>
+  <p className="m-0 text-lg font-bold text-secondary">{children}</p>
 );
 
 export default function Board({
@@ -26,21 +23,25 @@ export default function Board({
   return (
     <>
       {!hideSearchBar && (
-        <div className="flex items-center gap-2 my-2">
+        <div className="flex items-center flex-wrap gap-2 my-2">
           <Label>Filtrer par:</Label>
           <Input
-            className="h-9"
+            name="search"
+            className="h-9 max-w-1/2 lg:max-w-1/3"
             value={search.input || ''}
             placeholder="Nom ou dossard"
             onChange={(e) => setSearch({ ...search, input: e.target.value })}
           />
-          <div className="w-[150px]">
-            <Select value={search.cat || ''} onValueChange={(value) => setSearch({ ...search, cat: value })}>
+          <div className="w-35">
+            <Select
+              value={search.cat}
+              onValueChange={(value) => setSearch({ ...search, cat: value === 'none' ? '' : value })}
+            >
               <SelectTrigger>
                 <SelectValue placeholder="Catégories" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="">Aucun filtre</SelectItem>
+                <SelectItem value="none">Aucun filtre</SelectItem>
                 {CATEGORIES.map((cat) => (
                   <SelectItem key={cat.id} value={cat.id}>
                     {cat.label} ({cat.id})
@@ -49,13 +50,16 @@ export default function Board({
               </SelectContent>
             </Select>
           </div>
-          <div className="w-[150px]">
-            <Select value={search.gender || ''} onValueChange={(value) => setSearch({ ...search, gender: value })}>
+          <div className="w-35">
+            <Select
+              value={search.gender}
+              onValueChange={(value) => setSearch({ ...search, gender: value === 'none' ? '' : value })}
+            >
               <SelectTrigger>
                 <SelectValue placeholder="Genre" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="">Aucun filtre</SelectItem>
+                <SelectItem value="none">Aucun filtre</SelectItem>
                 <SelectItem value="M">Homme (M)</SelectItem>
                 <SelectItem value="F">Femme (F)</SelectItem>
               </SelectContent>

@@ -1,5 +1,4 @@
 import { PropsWithChildren, ElementType, createElement } from 'react';
-import COLORS from '@/styles/colors';
 import { cn } from '@/lib/utils';
 
 const Title = ({
@@ -10,12 +9,7 @@ const Title = ({
   createElement(
     hLevel,
     {
-      className: cn('text-2xl p-[10px_15px]', className),
-      style: {
-        color: COLORS.WHITE,
-        backgroundColor: COLORS.SECONDARY,
-        fontFamily: 'FontBold',
-      },
+      className: cn('text-4xl py-3 px-4 text-white bg-secondary font-bold', className),
     },
     children,
   );

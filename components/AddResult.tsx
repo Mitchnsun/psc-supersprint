@@ -53,7 +53,7 @@ const AddResultForm = () => {
       gender: '',
       birthYear: '' as any,
       category: CATEGORIES[1].id,
-      status: '',
+      status: 'finisher',
       times: {
         swim: '',
         bike: '',
@@ -80,7 +80,7 @@ const AddResultForm = () => {
       lastname,
       bib,
       sex: gender,
-      status: raceStatus,
+      status: raceStatus === 'finisher' ? '' : raceStatus,
       cat: category,
       ...timeCalculus(times),
     })
@@ -132,7 +132,7 @@ const AddResultForm = () => {
 
       <FormField
         render={({ field }) => (
-          <FormItem className="w-[150px]">
+          <FormItem className="w-38">
             <FormLabel>Gender</FormLabel>
             <Select value={field.value} onValueChange={field.onChange}>
               <SelectTrigger>
@@ -165,7 +165,7 @@ const AddResultForm = () => {
         />
         <FormField
           render={({ field }) => (
-            <FormItem className="w-[150px]">
+            <FormItem className="w-38">
               <FormLabel>Catégorie</FormLabel>
               <Select value={field.value} onValueChange={field.onChange}>
                 <SelectTrigger>
@@ -191,7 +191,7 @@ const AddResultForm = () => {
       <div className="flex gap-4">
         <FormField
           render={({ field }) => (
-            <FormItem className="w-[150px]">
+            <FormItem className="w-38">
               <FormLabel>Swim</FormLabel>
               <Input {...field} onChange={(e) => field.onChange(Time.maskInput(e.target.value))} />
               <FormMessage>
@@ -205,7 +205,7 @@ const AddResultForm = () => {
         />
         <FormField
           render={({ field }) => (
-            <FormItem className="w-[150px]">
+            <FormItem className="w-38">
               <FormLabel>Bike</FormLabel>
               <Input {...field} onChange={(e) => field.onChange(Time.maskInput(e.target.value))} />
               <FormMessage>
@@ -219,7 +219,7 @@ const AddResultForm = () => {
         />
         <FormField
           render={({ field }) => (
-            <FormItem className="w-[150px]">
+            <FormItem className="w-38">
               <FormLabel>Total</FormLabel>
               <Input {...field} onChange={(e) => field.onChange(Time.maskInput(e.target.value))} />
               <FormMessage>
@@ -235,14 +235,14 @@ const AddResultForm = () => {
 
       <FormField
         render={({ field }) => (
-          <FormItem className="w-[150px]">
+          <FormItem className="w-38">
             <FormLabel>Status</FormLabel>
             <Select value={field.value} onValueChange={field.onChange}>
               <SelectTrigger>
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="">Finisher</SelectItem>
+                <SelectItem value="finisher">Finisher</SelectItem>
                 <SelectItem value="DNF">DNF</SelectItem>
                 <SelectItem value="DNS">DNS</SelectItem>
                 <SelectItem value="DNQ">DNQ</SelectItem>

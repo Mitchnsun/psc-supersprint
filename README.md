@@ -1,42 +1,110 @@
-# PSC Supersprint
+# PSC Supersprint 🏊‍♂️🚴‍♂️🏃‍♂️
 
-## Migration to Next.js 16 and React 19
+[![Next.js](https://img.shields.io/badge/Next.js-16-black?logo=next.js)](https://nextjs.org/)
+[![React](https://img.shields.io/badge/React-19-blue?logo=react)](https://react.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.1+-blue?logo=typescript)](https://www.typescriptlang.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind-4.x-38B2AC?logo=tailwind-css)](https://tailwindcss.com/)
 
-This project has been migrated to Next.js 16 and React 19. Below are the key changes and important notes:
+Application web pour gérer et afficher les résultats d'une compétition de triathlon supersprint.
 
-### Updated Dependencies
+🔗 **Production**: [psc-supersprint.vercel.app](https://psc-supersprint.vercel.app/)
 
-- **Next.js**: Upgraded from 14.2.x to 16.1.6
-- **React & React DOM**: Upgraded from 18.3.1 to 19.2.4
-- **TypeScript**: Upgraded from 4.9.4 to 5.1.0+ (required by Next.js 16)
-- **@testing-library/react**: Upgraded from 14.2.1 to 16.3.2 for React 19 support
-- **@vitejs/plugin-react**: Upgraded from 4.2.1 to 5.1.3
-- **react-hook-form**: Upgraded from 7.41.0 to 7.71.1
-- **@hookform/resolvers**: Upgraded from 2.9.10 to 5.2.2
-- **yup**: Upgraded from 0.32.11 to 1.4.0
-- **eslint-config-next**: Upgraded from 14.2.24 to 16.1.6
+## ✨ Fonctionnalités
 
-### Breaking Changes Addressed
+- 📊 Affichage des résultats en temps réel
+- 🏆 Classements par catégorie, genre et scratch
+- 🥇 Visualisation des podiums
+- 👤 Fiches individuelles des athlètes
+- 📱 Interface responsive (mobile-first)
+- 🔐 Interface d'administration pour saisir les résultats
 
-1. **TypeScript Configuration**:
+## 🚀 Quick Start
 
-   - Updated `moduleResolution` to `"bundler"` for better ES module support
-   - Updated `jsx` to `"react-jsx"` (Next.js now uses React automatic runtime)
-   - Added `.next/dev/types/**/*.ts` to include paths
+### Prérequis
 
-2. **Dynamic Imports in Server Components**:
+- **Node.js** ≥ 20.9.0
+- **Yarn** ≥ 1.22.0
 
-   - Removed `{ ssr: false }` option from `next/dynamic` in server components
-   - The `Share` component import in `/athlete/[year]/[id]/page.tsx` now uses a direct import since it's already a client component
+### Installation
 
-3. **Type Definitions**:
-   - Added `@types/lodash` for TypeScript support
-   - Updated form type definitions in `AddResult.tsx` to match yup schema inference
-   - Fixed numeric field types (`bib`, `birthYear`) to match schema expectations
+```bash
+# Cloner le repository
+git clone https://github.com/Mitchnsun/psc-supersprint.git
+cd psc-supersprint
 
-### Environment Variables
+# Installer les dépendances
+yarn install
 
-The project requires Firebase configuration through environment variables. Create a `.env.local` file with the following variables:
+# Configurer les variables d'environnement
+cp .env.example .env.local
+# Éditer .env.local avec vos credentials Firebase
+
+# Lancer le serveur de développement
+yarn dev
+```
+
+L'application sera disponible sur [http://localhost:3000](http://localhost:3000)
+
+## 📜 Scripts disponibles
+
+| Commande          | Description                             |
+| ----------------- | --------------------------------------- |
+| `yarn dev`        | Serveur de développement avec Turbopack |
+| `yarn build`      | Build de production                     |
+| `yarn start`      | Serveur de production                   |
+| `yarn test`       | Exécuter les tests avec coverage        |
+| `yarn test:watch` | Tests en mode watch                     |
+| `yarn lint`       | Vérification ESLint                     |
+
+## 🏗️ Architecture
+
+```
+app/                    # Next.js App Router (pages)
+├── layout.tsx          # Layout racine (Server Component)
+├── providers.tsx       # Providers client-side
+├── admin/              # Section administration
+├── athlete/[year]/[id] # Résultats individuels
+├── live/               # Résultats en direct
+├── podiums/[year]/     # Podiums par année
+└── resultats/[year]/   # Résultats par année
+
+components/             # Composants React
+├── ui/                 # Composants shadcn/ui (Button, Input, etc.)
+├── atoms/              # Composants atomiques (icons, etc.)
+└── *.tsx               # Composants métier
+
+lib/                    # Configuration & utilitaires
+├── firebase.ts         # Config Firebase
+└── utils.ts            # Helpers (cn, etc.)
+
+utils/                  # Logique métier
+├── types.ts            # Types TypeScript
+├── time.ts             # Formatage temps
+├── categories.utils.ts # Gestion catégories
+└── context/            # Contexts React
+
+views/                  # Composants de vue (page-level)
+tests/                  # Configuration tests
+```
+
+## 🛠️ Tech Stack
+
+| Catégorie      | Technologies               |
+| -------------- | -------------------------- |
+| **Framework**  | Next.js 16 (App Router)    |
+| **UI**         | React 19                   |
+| **Language**   | TypeScript 5.1+            |
+| **Styling**    | Tailwind CSS v4            |
+| **Components** | Radix UI + shadcn/ui       |
+| **Forms**      | React Hook Form + Yup      |
+| **Database**   | Firebase Realtime Database |
+| **Testing**    | Vitest + Testing Library   |
+
+## ⚙️ Configuration
+
+### Variables d'environnement
+
+Créer un fichier `.env.local` à la racine:
 
 ```bash
 NEXT_PUBLIC_FIREBASE_PUBLIC_API_KEY=your_api_key
@@ -49,51 +117,63 @@ NEXT_PUBLIC_FIREBASE_APP_ID=your_app_id
 NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID=your_measurement_id
 ```
 
-### Running the Project
+### Path Aliases
 
-```bash
-# Install dependencies
-yarn install
+Les imports utilisent des alias configurés dans `tsconfig.json`:
 
-# Run development server
-yarn dev
-
-# Build for production
-yarn build
-
-# Run production server
-yarn start
-
-# Run tests
-yarn test
-
-# Lint code
-yarn lint
+```typescript
+import { Button } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
+import Time from '@/utils/time';
 ```
 
-### Next.js 16 Features
+## 🧪 Tests
 
-This project now benefits from Next.js 16 features including:
+```bash
+# Exécuter tous les tests
+yarn test
 
-- **Turbopack** as the default bundler (faster builds and HMR)
-- Improved TypeScript support with better type inference
-- Enhanced performance and optimization
+# Mode watch pour le développement
+yarn test:watch
 
-### React 19 Features
+# Avec interface UI
+yarn test --ui
+```
 
-React 19 brings several improvements:
+Les tests utilisent **Vitest** avec **Testing Library** et sont configurés dans `vitest.config.ts`.
 
-- Better concurrent rendering
-- Improved type definitions
-- New hooks like `useActionState`, `useFormStatus` (available for future use)
-- React Server Components are now stable
+## 📝 Conventions de code
 
-### Testing
+- **Server Components** par défaut dans `/app`
+- **Client Components** avec `'use client'` quand nécessaire
+- Pattern `page.client.tsx` pour séparer logique client des pages
+- Styling avec Tailwind et `cn()` pour les classes conditionnelles
+- Types définis dans `@/utils/types.ts`
 
-All existing tests pass with the new versions. The test suite uses Vitest with React Testing Library 16.3.2, which fully supports React 19.
+Pour plus de détails, voir [.github/copilot-instructions.md](.github/copilot-instructions.md).
 
-### Notes
+## 🤝 Contribution
 
-- Minimum Node.js version required: **20.9.0 or later**
-- Minimum TypeScript version: **5.1.0**
-- All dynamic pages use `export const dynamic = 'force-dynamic'` to ensure proper server-side rendering
+1. Fork le projet
+2. Créer une branche (`git checkout -b feature/amazing-feature`)
+3. Développer la fonctionnalité
+4. Ajouter des tests pour le nouveau code
+5. Vérifier le formatage et le linting :
+   ```bash
+   yarn lint          # Vérifier ESLint
+   yarn test          # Exécuter les tests
+   ```
+6. Commit les changements (`git commit -m 'Add amazing feature'`)
+7. Push la branche (`git push origin feature/amazing-feature`)
+8. Ouvrir une Pull Request
+
+### Checklist avant PR
+
+- [ ] Les tests passent (`yarn test`)
+- [ ] Le code respecte les règles ESLint (`yarn lint`)
+- [ ] Les nouveaux fichiers suivent les conventions de nommage
+- [ ] Les types TypeScript sont correctement définis
+
+## 📄 License
+
+ISC

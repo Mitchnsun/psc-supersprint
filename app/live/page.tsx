@@ -51,7 +51,7 @@ export default function LivePage() {
     <GlobalContext.Provider value={contextMemo}>
       <Title hLevel="h1">{`Résultats ${YEAR}`}</Title>
       <Board results={data.results} totals={data.totals} hideSearchBar />
-      <Image src={QRCode} width={150} height={150} alt="QR Code" style={{ position: 'fixed', left: 0, bottom: 0 }} />
+      <Image className="fixed left-0 bottom-0" src={QRCode} width={150} height={150} alt="QR Code" />
     </GlobalContext.Provider>
   );
 }

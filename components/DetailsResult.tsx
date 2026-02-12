@@ -5,7 +5,6 @@ import Time from '@/utils/time';
 import { YEAR } from '@/utils/constants';
 import { ResultTypeWithId } from '@/utils/types';
 import GlobalContext from '@/utils/context/global.context';
-import COLORS from '@/styles/colors';
 import SwimIcon from './atoms/SwimIcon';
 import BikeIcon from './atoms/BikeIcon';
 import RunIcon from './atoms/RunIcon';
@@ -40,7 +39,7 @@ const DetailsResult = ({ result, totals }: { result: ResultTypeWithId; totals: R
       />
       <div className="col-span-2 text-center m-auto">
         <Link href={`/athlete/${context.year || YEAR}/${result.id}`}>
-          <ShareIcon style={{ fill: COLORS.LOGO }} />
+          <ShareIcon className="text-logo" />
         </Link>
       </div>
     </div>
