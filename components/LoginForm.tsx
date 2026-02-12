@@ -4,7 +4,10 @@ import { useForm, Controller } from 'react-hook-form';
 import { initializeApp } from 'firebase/app';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Alert, Box, Button, TextField, Typography } from '@mui/material';
+import { Alert, AlertDescription } from '@/components/ui/alert';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { firebaseConfig } from '@/lib/firebase';
 import UserContext from '@/utils/context/user.context';
 
@@ -32,52 +35,48 @@ const LoginForm = () => {
       .catch(() => setFirebaseMsg('Identifiants incorrects'));
 
   return (
-    <Box
-      component="form"
-      sx={{
-        '& .MuiTextField-root': { mr: 2, width: '25ch' },
-      }}
-      onSubmit={handleSubmit(onSubmit)}
-    >
-      <Typography variant="subtitle1" style={{ margin: '1rem 0' }}>
-        Vous devez être connecté pour accéder à cette page
-      </Typography>
-      <Controller
-        render={({ field }) => (
-          <TextField
-            {...field}
-            label="Identifiant"
-            size="small"
-            error={!!errors.id?.message}
-            helperText={errors.id?.message}
-          />
-        )}
-        name="id"
-        control={control}
-        defaultValue=""
-      />
-      <Controller
-        render={({ field }) => (
-          <TextField
-            {...field}
-            type="password"
-            label="Mot de passe"
-            size="small"
-            error={!!errors.password?.message}
-            helperText={errors.password?.message}
-          />
-        )}
-        name="password"
-        control={control}
-        defaultValue=""
-      />
-      <div style={{ padding: '1rem 0' }}>
-        <Button type="submit" variant="contained" color="secondary">
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+      <p className="text-base my-4">Vous devez être connecté pour accéder à cette page</p>
+
+      <div className="flex gap-4 w-1/2">
+        <FormField
+          control={control}
+          name="id"
+          defaultValue=""
+          render={({ field }) => (
+            <FormItem className="basis-1/2">
+              <FormLabel>Identifiant</FormLabel>
+              <Input {...field} />
+              <FormMessage>{errors.id?.message}</FormMessage>
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={control}
+          name="password"
+          defaultValue=""
+          render={({ field }) => (
+            <FormItem className="basis-1/2">
+              <FormLabel>Mot de passe</FormLabel>
+              <Input {...field} type="password" />
+              <FormMessage>{errors.password?.message}</FormMessage>
+            </FormItem>
+          )}
+        />
+      </div>
+
+      <div className="py-4">
+        <Button type="submit" variant="secondary">
           Se connecter
         </Button>
       </div>
-      {firebaseMsg && <Alert severity="error">{firebaseMsg}</Alert>}
-    </Box>
+
+      {firebaseMsg && (
+        <Alert variant="destructive">
+          <AlertDescription>{firebaseMsg}</AlertDescription>
+        </Alert>
+      )}
+    </form>
   );
 };
 

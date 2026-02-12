@@ -1,5 +1,5 @@
 import { ref, child, get } from 'firebase/database';
-import isEmpty from 'lodash/isEmpty';
+import { isEmpty } from '@/lib/utils';
 import db from '@/lib/firebase';
 
 import { rankResults } from '@/utils/results';

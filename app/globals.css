@@ -1,0 +1,49 @@
+@import 'tailwindcss';
+
+/* Custom theme configuration */
+@theme {
+  --color-primary: #a9dcde;
+  --color-secondary: #082ccb;
+  --color-logo: #183772;
+  --color-success: hsl(144, 52%, 34%);
+  --color-warning: hsl(33, 100%, 34%);
+  --color-error: hsl(0, 78%, 49%);
+  --color-destructive: hsl(0, 78%, 49%);
+  --color-gray-dark: #5f5e5d;
+}
+
+/* Custom Fonts */
+@layer base {
+  @font-face {
+    font-family: 'Gilroy';
+    src: url('/static/Gilroy-Light.otf');
+    font-weight: 300;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'Gilroy';
+    src: url('/static/Gilroy-ExtraBold.otf');
+    font-weight: 700;
+    font-style: normal;
+  }
+
+  :root {
+    /* Font families */
+    --font-family-regular: 'Gilroy', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+    --font-family-bold: 'Gilroy', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+  }
+
+  /* Global Styles */
+  body {
+    font-family: var(--font-family-regular);
+    font-weight: 300;
+    background-color: var(--color-primary);
+  }
+
+  @media (max-width: 450px) {
+    body {
+      font-size: 1rem;
+    }
+  }
+}

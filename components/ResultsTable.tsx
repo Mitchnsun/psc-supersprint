@@ -1,9 +1,8 @@
-import isEmpty from 'lodash/isEmpty';
-import { styled, useTheme } from '@mui/material/styles';
-import useMediaQuery from '@mui/material/useMediaQuery';
-import { Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material';
-import COLORS from '@/styles/colors';
+import { ComponentProps } from 'react';
+import { Table, TableBody, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import { isEmpty } from '@/lib/utils';
 import { ResultTypeWithId, SearchType } from '@/utils/types';
+import { cn } from '@/lib/utils';
 
 import LineResult from './LineResult';
 
@@ -12,16 +11,11 @@ const rEx = (item = '', value = '') => {
   return regex.test(item.toString().toLowerCase());
 };
 
-const StyledTableCell = styled(TableCell)(({ theme }) => ({
-  color: COLORS.SECONDARY,
-  textAlign: 'center',
-  fontFamily: 'FontBold',
-  fontWeight: 'bold',
-  fontSize: '1.1rem',
-  [theme.breakpoints.down('sm')]: {
-    padding: 2,
-  },
-}));
+const StyledTableCell = ({ children, className, ...props }: ComponentProps<typeof TableHead>) => (
+  <TableHead {...props} className={cn('text-center font-bold text-base md:p-2 p-0.5 text-secondary', className)}>
+    {children}
+  </TableHead>
+);
 
 const ResultsTable = ({
   results,
@@ -32,8 +26,6 @@ const ResultsTable = ({
   search?: SearchType;
   totals: Record<string, number>;
 }) => {
-  const theme = useTheme();
-  const isLargeScreen = useMediaQuery(theme.breakpoints.up('md'));
   const { input, cat, gender } = search;
   const list = results.filter(
     (item) =>
@@ -46,24 +38,20 @@ const ResultsTable = ({
   const statusList = results.filter((item) => !isEmpty(item.status) && !hasFilters);
 
   return (
-    <Table size="small">
-      <TableHead>
+    <Table>
+      <TableHeader>
         <TableRow>
           <StyledTableCell aria-label="Expand" />
           <StyledTableCell>Rang</StyledTableCell>
           <StyledTableCell>Nom</StyledTableCell>
           <StyledTableCell>Dossard</StyledTableCell>
-          {isLargeScreen && <StyledTableCell>Cat.</StyledTableCell>}
+          <StyledTableCell className="hidden lg:table-cell">Cat.</StyledTableCell>
           <StyledTableCell>Temps</StyledTableCell>
-          {isLargeScreen && (
-            <>
-              <StyledTableCell>Nat.</StyledTableCell>
-              <StyledTableCell>Vélo</StyledTableCell>
-              <StyledTableCell>CAP</StyledTableCell>
-            </>
-          )}
+          <StyledTableCell className="hidden lg:table-cell">Nat.</StyledTableCell>
+          <StyledTableCell className="hidden lg:table-cell">Vélo</StyledTableCell>
+          <StyledTableCell className="hidden lg:table-cell">CAP</StyledTableCell>
         </TableRow>
-      </TableHead>
+      </TableHeader>
       <TableBody>
         {[...list, ...statusList].map((item, index) => (
           <LineResult

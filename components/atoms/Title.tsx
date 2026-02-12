@@ -1,20 +1,17 @@
-import { PropsWithChildren, ElementType } from 'react';
-import { Typography } from '@mui/material';
-import COLORS from '@/styles/colors';
+import { PropsWithChildren, ElementType, createElement } from 'react';
+import { cn } from '@/lib/utils';
 
-const Title = ({ hLevel = 'h1', children }: PropsWithChildren<{ hLevel: ElementType }>) => (
-  <Typography
-    variant="h4"
-    component={hLevel}
-    sx={{
-      color: COLORS.WHITE,
-      backgroundColor: COLORS.SECONDARY,
-      fontFamily: 'FontBold',
-      padding: '10px 15px',
-    }}
-  >
-    {children}
-  </Typography>
-);
+const Title = ({
+  hLevel = 'h1',
+  children,
+  className,
+}: PropsWithChildren<{ hLevel?: ElementType; className?: string }>) =>
+  createElement(
+    hLevel,
+    {
+      className: cn('text-4xl py-3 px-4 text-white bg-secondary font-bold', className),
+    },
+    children,
+  );
 
 export default Title;

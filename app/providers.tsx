@@ -1,17 +1,13 @@
 'use client';
 
-import { ThemeProvider } from '@mui/material/styles';
-import { CssBaseline } from '@mui/material';
+import { ReactNode } from 'react';
 import { Analytics } from '@vercel/analytics/react';
 
-import theme from '@/styles/theme';
-
-export default function ClientProviders({ children }: { children: React.ReactNode }) {
+export default function ClientProviders({ children }: { children: ReactNode }) {
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
+    <>
       {children}
       <Analytics />
-    </ThemeProvider>
+    </>
   );
 }

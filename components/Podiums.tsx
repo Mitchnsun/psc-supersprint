@@ -1,9 +1,5 @@
 import { ResultTypeWithId } from '@/utils/types';
-import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid2';
-import { Typography } from '@mui/material';
-import COLORS from '@/styles/colors';
-import isEmpty from 'lodash/isEmpty';
+import { isEmpty } from '@/lib/utils';
 import Time from '@/utils/time';
 
 const Podiums = ({ category, results }: { category: string; results: ResultTypeWithId[] }) => {
@@ -11,112 +7,68 @@ const Podiums = ({ category, results }: { category: string; results: ResultTypeW
   const women = results.filter(({ cat, sex }) => (isEmpty(category) || category === cat) && sex === 'F');
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <Grid container spacing={1}>
-        <Grid size={6}>
-          <Typography
-            variant="h5"
-            component="h2"
-            sx={{
-              color: COLORS.SECONDARY,
-              fontFamily: 'FontBold',
-            }}
-          >
-            Hommes
-          </Typography>
-        </Grid>
-        <Grid size={6}>
-          <Typography
-            variant="h5"
-            component="h2"
-            sx={{
-              color: COLORS.SECONDARY,
-              fontFamily: 'FontBold',
-            }}
-          >
-            Femmes
-          </Typography>
-        </Grid>
-        <Grid size={6}>
+    <div className="grow">
+      <div className="grid grid-cols-2 gap-1">
+        <h2 className="text-xl text-secondary font-bold">Hommes</h2>
+        <h2 className="text-xl text-secondary font-bold">Femmes</h2>
+        <div>
           {men.slice(0, 3).map((item, index) => (
-            <Typography key={`${item.firstname}-${item.lastname}-${index}`}>
+            <p key={`${item.firstname}-${item.lastname}-${index}`}>
               {index + 1}. {item.firstname} {item.lastname} - {Time.convert(item.total)}
-            </Typography>
+            </p>
           ))}
-        </Grid>
-        <Grid size={6}>
+        </div>
+        <div>
           {women.slice(0, 3).map((item, index) => (
-            <Typography key={`${item.firstname}-${item.lastname}-${index}`}>
+            <p key={`${item.firstname}-${item.lastname}-${index}`}>
               {index + 1}. {item.firstname} {item.lastname} - {Time.convert(item.total)}
-            </Typography>
+            </p>
           ))}
-        </Grid>
-        <Grid size={12}>
-          <Typography
-            variant="h6"
-            component="h2"
-            sx={{
-              color: COLORS.SECONDARY,
-              fontFamily: 'FontBold',
-            }}
-          >
-            Natation
-          </Typography>
-        </Grid>
-        <Grid size={6}>
+        </div>
+        <h2 className="text-lg text-secondary font-bold col-span-2">Natation</h2>
+        <div>
           {men
-            .sort((a, b) => a.swim - b.swim)
+            .toSorted((a, b) => a.swim - b.swim)
             .slice(0, 3)
             .map((item, index) => (
-              <Typography key={`${item.firstname}-${item.lastname}-${index}`}>
+              <p key={`${item.firstname}-${item.lastname}-${index}`}>
                 {index + 1}. {item.firstname} {item.lastname} - {Time.convert(item.swim)}
-              </Typography>
+              </p>
             ))}
-        </Grid>
-        <Grid size={6}>
+        </div>
+        <div>
           {women
-            .sort((a, b) => a.swim - b.swim)
+            .toSorted((a, b) => a.swim - b.swim)
             .slice(0, 3)
             .map((item, index) => (
-              <Typography key={`${item.firstname}-${item.lastname}-${index}`}>
+              <p key={`${item.firstname}-${item.lastname}-${index}`}>
                 {index + 1}. {item.firstname} {item.lastname} - {Time.convert(item.swim)}
-              </Typography>
+              </p>
             ))}
-        </Grid>
-        <Grid size={12}>
-          <Typography
-            variant="h6"
-            component="h2"
-            sx={{
-              color: COLORS.SECONDARY,
-              fontFamily: 'FontBold',
-            }}
-          >
-            Vélo
-          </Typography>
-        </Grid>
-        <Grid size={6}>
+        </div>
+        <h2 className="text-lg text-secondary font-bold col-span-2">Vélo</h2>
+        <div>
           {men
-            .sort((a, b) => a.bike - b.bike)
+            .toSorted((a, b) => a.bike - b.bike)
             .slice(0, 3)
             .map((item, index) => (
-              <Typography key={`${item.firstname}-${item.lastname}-${index}`}>
+              <p key={`${item.firstname}-${item.lastname}-${index}`}>
                 {index + 1}. {item.firstname} {item.lastname} - {Time.convert(item.bike)}
-              </Typography>
+              </p>
             ))}
-        </Grid>
-        <Grid size={6}>
+        </div>
+        <div>
           {women
-            .sort((a, b) => a.bike - b.bike)
+            .toSorted((a, b) => a.bike - b.bike)
             .slice(0, 3)
             .map((item, index) => (
-              <Typography key={`${item.firstname}-${item.lastname}-${index}`}>
+              <p key={`${item.firstname}-${item.lastname}-${index}`}>
                 {index + 1}. {item.firstname} {item.lastname} - {Time.convert(item.bike)}
-              </Typography>
+              </p>
             ))}
-        </Grid>
-      </Grid>
-    </Box>
+        </div>
+      </div>
+    </div>
   );
 };
 

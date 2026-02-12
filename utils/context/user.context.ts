@@ -1,11 +1,15 @@
-import { createContext } from 'react';
-import noop from 'lodash/noop';
+import { createContext, Dispatch, SetStateAction } from 'react';
 
-export const INITIAL_USER = { uid: null, isLoggedIn: false };
+export const INITIAL_USER = { uid: null as string | null, isLoggedIn: false };
 
-const initialUser = {
+type UserContextType = {
+  user: typeof INITIAL_USER;
+  setUser: Dispatch<SetStateAction<typeof INITIAL_USER>>;
+};
+
+const initialUser: UserContextType = {
   user: INITIAL_USER,
-  setUser: noop,
+  setUser: () => {},
 };
 
 const UserContext = createContext(initialUser);

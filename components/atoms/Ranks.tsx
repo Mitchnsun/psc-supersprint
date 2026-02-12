@@ -1,18 +1,6 @@
-import { Grid } from '@mui/material';
-import { styled } from '@mui/material/styles';
-import COLORS from '@/styles/colors';
 import { RanksType } from '@/utils/types';
 
 import RankIcon from './RankIcon';
-
-const StyledTotal = styled('span')`
-  font-size: 0.8rem;
-  color: ${COLORS.GRAY_DARK};
-`;
-const StyledRank = styled('p')`
-  font-size: 0.9rem;
-  margin: 0 0.75rem;
-`;
 
 const Ranks = ({
   ranks,
@@ -25,25 +13,25 @@ const Ranks = ({
   gender: string;
   totals: Record<string, number>;
 }) => (
-  <Grid container item xs={6} md={4} justifyContent="center" alignItems="center">
-    <Grid item style={{ width: 30, height: 30 }}>
+  <div className="col-span-6 md:col-span-4 flex justify-center items-center">
+    <div className="w-8 h-8">
       <RankIcon />
-    </Grid>
-    <Grid item style={{ textAlign: 'left' }}>
-      <StyledRank>
+    </div>
+    <div className="text-left">
+      <p className="text-sm my-0 mx-3">
         {`Scratch: ${ranks.scratch || '-'}`}
-        <StyledTotal>{`/${totals.overall}`}</StyledTotal>
-      </StyledRank>
-      <StyledRank>
+        <span className="text-xs text-gray-dark">{`/${totals.overall}`}</span>
+      </p>
+      <p className="text-sm my-0 mx-3">
         {`Cat. ${cat}${gender}: ${ranks.cat || '-'}`}
-        <StyledTotal>{`/${totals[cat + gender]}`}</StyledTotal>
-      </StyledRank>
-      <StyledRank>
+        <span className="text-xs text-gray-dark">{`/${totals[cat + gender]}`}</span>
+      </p>
+      <p className="text-sm my-0 mx-3">
         {`${gender}: ${ranks.gender || '-'}`}
-        <StyledTotal>{`/${totals[gender]}`}</StyledTotal>
-      </StyledRank>
-    </Grid>
-  </Grid>
+        <span className="text-xs text-gray-dark">{`/${totals[gender]}`}</span>
+      </p>
+    </div>
+  </div>
 );
 
 export default Ranks;

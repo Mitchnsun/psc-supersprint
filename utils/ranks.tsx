@@ -1,4 +1,4 @@
-import isEmpty from 'lodash/isEmpty';
+import { isEmpty } from '@/lib/utils';
 import { ResultTypeWithId } from './types';
 
 export default {

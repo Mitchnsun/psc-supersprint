@@ -1,12 +1,10 @@
 import { useContext } from 'react';
 import Link from 'next/link';
-import { Grid } from '@mui/material';
-import ShareIcon from '@mui/icons-material/IosShare';
+import { Share as ShareIcon } from 'lucide-react';
 import Time from '@/utils/time';
 import { YEAR } from '@/utils/constants';
 import { ResultTypeWithId } from '@/utils/types';
 import GlobalContext from '@/utils/context/global.context';
-import COLORS from '@/styles/colors';
 import SwimIcon from './atoms/SwimIcon';
 import BikeIcon from './atoms/BikeIcon';
 import RunIcon from './atoms/RunIcon';
@@ -16,7 +14,7 @@ import ActivityResult from './atoms/ActivityResult';
 const DetailsResult = ({ result, totals }: { result: ResultTypeWithId; totals: Record<string, number> }) => {
   const { context } = useContext(GlobalContext);
   return (
-    <Grid container spacing={2} justifyContent="center" style={{ padding: '0.5rem' }}>
+    <div className="grid grid-cols-12 gap-2 justify-center p-2">
       <Ranks ranks={result.ranks} cat={result.cat} gender={result.sex} totals={totals} />
       <ActivityResult
         icon={<SwimIcon />}
@@ -39,12 +37,12 @@ const DetailsResult = ({ result, totals }: { result: ResultTypeWithId; totals: R
         speed={Time.run(result.run)}
         unit="/km"
       />
-      <Grid item xs={2} sx={{ textAlign: 'center', margin: 'auto' }}>
+      <div className="col-span-2 text-center m-auto">
         <Link href={`/athlete/${context.year || YEAR}/${result.id}`}>
-          <ShareIcon sx={{ fill: COLORS.LOGO }} />
+          <ShareIcon className="text-logo" />
         </Link>
-      </Grid>
-    </Grid>
+      </div>
+    </div>
   );
 };
 
