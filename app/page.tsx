@@ -1,9 +1,10 @@
-import { ref, child, get } from 'firebase/database';
-import db from '@/lib/firebase';
+import { child, get, ref } from 'firebase/database';
 
+import db from '@/lib/firebase';
+import { YEAR } from '@/utils/constants';
 import { rankResults } from '@/utils/results';
 import { ResultType } from '@/utils/types';
-import { YEAR } from '@/utils/constants';
+
 import ResultsPageClient from './page.client';
 
 export const dynamic = 'force-dynamic';

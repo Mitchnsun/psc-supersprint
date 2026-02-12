@@ -1,13 +1,14 @@
-import { useState, useContext } from 'react';
-import * as yup from 'yup';
-import { useForm, Controller } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
 import { initializeApp } from 'firebase/app';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
-import { yupResolver } from '@hookform/resolvers/yup';
+import { useContext, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import * as yup from 'yup';
+
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
 import { FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
 import { firebaseConfig } from '@/lib/firebase';
 import UserContext from '@/utils/context/user.context';
 
@@ -36,9 +37,9 @@ const LoginForm = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-      <p className="text-base my-4">Vous devez être connecté pour accéder à cette page</p>
+      <p className="my-4 text-base">Vous devez être connecté pour accéder à cette page</p>
 
-      <div className="flex gap-4 w-1/2">
+      <div className="flex w-1/2 gap-4">
         <FormField
           control={control}
           name="id"

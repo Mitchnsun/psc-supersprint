@@ -1,7 +1,10 @@
 import './globals.css';
-import { ReactNode } from 'react';
+
 import { Poppins } from 'next/font/google';
+import { ReactNode } from 'react';
+
 import Layout from '@/components/Layout';
+
 import ClientProviders from './providers';
 
 const poppins = Poppins({

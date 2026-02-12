@@ -1,10 +1,11 @@
 'use client';
 
 import { useMemo, useState } from 'react';
-import Board from '@/components/Board';
+
 import Title from '@/components/atoms/Title';
-import { ResultTypeWithId } from '@/utils/types';
+import Board from '@/components/Board';
 import GlobalContext from '@/utils/context/global.context';
+import { ResultTypeWithId } from '@/utils/types';
 
 export default function ResultatsPageClient({
   year,

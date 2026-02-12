@@ -1,12 +1,14 @@
-import { useState, ReactNode } from 'react';
+import { ReactNode, useState } from 'react';
+
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { CATEGORIES } from '@/utils/categories.utils';
 import { ResultTypeWithId, SearchType } from '@/utils/types';
+
 import ResultsTable from './ResultsTable';
 
 const Label = ({ children }: { children: ReactNode }) => (
-  <p className="m-0 text-lg font-bold text-secondary">{children}</p>
+  <p className="text-secondary m-0 text-lg font-bold">{children}</p>
 );
 
 export default function Board({
@@ -23,7 +25,7 @@ export default function Board({
   return (
     <>
       {!hideSearchBar && (
-        <div className="flex items-center flex-wrap gap-2 my-2">
+        <div className="my-2 flex flex-wrap items-center gap-2">
           <Label>Filtrer par:</Label>
           <Input
             name="search"

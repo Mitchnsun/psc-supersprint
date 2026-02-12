@@ -1,9 +1,10 @@
 'use client';
 
 import { useMemo, useState } from 'react';
-import PodiumView from '@/views/Podiums.view';
-import { ResultTypeWithId } from '@/utils/types';
+
 import GlobalContext from '@/utils/context/global.context';
+import { ResultTypeWithId } from '@/utils/types';
+import PodiumView from '@/views/Podiums.view';
 
 export default function PodiumsPageClient(props: {
   year: string;

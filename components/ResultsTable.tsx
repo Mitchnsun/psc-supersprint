@@ -1,8 +1,9 @@
 import { ComponentProps } from 'react';
+
 import { Table, TableBody, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { isEmpty } from '@/lib/utils';
-import { ResultTypeWithId, SearchType } from '@/utils/types';
 import { cn } from '@/lib/utils';
+import { ResultTypeWithId, SearchType } from '@/utils/types';
 
 import LineResult from './LineResult';
 
@@ -12,7 +13,7 @@ const rEx = (item = '', value = '') => {
 };
 
 const StyledTableCell = ({ children, className, ...props }: ComponentProps<typeof TableHead>) => (
-  <TableHead {...props} className={cn('text-center font-bold text-base md:p-2 p-0.5 text-secondary', className)}>
+  <TableHead {...props} className={cn('text-secondary p-0.5 text-center text-base font-bold md:p-2', className)}>
     {children}
   </TableHead>
 );
