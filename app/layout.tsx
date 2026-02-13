@@ -3,8 +3,6 @@ import './globals.css';
 import { Poppins } from 'next/font/google';
 import { ReactNode } from 'react';
 
-import Layout from '@/components/Layout';
-
 import ClientProviders from './providers';
 
 const poppins = Poppins({
@@ -20,13 +18,15 @@ export const metadata = {
   },
 };
 
+/**
+ * Root layout - provides base HTML structure, fonts, and providers
+ * Page-specific layouts are defined in (main) and (themed) route groups
+ */
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="fr" className={poppins.variable}>
       <body className={poppins.className}>
-        <ClientProviders>
-          <Layout>{children}</Layout>
-        </ClientProviders>
+        <ClientProviders>{children}</ClientProviders>
       </body>
     </html>
   );
