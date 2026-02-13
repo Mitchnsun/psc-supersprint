@@ -1,18 +1,19 @@
-import { useState, useEffect } from 'react';
-import { useForm } from 'react-hook-form';
-import { push, ref, set } from 'firebase/database';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { push, ref, set } from 'firebase/database';
+import { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import * as yup from 'yup';
+
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
+import { FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
-import * as yup from 'yup';
 import db from '@/lib/firebase';
-import Time from '@/utils/time';
-import { schema } from '@/utils/results';
 import { CATEGORIES, categoryFromBirthYear } from '@/utils/categories.utils';
 import { YEAR } from '@/utils/constants';
+import { schema } from '@/utils/results';
+import Time from '@/utils/time';
 
 type FormValues = yup.InferType<typeof schema>;
 
@@ -47,11 +48,11 @@ const AddResultForm = () => {
   } = useForm<FormValues>({
     resolver: yupResolver(schema),
     defaultValues: {
-      bib: '' as any,
+      bib: undefined,
       lastname: '',
       firstname: '',
       gender: '',
-      birthYear: '' as any,
+      birthYear: undefined,
       category: CATEGORIES[1].id,
       status: 'finisher',
       times: {
@@ -90,7 +91,7 @@ const AddResultForm = () => {
   };
 
   return (
-    <form autoComplete="off" onSubmit={handleSubmit(onSubmit)} className="p-4 space-y-4">
+    <form autoComplete="off" onSubmit={handleSubmit(onSubmit)} className="space-y-4 p-4">
       <FormField
         render={({ field }) => (
           <FormItem>

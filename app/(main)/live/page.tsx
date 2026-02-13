@@ -1,17 +1,17 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
-import { child, ref, onValue } from 'firebase/database';
+import { child, onValue, ref } from 'firebase/database';
 import Image from 'next/image';
+import { useEffect, useMemo, useState } from 'react';
 
-import Board from '@/components/Board';
 import Title from '@/components/atoms/Title';
+import Board from '@/components/Board';
 import db from '@/lib/firebase';
-import { rankResults } from '@/utils/results';
-import { ResultType, ResultTypeWithId } from '@/utils/types';
+import QRCode from '@/public/static/qr-code.png';
 import { YEAR } from '@/utils/constants';
 import GlobalContext from '@/utils/context/global.context';
-import QRCode from '@/public/static/qr-code.png';
+import { rankResults } from '@/utils/results';
+import { ResultType, ResultTypeWithId } from '@/utils/types';
 
 export default function LivePage() {
   const [context, setContext] = useState({ year: YEAR });
@@ -52,7 +52,7 @@ export default function LivePage() {
       <Title hLevel="h1">{`Résultats ${YEAR}`}</Title>
       <Board results={data.results} totals={data.totals} hideSearchBar />
       <Image
-        className="fixed bg-white left-1 bottom-1 p-1 border border-secondary"
+        className="border-secondary fixed bottom-1 left-1 border bg-white p-1"
         src={QRCode}
         width={150}
         height={150}

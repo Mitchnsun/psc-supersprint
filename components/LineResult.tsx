@@ -1,13 +1,15 @@
 import { ComponentProps, useState } from 'react';
-import { TableRow, TableCell } from '@/components/ui/table';
+
+import { TableCell, TableRow } from '@/components/ui/table';
 import { cn } from '@/lib/utils';
 import { ResultTypeWithId } from '@/utils/types';
-import TimeCell from './atoms/TimeCell';
+
 import ArrowIcon from './atoms/ArrowIcon';
+import TimeCell from './atoms/TimeCell';
 import DetailsResult from './DetailsResult';
 
 const CustomTableCell = ({ children, className, ...props }: ComponentProps<typeof TableCell>) => (
-  <TableCell {...props} className={cn('md:p-2 p-0.5 text-center', className)}>
+  <TableCell {...props} className={cn('p-0.5 text-center md:p-2', className)}>
     {children}
   </TableCell>
 );
@@ -32,7 +34,7 @@ const LineResult = ({
         <CustomTableCell className="text-center">{rank}</CustomTableCell>
         <CustomTableCell className="text-center">{`${result.firstname} ${result.lastname}`}</CustomTableCell>
         <CustomTableCell className="text-center">{`#${result.bib}`}</CustomTableCell>
-        <TableCell className="text-center hidden lg:table-cell">{`${result.cat}${result.sex}`}</TableCell>
+        <TableCell className="hidden text-center lg:table-cell">{`${result.cat}${result.sex}`}</TableCell>
         <TimeCell time={result.total} status={result.status} isBold />
         <TimeCell className="hidden lg:table-cell" time={result.swim} />
         <TimeCell className="hidden lg:table-cell" time={result.bike} />

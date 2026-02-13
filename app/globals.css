@@ -24,7 +24,6 @@
   body {
     font-family: var(--font-family-regular);
     font-weight: 300;
-    background-color: var(--color-primary);
   }
 
   @media (max-width: 450px) {

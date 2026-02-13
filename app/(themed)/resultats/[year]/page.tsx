@@ -1,9 +1,10 @@
-import { ref, child, get } from 'firebase/database';
+import { child, get, ref } from 'firebase/database';
 import { notFound } from 'next/navigation';
-import db from '@/lib/firebase';
 
+import db from '@/lib/firebase';
 import { rankResults } from '@/utils/results';
 import { ResultType } from '@/utils/types';
+
 import ResultatsPageClient from './page.client';
 
 export const dynamic = 'force-dynamic';

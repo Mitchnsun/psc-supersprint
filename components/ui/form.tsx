@@ -1,7 +1,9 @@
 import * as React from 'react';
 import { Controller, ControllerProps, FieldPath, FieldValues } from 'react-hook-form';
-import { Label } from './label';
+
 import { cn } from '@/lib/utils';
+
+import { Label } from './label';
 
 // FormField component that wraps Controller from react-hook-form
 export function FormField<
@@ -35,7 +37,7 @@ export const FormMessage = React.forwardRef<HTMLParagraphElement, React.HTMLAttr
     }
 
     return (
-      <p ref={ref} className={cn('text-sm font-medium text-destructive', className)} {...props}>
+      <p ref={ref} className={cn('text-destructive text-sm font-medium', className)} {...props}>
         {children}
       </p>
     );

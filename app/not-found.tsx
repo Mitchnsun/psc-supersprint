@@ -1,4 +1,5 @@
 import Link from 'next/link';
+
 import Title from '@/components/atoms/Title';
 
 export default function NotFound() {

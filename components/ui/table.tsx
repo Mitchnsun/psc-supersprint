@@ -29,7 +29,7 @@ const TableFooter = React.forwardRef<HTMLTableSectionElement, React.HTMLAttribut
   ({ className, ...props }, ref) => (
     <tfoot
       ref={ref}
-      className={cn('border-gray-300 border-t bg-zinc-100/50 font-medium [&>tr]:last:border-b-0', className)}
+      className={cn('border-t border-gray-300 bg-zinc-100/50 font-medium [&>tr]:last:border-b-0', className)}
       {...props}
     />
   ),
@@ -41,7 +41,7 @@ const TableRow = React.forwardRef<HTMLTableRowElement, React.HTMLAttributes<HTML
     <tr
       ref={ref}
       className={cn(
-        'border-gray-300 border-b transition-colors hover:bg-zinc-100/50 data-[state=selected]:bg-zinc-100',
+        'border-b border-gray-300 transition-colors hover:bg-zinc-100/50 data-[state=selected]:bg-zinc-100',
         className,
       )}
       {...props}
@@ -80,4 +80,4 @@ const TableCaption = React.forwardRef<HTMLTableCaptionElement, React.HTMLAttribu
 );
 TableCaption.displayName = 'TableCaption';
 
-export { Table, TableHeader, TableBody, TableFooter, TableHead, TableRow, TableCell, TableCaption };
+export { Table, TableBody, TableCaption, TableCell, TableFooter, TableHead, TableHeader, TableRow };

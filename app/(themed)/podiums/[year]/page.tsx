@@ -1,9 +1,10 @@
-import { ref, child, get } from 'firebase/database';
-import { isEmpty } from '@/lib/utils';
-import db from '@/lib/firebase';
+import { child, get, ref } from 'firebase/database';
 
+import db from '@/lib/firebase';
+import { isEmpty } from '@/lib/utils';
 import { rankResults } from '@/utils/results';
 import { ResultType } from '@/utils/types';
+
 import PodiumsPageClient from './page.client';
 
 export const dynamic = 'force-dynamic';

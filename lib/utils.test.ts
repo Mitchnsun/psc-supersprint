@@ -1,5 +1,6 @@
-import { describe, test, expect } from 'vitest';
-import { cn, isEmpty, compact } from './utils';
+import { describe, expect, test } from 'vitest';
+
+import { cn, compact, isEmpty } from './utils';
 
 describe('cn', () => {
   test('should merge class names', () => {

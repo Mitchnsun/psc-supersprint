@@ -1,6 +1,6 @@
-import { ResultTypeWithId } from '@/utils/types';
 import { isEmpty } from '@/lib/utils';
 import Time from '@/utils/time';
+import { ResultTypeWithId } from '@/utils/types';
 
 const Podiums = ({ category, results }: { category: string; results: ResultTypeWithId[] }) => {
   const men = results.filter(({ cat, sex }) => (isEmpty(category) || category === cat) && sex === 'M');
@@ -9,8 +9,8 @@ const Podiums = ({ category, results }: { category: string; results: ResultTypeW
   return (
     <div className="grow">
       <div className="grid grid-cols-2 gap-1">
-        <h2 className="text-xl text-secondary font-bold">Hommes</h2>
-        <h2 className="text-xl text-secondary font-bold">Femmes</h2>
+        <h2 className="text-secondary text-xl font-bold">Hommes</h2>
+        <h2 className="text-secondary text-xl font-bold">Femmes</h2>
         <div>
           {men.slice(0, 3).map((item, index) => (
             <p key={`${item.firstname}-${item.lastname}-${index}`}>
@@ -25,7 +25,7 @@ const Podiums = ({ category, results }: { category: string; results: ResultTypeW
             </p>
           ))}
         </div>
-        <h2 className="text-lg text-secondary font-bold col-span-2">Natation</h2>
+        <h2 className="text-secondary col-span-2 text-lg font-bold">Natation</h2>
         <div>
           {men
             .toSorted((a, b) => a.swim - b.swim)
@@ -46,7 +46,7 @@ const Podiums = ({ category, results }: { category: string; results: ResultTypeW
               </p>
             ))}
         </div>
-        <h2 className="text-lg text-secondary font-bold col-span-2">Vélo</h2>
+        <h2 className="text-secondary col-span-2 text-lg font-bold">Vélo</h2>
         <div>
           {men
             .toSorted((a, b) => a.bike - b.bike)

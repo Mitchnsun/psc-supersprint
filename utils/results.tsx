@@ -1,5 +1,7 @@
 import * as yup from 'yup';
+
 import { compact, isEmpty } from '@/lib/utils';
+
 import Ranks from './ranks';
 import { ResultTypeWithId } from './types';
 

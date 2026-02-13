@@ -1,8 +1,8 @@
-import { ref, child, get } from 'firebase/database';
+import { child, get, ref } from 'firebase/database';
 
+import Share from '@/components/Share';
 import db from '@/lib/firebase';
 import { ResultType } from '@/utils/types';
-import Share from '@/components/Share';
 
 export const dynamic = 'force-dynamic';
 
