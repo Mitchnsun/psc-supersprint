@@ -1,4 +1,5 @@
-import { PropsWithChildren, ElementType, createElement } from 'react';
+import { createElement, ElementType, PropsWithChildren } from 'react';
+
 import { cn } from '@/lib/utils';
 
 const Title = ({

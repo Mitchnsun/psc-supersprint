@@ -1,8 +1,9 @@
 'use client';
 
-import { useRef, useState } from 'react';
-import html2canvas from 'html2canvas';
 import { saveAs } from 'file-saver';
+import html2canvas from 'html2canvas';
+import { useRef, useState } from 'react';
+
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
 import { ResultType } from '@/utils/types';

@@ -1,20 +1,22 @@
-import { useContext } from 'react';
-import Link from 'next/link';
 import { Share as ShareIcon } from 'lucide-react';
-import Time from '@/utils/time';
+import Link from 'next/link';
+import { useContext } from 'react';
+
 import { YEAR } from '@/utils/constants';
-import { ResultTypeWithId } from '@/utils/types';
 import GlobalContext from '@/utils/context/global.context';
-import SwimIcon from './atoms/SwimIcon';
-import BikeIcon from './atoms/BikeIcon';
-import RunIcon from './atoms/RunIcon';
-import Ranks from './atoms/Ranks';
+import Time from '@/utils/time';
+import { ResultTypeWithId } from '@/utils/types';
+
 import ActivityResult from './atoms/ActivityResult';
+import BikeIcon from './atoms/BikeIcon';
+import Ranks from './atoms/Ranks';
+import RunIcon from './atoms/RunIcon';
+import SwimIcon from './atoms/SwimIcon';
 
 const DetailsResult = ({ result, totals }: { result: ResultTypeWithId; totals: Record<string, number> }) => {
   const { context } = useContext(GlobalContext);
   return (
-    <div className="grid grid-cols-12 gap-2 justify-center p-2">
+    <div className="grid grid-cols-12 justify-center gap-2 p-2">
       <Ranks ranks={result.ranks} cat={result.cat} gender={result.sex} totals={totals} />
       <ActivityResult
         icon={<SwimIcon />}
@@ -37,7 +39,7 @@ const DetailsResult = ({ result, totals }: { result: ResultTypeWithId; totals: R
         speed={Time.run(result.run)}
         unit="/km"
       />
-      <div className="col-span-2 text-center m-auto">
+      <div className="col-span-2 m-auto text-center">
         <Link href={`/athlete/${context.year || YEAR}/${result.id}`}>
           <ShareIcon className="text-logo" />
         </Link>

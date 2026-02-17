@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
+
 import Title from '@/components/atoms/Title';
 import Podium from '@/components/Podiums';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { ResultTypeWithId } from '@/utils/types';
 import { CATEGORIES } from '@/utils/categories.utils';
+import { ResultTypeWithId } from '@/utils/types';
 
 const PodiumView = ({ year, results = [] }: { year: string; results: ResultTypeWithId[] }) => {
   const [cat, setCat] = useState<string>('');
@@ -16,8 +17,8 @@ const PodiumView = ({ year, results = [] }: { year: string; results: ResultTypeW
   return (
     <>
       <Title hLevel="h1">Podiums {year}</Title>
-      <div className="flex items-center gap-2 my-2">
-        <p className="m-0 text-lg font-bold text-secondary">Filtrer par:</p>
+      <div className="my-2 flex items-center gap-2">
+        <p className="text-secondary m-0 text-lg font-bold">Filtrer par:</p>
         <div className="w-35">
           {isMounted ? (
             <Select value={cat} onValueChange={(value) => setCat(value === 'none' ? '' : value)}>
@@ -26,9 +27,9 @@ const PodiumView = ({ year, results = [] }: { year: string; results: ResultTypeW
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="none">Aucun filtre</SelectItem>
-                {CATEGORIES.map((cat, index) => (
-                  <SelectItem key={`${cat.id}-${cat.label}-${index}`} value={cat.id}>
-                    {cat.label} ({cat.id})
+                {CATEGORIES.map((categ, index) => (
+                  <SelectItem key={`${categ.id}-${categ.label}-${index}`} value={categ.id}>
+                    {categ.label} ({categ.id})
                   </SelectItem>
                 ))}
               </SelectContent>

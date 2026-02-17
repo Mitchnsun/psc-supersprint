@@ -1,4 +1,5 @@
-import { useState, useMemo } from 'react';
+import { useMemo, useState } from 'react';
+
 import AddResultForm from '@/components/AddResult';
 import LoginForm from '@/components/LoginForm';
 import UserContext, { INITIAL_USER } from '@/utils/context/user.context';

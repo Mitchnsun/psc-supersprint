@@ -1,11 +1,12 @@
 'use client';
 
 import { useMemo, useState } from 'react';
-import Board from '@/components/Board';
+
 import Title from '@/components/atoms/Title';
-import { ResultTypeWithId } from '@/utils/types';
-import { YEAR, DATE } from '@/utils/constants';
+import Board from '@/components/Board';
+import { DATE, YEAR } from '@/utils/constants';
 import GlobalContext from '@/utils/context/global.context';
+import { ResultTypeWithId } from '@/utils/types';
 
 export default function ResultsPageClient({
   results = [],

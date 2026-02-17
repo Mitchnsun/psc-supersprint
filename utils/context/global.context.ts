@@ -1,4 +1,5 @@
 import { createContext, Dispatch, SetStateAction } from 'react';
+
 import { YEAR } from '../constants';
 
 export const INITIAL_CONTEXT = { year: YEAR };

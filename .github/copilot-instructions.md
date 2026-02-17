@@ -182,11 +182,44 @@ Variables Firebase requises (préfixées `NEXT_PUBLIC_`):
 
 ### Règles ESLint
 
-Le projet utilise une configuration ESLint stricte basée sur:
+Le projet utilise une configuration ESLint stricte avec flat config (`eslint.config.mjs`) incluant les plugins suivants:
 
-- `eslint-config-airbnb`
-- `eslint-config-next`
-- `eslint-config-prettier`
+#### Plugins principaux
+
+- **@typescript-eslint**: Linting TypeScript avec règles strictes
+  - `@typescript-eslint/no-shadow`: 'error' (pas de variables masquées)
+- **eslint-plugin-react**: Règles React (recommended + jsx-runtime)
+  - `react/prop-types`: 'off' (TypeScript gère le typage)
+  - `react/jsx-filename-extension`: 'off' (accepte .tsx)
+  - `react/jsx-props-no-spreading`: 'off' (autorise le spread de props)
+- **eslint-plugin-react-hooks**: Règles des Hooks React (recommended)
+- **eslint-plugin-jsx-a11y**: Accessibilité JSX
+- **eslint-config-prettier**: Désactive les règles conflictuelles avec Prettier
+
+#### Organisation des imports
+
+- **eslint-plugin-simple-import-sort**: Tri automatique des imports/exports
+  - `simple-import-sort/imports`: 'error'
+  - `simple-import-sort/exports`: 'error'
+- **eslint-plugin-import**: Gestion des imports
+  - `import/no-extraneous-dependencies`: 'error' (sauf devDependencies pour tests)
+- **eslint-plugin-unused-imports**: Détection imports non utilisés
+  - `unused-imports/no-unused-imports`: 'error'
+  - `unused-imports/no-unused-vars`: 'warn' (ignore les vars préfixées `_`)
+
+#### Tests
+
+- **eslint-plugin-vitest**: Règles pour Vitest (recommended)
+  - `vitest/max-nested-describe`: max 3 niveaux
+- **eslint-plugin-vitest-globals**: Support des globals Vitest (describe, test, expect)
+
+#### Règles importantes à respecter
+
+- Pas d'imports inutilisés
+- Imports/exports triés automatiquement
+- Variables masquées interdites (shadowing)
+- Types TypeScript explicites (pas de `any`)
+- Accessibilité JSX respectée
 
 ### Checklist pour les nouvelles fonctionnalités
 
