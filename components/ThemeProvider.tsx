@@ -41,7 +41,7 @@ function generateCssVars(theme: Theme): React.CSSProperties {
  * </ThemeProvider>
  * ```
  */
-export function ThemeProvider({ year, children }: ThemeProviderProps) {
+export function ThemeProvider({ year, children }: ThemeProviderProps): React.ReactElement {
   // Only apply theme if year is provided and has a specific theme
   const shouldApplyTheme = year !== undefined && hasThemeForYear(year);
   const theme = shouldApplyTheme ? getThemeByYear(year) : null;

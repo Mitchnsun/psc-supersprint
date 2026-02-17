@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest';
 
-import { cn, compact, isEmpty } from './utils';
+import { cn, compact, isEmpty } from '@/lib/utils';
 
 describe('cn', () => {
   test('should merge class names', () => {

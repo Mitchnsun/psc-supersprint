@@ -13,15 +13,15 @@ import ThemeProvider from '@/components/ThemeProvider';
  * Uses useParams() to get the year from the URL and applies
  * the corresponding theme to the entire page including Header
  */
-export default function ThemedLayout({ children }: { children: ReactNode }) {
+export default function ThemedLayout({ children }: { children: ReactNode }): ReactNode {
   const params = useParams();
   const year = params.year ? parseInt(params.year as string, 10) : undefined;
 
   return (
     <ThemeProvider year={year}>
-      <div className="mx-auto max-w-300">
+      <div className="mx-auto max-w-300 p-4">
         <Header year={year} />
-        <div className="border-secondary mx-4 my-2 border bg-white p-5">{children}</div>
+        <div className="border-secondary border bg-white p-5">{children}</div>
       </div>
     </ThemeProvider>
   );
