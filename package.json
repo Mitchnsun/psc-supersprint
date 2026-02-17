@@ -60,7 +60,7 @@
     "@typescript-eslint/eslint-plugin": "^8.23.0",
     "@typescript-eslint/parser": "^8.23.0",
     "@vitejs/plugin-react": "^5.1.4",
-    "@vitest/coverage-v8": "^1.4.0",
+    "@vitest/coverage-v8": "^4.0.0",
     "eslint": "^9.21.0",
     "eslint-config-next": "^16.1.6",
     "eslint-config-prettier": "^9.1.0",
@@ -82,7 +82,7 @@
     "shadcn": "^3.8.4",
     "typescript": "^5.1.0",
     "vite-tsconfig-paths": "^4.3.2",
-    "vitest": "^1.6.1"
+    "vitest": "^4.0.0"
   },
   "packageManager": "yarn@1.22.22"
 }
