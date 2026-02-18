@@ -19,6 +19,18 @@ export const schema = yup.object({
     .transform((value, originalValue) => (originalValue === '' ? undefined : value))
     .required(),
   category: yup.string().required(),
+  bikeNumber: yup
+    .number()
+    .transform((value, originalValue) => (originalValue === '' ? undefined : value))
+    .positive()
+    .integer()
+    .optional(),
+  wave: yup
+    .number()
+    .transform((value, originalValue) => (originalValue === '' ? undefined : value))
+    .positive()
+    .integer()
+    .optional(),
   times: yup
     .object({
       swim: yup.string().required(),

@@ -55,6 +55,8 @@ const AddResultForm = () => {
       birthYear: undefined,
       category: CATEGORIES[1].id,
       status: 'finisher',
+      bikeNumber: undefined,
+      wave: undefined,
       times: {
         swim: '',
         bike: '',
@@ -73,7 +75,17 @@ const AddResultForm = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [birthYear]);
 
-  const onSubmit = async ({ firstname, lastname, bib, gender, category, status: raceStatus, times }: FormValues) => {
+  const onSubmit = async ({
+    firstname,
+    lastname,
+    bib,
+    gender,
+    category,
+    status: raceStatus,
+    times,
+    bikeNumber,
+    wave,
+  }: FormValues) => {
     setIsLoading(true);
     const { key } = await push(ref(db, YEAR.toString()));
     set(ref(db, `${YEAR}/${key}`), {
@@ -83,6 +95,8 @@ const AddResultForm = () => {
       sex: gender,
       status: raceStatus === 'finisher' ? '' : raceStatus,
       cat: category,
+      ...(bikeNumber && { bikeNumber }),
+      ...(wave && { wave }),
       ...timeCalculus(times),
     })
       .then(() => reset())
@@ -103,6 +117,31 @@ const AddResultForm = () => {
         name="bib"
         control={control}
       />
+
+      <div className="flex gap-4">
+        <FormField
+          render={({ field }) => (
+            <FormItem className="w-38">
+              <FormLabel>Numéro de vélo</FormLabel>
+              <Input {...field} type="number" />
+              <FormMessage>{errors.bikeNumber?.message}</FormMessage>
+            </FormItem>
+          )}
+          name="bikeNumber"
+          control={control}
+        />
+        <FormField
+          render={({ field }) => (
+            <FormItem className="w-38">
+              <FormLabel>Numéro de vague</FormLabel>
+              <Input {...field} type="number" />
+              <FormMessage>{errors.wave?.message}</FormMessage>
+            </FormItem>
+          )}
+          name="wave"
+          control={control}
+        />
+      </div>
 
       <div className="flex gap-4">
         <FormField

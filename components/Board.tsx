@@ -67,6 +67,24 @@ export default function Board({
               </SelectContent>
             </Select>
           </div>
+          <div className="w-35">
+            <Select
+              value={search.wave}
+              onValueChange={(value) => setSearch({ ...search, wave: value === 'none' ? '' : value })}
+            >
+              <SelectTrigger>
+                <SelectValue placeholder="Vague" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="none">Aucun filtre</SelectItem>
+                <SelectItem value="1">Vague 1</SelectItem>
+                <SelectItem value="2">Vague 2</SelectItem>
+                <SelectItem value="3">Vague 3</SelectItem>
+                <SelectItem value="4">Vague 4</SelectItem>
+                <SelectItem value="5">Vague 5</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
         </div>
       )}
       <ResultsTable results={results} search={search} totals={totals} />

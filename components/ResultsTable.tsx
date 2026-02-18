@@ -27,15 +27,16 @@ const ResultsTable = ({
   search?: SearchType;
   totals: Record<string, number>;
 }) => {
-  const { input, cat, gender } = search;
+  const { input, cat, gender, wave } = search;
   const list = results.filter(
     (item) =>
       (rEx(item.bib.toString(), input) || rEx(item.firstname, input) || rEx(item.lastname, input)) &&
       rEx(item.cat, cat) &&
       rEx(item.sex, gender) &&
+      rEx(item.wave?.toString(), wave) &&
       isEmpty(item.status),
   );
-  const hasFilters = input || cat || gender;
+  const hasFilters = input || cat || gender || wave;
   const statusList = results.filter((item) => !isEmpty(item.status) && !hasFilters);
 
   return (

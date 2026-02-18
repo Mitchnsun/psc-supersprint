@@ -4,6 +4,7 @@ export interface SearchType {
   input?: string;
   cat?: string;
   gender?: string;
+  wave?: string;
 }
 
 export interface RanksType {
@@ -26,6 +27,8 @@ export interface ResultType {
   status: string;
   swim: number;
   total: number;
+  bikeNumber?: number;
+  wave?: number;
 }
 
 export interface ResultTypeWithId extends ResultType {
