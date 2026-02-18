@@ -19,7 +19,7 @@ export default function ThemedLayout({ children }: { children: ReactNode }): Rea
 
   return (
     <ThemeProvider year={year}>
-      <div className="mx-auto max-w-300 p-4">
+      <div className="mx-auto max-w-300 px-4 pb-4">
         <Header year={year} />
         <div className="border-secondary border bg-white p-5">{children}</div>
       </div>

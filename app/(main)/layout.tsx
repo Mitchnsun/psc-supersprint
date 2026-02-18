@@ -9,7 +9,7 @@ import Header from '@/components/Header';
 export default function MainLayout({ children }: { children: ReactNode }) {
   return (
     <div className="bg-primary min-h-screen">
-      <div className="mx-auto max-w-300 p-4">
+      <div className="mx-auto max-w-300 px-4 pb-4">
         <Header />
         <div className="border-secondary border bg-white p-5">{children}</div>
       </div>
