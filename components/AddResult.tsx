@@ -2,7 +2,6 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { push, ref, set } from 'firebase/database';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import * as yup from 'yup';
 
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
@@ -12,10 +11,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import db from '@/lib/firebase';
 import { CATEGORIES, categoryFromBirthYear } from '@/utils/categories.utils';
 import { YEAR } from '@/utils/constants';
-import { schema } from '@/utils/results';
+import { FormValues, schema } from '@/utils/results';
 import Time from '@/utils/time';
-
-type FormValues = yup.InferType<typeof schema>;
 
 const timeCalculus = ({ swim, bike, total }: { swim: string; bike: string; total: string }) => {
   const swimSeconds = swim
@@ -45,7 +42,7 @@ const AddResultForm = () => {
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm<FormValues>({
+  } = useForm({
     resolver: yupResolver(schema),
     defaultValues: {
       bib: undefined,
@@ -110,7 +107,7 @@ const AddResultForm = () => {
         render={({ field }) => (
           <FormItem>
             <FormLabel>Numéro de dossard</FormLabel>
-            <Input {...field} />
+            <Input {...field} value={field.value ?? ''} />
             <FormMessage>{errors.bib?.message}</FormMessage>
           </FormItem>
         )}
@@ -123,7 +120,7 @@ const AddResultForm = () => {
           render={({ field }) => (
             <FormItem className="w-38">
               <FormLabel>Numéro de vélo</FormLabel>
-              <Input {...field} type="number" />
+              <Input {...field} value={field.value ?? ''} type="number" />
               <FormMessage>{errors.bikeNumber?.message}</FormMessage>
             </FormItem>
           )}
@@ -134,7 +131,7 @@ const AddResultForm = () => {
           render={({ field }) => (
             <FormItem className="w-38">
               <FormLabel>Numéro de vague</FormLabel>
-              <Input {...field} type="number" />
+              <Input {...field} value={field.value ?? ''} type="number" />
               <FormMessage>{errors.wave?.message}</FormMessage>
             </FormItem>
           )}
@@ -196,7 +193,7 @@ const AddResultForm = () => {
           render={({ field }) => (
             <FormItem>
               <FormLabel>Année de naissance</FormLabel>
-              <Input {...field} maxLength={4} />
+              <Input {...field} value={field.value ?? ''} maxLength={4} />
               <FormMessage>{errors.birthYear?.message}</FormMessage>
             </FormItem>
           )}

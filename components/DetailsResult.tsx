@@ -18,13 +18,6 @@ const DetailsResult = ({ result, totals }: { result: ResultTypeWithId; totals: R
   return (
     <div className="grid grid-cols-12 justify-center gap-2 p-2">
       <Ranks ranks={result.ranks} cat={result.cat} gender={result.sex} totals={totals} />
-      {(result.bikeNumber || result.wave) && (
-        <div className="col-span-12 text-center text-sm">
-          {result.bikeNumber && `Vélo #${result.bikeNumber}`}
-          {result.bikeNumber && result.wave && ' | '}
-          {result.wave && `Vague ${result.wave}`}
-        </div>
-      )}
       <ActivityResult
         icon={<SwimIcon />}
         label="Natation"

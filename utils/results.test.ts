@@ -33,6 +33,22 @@ describe('Results Schema Validation', () => {
       await expect(schema.validate(data)).resolves.toBeTruthy();
     });
 
+    test('should transform empty string to undefined for bikeNumber', async () => {
+      const data = {
+        firstname: 'John',
+        lastname: 'Doe',
+        gender: 'M',
+        status: '',
+        bib: 100,
+        birthYear: 1990,
+        category: 'V1',
+        bikeNumber: '',
+        times: { swim: '10:00', bike: '20:00', total: '35:00' },
+      };
+      const result = await schema.validate(data);
+      expect(result.bikeNumber).toBeUndefined();
+    });
+
     test('should reject negative bikeNumber', async () => {
       const data = {
         firstname: 'John',
@@ -94,6 +110,22 @@ describe('Results Schema Validation', () => {
       await expect(schema.validate(data)).resolves.toBeTruthy();
     });
 
+    test('should transform empty string to undefined for wave', async () => {
+      const data = {
+        firstname: 'John',
+        lastname: 'Doe',
+        gender: 'M',
+        status: '',
+        bib: 100,
+        birthYear: 1990,
+        category: 'V1',
+        wave: '',
+        times: { swim: '10:00', bike: '20:00', total: '35:00' },
+      };
+      const result = await schema.validate(data);
+      expect(result.wave).toBeUndefined();
+    });
+
     test('should reject negative wave', async () => {
       const data = {
         firstname: 'John',
@@ -104,6 +136,21 @@ describe('Results Schema Validation', () => {
         birthYear: 1990,
         category: 'V1',
         wave: -1,
+        times: { swim: '10:00', bike: '20:00', total: '35:00' },
+      };
+      await expect(schema.validate(data)).rejects.toThrow();
+    });
+
+    test('should reject decimal wave', async () => {
+      const data = {
+        firstname: 'John',
+        lastname: 'Doe',
+        gender: 'M',
+        status: '',
+        bib: 100,
+        birthYear: 1990,
+        category: 'V1',
+        wave: 3.5,
         times: { swim: '10:00', bike: '20:00', total: '35:00' },
       };
       await expect(schema.validate(data)).rejects.toThrow();
