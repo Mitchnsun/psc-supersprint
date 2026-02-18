@@ -2484,7 +2484,7 @@
     "@types/babel__core" "^7.20.5"
     react-refresh "^0.18.0"
 
-"@vitest/coverage-v8@^4.0.0":
+"@vitest/coverage-v8@^4.0.18":
   version "4.0.18"
   resolved "https://registry.yarnpkg.com/@vitest/coverage-v8/-/coverage-v8-4.0.18.tgz#b9c4db7479acd51d5f0ced91b2853c29c3d0cda7"
   integrity sha512-7i+N2i0+ME+2JFZhfuz7Tg/FqKtilHjGyGvoHYQ6iLV0zahbsJ9sljC9OcFcPDbhYKCet+sG8SsVqlyGvPflZg==
@@ -3861,7 +3861,7 @@ eslint-config-next@^16.1.6:
     globals "16.4.0"
     typescript-eslint "^8.46.0"
 
-eslint-config-prettier@^9.1.0:
+eslint-config-prettier@^9.1.2:
   version "9.1.2"
   resolved "https://registry.yarnpkg.com/eslint-config-prettier/-/eslint-config-prettier-9.1.2.tgz#90deb4fa0259592df774b600dbd1d2249a78ce91"
   integrity sha512-iI1f+D2ViGn+uvv5HuHVUamg8ll4tN+JRHGc6IJi4TP9Kl976C57fzPXgseXNs8v0iA8aSJpHsTWjDb9QJamGQ==
@@ -4034,7 +4034,7 @@ eslint-visitor-keys@^4.2.1:
   resolved "https://registry.yarnpkg.com/eslint-visitor-keys/-/eslint-visitor-keys-4.2.1.tgz#4cfea60fe7dd0ad8e816e1ed026c1d5251b512c1"
   integrity sha512-Uhdk5sfqcee/9H/rCOJikYz67o0a2Tw2hGRPOG2Y1R2dg7brRe1uG0yaNQDHu+TO/uQPF/5eCapvYSmHUjt7JQ==
 
-eslint@^9.21.0:
+eslint@^9.39.2:
   version "9.39.2"
   resolved "https://registry.yarnpkg.com/eslint/-/eslint-9.39.2.tgz#cb60e6d16ab234c0f8369a3fe7cc87967faf4b6c"
   integrity sha512-LEyamqS7W5HB3ujJyvi0HQK/dtVINZvd5mAAp9eT5S/ujByGjiZLCzPcHVzuXbpJDJF/cxwHlfceVUDZ2lnSTw==
@@ -4809,7 +4809,7 @@ human-signals@^8.0.1:
   resolved "https://registry.yarnpkg.com/human-signals/-/human-signals-8.0.1.tgz#f08bb593b6d1db353933d06156cedec90abe51fb"
   integrity sha512-eKCa6bwnJhvxj14kZk5NCPc6Hb6BdsU9DZcOnmQKSnO1VKrfV0zCvtttPZUsBvjmNDn8rpcJfpwSYnHBjc95MQ==
 
-husky@^9.0.0:
+husky@^9.1.7:
   version "9.1.7"
   resolved "https://registry.yarnpkg.com/husky/-/husky-9.1.7.tgz#d46a38035d101b46a70456a850ff4201344c0b2d"
   integrity sha512-5gs5ytaNjBrh5Ow3zrvdUUY+0VxIuWVL4i9irt6friV+BqdCfmV11CQTWMiBYWHbXhco+J1kHfTOUkePhCDvMA==
@@ -5388,7 +5388,7 @@ js-yaml@^4.1.0, js-yaml@^4.1.1:
   dependencies:
     argparse "^2.0.1"
 
-jsdom@^28.0.0:
+jsdom@^28.1.0:
   version "28.1.0"
   resolved "https://registry.yarnpkg.com/jsdom/-/jsdom-28.1.0.tgz#ac4203e58fd24d7b0f34359ab00d6d9caebd4b62"
   integrity sha512-0+MoQNYyr2rBHqO1xilltfDjV9G7ymYGlAUazgcDLQaUf8JDHbuGwsxN6U9qWaElZ4w1B2r7yEGIL3GdeW3Rug==
@@ -6280,7 +6280,7 @@ prettier-plugin-tailwindcss@^0.7.2:
   resolved "https://registry.yarnpkg.com/prettier-plugin-tailwindcss/-/prettier-plugin-tailwindcss-0.7.2.tgz#8de2039fc0363b8532ef5a2d3fc9e2c1b6ca3bd4"
   integrity sha512-LkphyK3Fw+q2HdMOoiEHWf93fNtYJwfamoKPl7UwtjFQdei/iIBoX11G6j706FzN3ymX9mPVi97qIY8328vdnA==
 
-prettier@^3.4.2:
+prettier@^3.8.1:
   version "3.8.1"
   resolved "https://registry.yarnpkg.com/prettier/-/prettier-3.8.1.tgz#edf48977cf991558f4fcbd8a3ba6015ba2a3a173"
   integrity sha512-UOnG6LftzbdaHZcKoPFtOcCKztrQ57WkHDeRD9t/PTQtmT0NHSeWWepj6pS0z/N7+08BHFDQVUrfmfMRcZwbMg==
@@ -6301,7 +6301,7 @@ pretty-ms@^9.2.0:
   dependencies:
     parse-ms "^4.0.0"
 
-pretty-quick@^4.0.0:
+pretty-quick@^4.2.2:
   version "4.2.2"
   resolved "https://registry.yarnpkg.com/pretty-quick/-/pretty-quick-4.2.2.tgz#0fc31da666f182fe14e119905fc9829b5b85a234"
   integrity sha512-uAh96tBW1SsD34VhhDmWuEmqbpfYc/B3j++5MC/6b3Cb8Ow7NJsvKFhg0eoGu2xXX+o9RkahkTK6sUdd8E7g5w==
@@ -6773,10 +6773,10 @@ setprototypeof@~1.2.0:
   resolved "https://registry.yarnpkg.com/setprototypeof/-/setprototypeof-1.2.0.tgz#66c9a24a73f9fc28cbe66b09fed3d33dcaf1b424"
   integrity sha512-E5LDX7Wrp85Kil5bhZv46j8jOeboKq5JMmYM3gVGdGH8xFpPWXUMsNrlODCrkoxMEeNi/XZIwuRvY4XNwYMJpw==
 
-shadcn@^3.8.4:
-  version "3.8.4"
-  resolved "https://registry.yarnpkg.com/shadcn/-/shadcn-3.8.4.tgz#d66532b3b2183ed393a1645bafbccc9ddd7daa83"
-  integrity sha512-pSad/m1+PGzB0aLsRBV0EkyGg9al1nJqYUuucg6d8v8xZspPZ5/ehGNEp5M4b1KQYqdO5/gGPbkhVbgmXqG9Pw==
+shadcn@^3.8.5:
+  version "3.8.5"
+  resolved "https://registry.yarnpkg.com/shadcn/-/shadcn-3.8.5.tgz#3dd5f80a26db7d3e9fbf07f72d3646c71de78f6c"
+  integrity sha512-jPRx44e+eyeV7xwY3BLJXcfrks00+M0h5BGB9l6DdcBW4BpAj4x3lVmVy0TXPEs2iHEisxejr62sZAAw6B1EVA==
   dependencies:
     "@antfu/ni" "^25.0.0"
     "@babel/core" "^7.28.0"
@@ -7596,7 +7596,7 @@ vite-tsconfig-paths@^4.3.2:
   optionalDependencies:
     fsevents "~2.3.3"
 
-vitest@^4.0.0:
+vitest@^4.0.18:
   version "4.0.18"
   resolved "https://registry.yarnpkg.com/vitest/-/vitest-4.0.18.tgz#56f966353eca0b50f4df7540cd4350ca6d454a05"
   integrity sha512-hOQuK7h0FGKgBAas7v0mSAsnvrIgAvWmRFjmzpJ7SwFHH3g1k2u37JtYwOwmEKhK6ZO3v9ggDBBm0La1LCK4uQ==
