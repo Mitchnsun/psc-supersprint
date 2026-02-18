@@ -5,7 +5,24 @@ import { compact, isEmpty } from '@/lib/utils';
 import Ranks from './ranks';
 import { ResultTypeWithId } from './types';
 
-export const schema = yup.object({
+export interface FormValues {
+  firstname: string;
+  lastname: string;
+  gender: string;
+  status: string;
+  bib: number;
+  birthYear: number;
+  category: string;
+  bikeNumber?: number;
+  wave?: number;
+  times: {
+    swim: string;
+    bike: string;
+    total: string;
+  };
+}
+
+export const schema: yup.ObjectSchema<FormValues> = yup.object({
   firstname: yup.string().required(),
   lastname: yup.string().required(),
   gender: yup.string().required(),
@@ -19,6 +36,18 @@ export const schema = yup.object({
     .transform((value, originalValue) => (originalValue === '' ? undefined : value))
     .required(),
   category: yup.string().required(),
+  bikeNumber: yup
+    .number()
+    .optional()
+    .transform((value, originalValue) => (originalValue === '' ? undefined : value))
+    .positive()
+    .integer(),
+  wave: yup
+    .number()
+    .optional()
+    .transform((value, originalValue) => (originalValue === '' ? undefined : value))
+    .positive()
+    .integer(),
   times: yup
     .object({
       swim: yup.string().required(),

@@ -67,6 +67,37 @@ export default function Board({
               </SelectContent>
             </Select>
           </div>
+          <div className="w-35">
+            <Select
+              value={search.wave}
+              onValueChange={(value) => setSearch({ ...search, wave: value === 'none' ? '' : value })}
+            >
+              <SelectTrigger>
+                <SelectValue placeholder="Vague" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="none">Aucun filtre</SelectItem>
+                <SelectItem value="1">Vague 1</SelectItem>
+                <SelectItem value="2">Vague 2</SelectItem>
+                <SelectItem value="3">Vague 3</SelectItem>
+                <SelectItem value="4">Vague 4</SelectItem>
+                <SelectItem value="5">Vague 5</SelectItem>
+                <SelectItem value="1">Vague 6</SelectItem>
+                <SelectItem value="2">Vague 7</SelectItem>
+                <SelectItem value="3">Vague 8</SelectItem>
+                <SelectItem value="4">Vague 9</SelectItem>
+                <SelectItem value="5">Vague 10</SelectItem>
+                <SelectItem value="1">Vague 11</SelectItem>
+                <SelectItem value="2">Vague 12</SelectItem>
+                <SelectItem value="3">Vague 13</SelectItem>
+                <SelectItem value="4">Vague 14</SelectItem>
+                <SelectItem value="5">Vague 15</SelectItem>
+                <SelectItem value="1">Vague 16</SelectItem>
+                <SelectItem value="2">Vague 17</SelectItem>
+                <SelectItem value="3">Vague 18</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
         </div>
       )}
       <ResultsTable results={results} search={search} totals={totals} />

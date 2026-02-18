@@ -2,7 +2,6 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { push, ref, set } from 'firebase/database';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import * as yup from 'yup';
 
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
@@ -12,10 +11,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import db from '@/lib/firebase';
 import { CATEGORIES, categoryFromBirthYear } from '@/utils/categories.utils';
 import { YEAR } from '@/utils/constants';
-import { schema } from '@/utils/results';
+import { FormValues, schema } from '@/utils/results';
 import Time from '@/utils/time';
-
-type FormValues = yup.InferType<typeof schema>;
 
 const timeCalculus = ({ swim, bike, total }: { swim: string; bike: string; total: string }) => {
   const swimSeconds = swim
@@ -45,7 +42,7 @@ const AddResultForm = () => {
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm<FormValues>({
+  } = useForm({
     resolver: yupResolver(schema),
     defaultValues: {
       bib: undefined,
@@ -55,6 +52,8 @@ const AddResultForm = () => {
       birthYear: undefined,
       category: CATEGORIES[1].id,
       status: 'finisher',
+      bikeNumber: undefined,
+      wave: undefined,
       times: {
         swim: '',
         bike: '',
@@ -73,7 +72,17 @@ const AddResultForm = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [birthYear]);
 
-  const onSubmit = async ({ firstname, lastname, bib, gender, category, status: raceStatus, times }: FormValues) => {
+  const onSubmit = async ({
+    firstname,
+    lastname,
+    bib,
+    gender,
+    category,
+    status: raceStatus,
+    times,
+    bikeNumber,
+    wave,
+  }: FormValues) => {
     setIsLoading(true);
     const { key } = await push(ref(db, YEAR.toString()));
     set(ref(db, `${YEAR}/${key}`), {
@@ -83,6 +92,8 @@ const AddResultForm = () => {
       sex: gender,
       status: raceStatus === 'finisher' ? '' : raceStatus,
       cat: category,
+      ...(bikeNumber && { bikeNumber }),
+      ...(wave && { wave }),
       ...timeCalculus(times),
     })
       .then(() => reset())
@@ -96,13 +107,38 @@ const AddResultForm = () => {
         render={({ field }) => (
           <FormItem>
             <FormLabel>Numéro de dossard</FormLabel>
-            <Input {...field} />
+            <Input {...field} value={field.value ?? ''} />
             <FormMessage>{errors.bib?.message}</FormMessage>
           </FormItem>
         )}
         name="bib"
         control={control}
       />
+
+      <div className="flex gap-4">
+        <FormField
+          render={({ field }) => (
+            <FormItem className="w-38">
+              <FormLabel>Numéro de vélo</FormLabel>
+              <Input {...field} value={field.value ?? ''} type="number" />
+              <FormMessage>{errors.bikeNumber?.message}</FormMessage>
+            </FormItem>
+          )}
+          name="bikeNumber"
+          control={control}
+        />
+        <FormField
+          render={({ field }) => (
+            <FormItem className="w-38">
+              <FormLabel>Numéro de vague</FormLabel>
+              <Input {...field} value={field.value ?? ''} type="number" />
+              <FormMessage>{errors.wave?.message}</FormMessage>
+            </FormItem>
+          )}
+          name="wave"
+          control={control}
+        />
+      </div>
 
       <div className="flex gap-4">
         <FormField
@@ -157,7 +193,7 @@ const AddResultForm = () => {
           render={({ field }) => (
             <FormItem>
               <FormLabel>Année de naissance</FormLabel>
-              <Input {...field} maxLength={4} />
+              <Input {...field} value={field.value ?? ''} maxLength={4} />
               <FormMessage>{errors.birthYear?.message}</FormMessage>
             </FormItem>
           )}
