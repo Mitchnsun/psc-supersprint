@@ -91,7 +91,18 @@ export const rankResults = (data: ResultTypeWithId[]) => {
   return Ranks.byCat(sortedResults as ResultTypeWithId[]);
 };
 
+export const getWaves = (data: ResultTypeWithId[]): number[] => {
+  const waves = new Set<number>();
+  data.forEach((result) => {
+    if (result.wave !== undefined) {
+      waves.add(result.wave);
+    }
+  });
+  return Array.from(waves).sort((a, b) => a - b);
+};
+
 export default {
   sortResults,
   rankResults,
+  getWaves,
 };

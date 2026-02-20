@@ -1,6 +1,7 @@
 import { describe, expect, test } from 'vitest';
 
-import { schema } from './results';
+import { getWaves, schema } from './results';
+import { ResultTypeWithId } from './types';
 
 describe('Results Schema Validation', () => {
   describe('bikeNumber field', () => {
@@ -173,5 +174,47 @@ describe('Results Schema Validation', () => {
       };
       await expect(schema.validate(data)).resolves.toBeTruthy();
     });
+  });
+});
+
+const makeResult = (id: string, wave?: number): ResultTypeWithId => ({
+  id,
+  bib: 1,
+  bike: 0,
+  cat: 'S' as never,
+  firstname: 'John',
+  lastname: 'Doe',
+  ranks: { cat: 1, gender: 1, scratch: 1, swim: 1, bike: 1 },
+  run: 0,
+  sex: 'M',
+  status: '',
+  swim: 0,
+  total: 0,
+  wave,
+});
+
+describe('getWaves', () => {
+  test('should return empty array when no results have a wave', () => {
+    const results = [makeResult('1'), makeResult('2')];
+    expect(getWaves(results)).toEqual([]);
+  });
+
+  test('should return sorted unique wave numbers', () => {
+    const results = [makeResult('1', 3), makeResult('2', 1), makeResult('3', 2)];
+    expect(getWaves(results)).toEqual([1, 2, 3]);
+  });
+
+  test('should deduplicate wave values', () => {
+    const results = [makeResult('1', 2), makeResult('2', 2), makeResult('3', 1)];
+    expect(getWaves(results)).toEqual([1, 2]);
+  });
+
+  test('should ignore results without a wave', () => {
+    const results = [makeResult('1', 1), makeResult('2'), makeResult('3', 3)];
+    expect(getWaves(results)).toEqual([1, 3]);
+  });
+
+  test('should return empty array for empty input', () => {
+    expect(getWaves([])).toEqual([]);
   });
 });
