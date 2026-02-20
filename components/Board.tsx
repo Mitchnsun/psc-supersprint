@@ -1,8 +1,9 @@
-import { ReactNode, useState } from 'react';
+import { ReactNode, useMemo, useState } from 'react';
 
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { CATEGORIES } from '@/utils/categories.utils';
+import { getWaves } from '@/utils/results';
 import { ResultTypeWithId, SearchType } from '@/utils/types';
 
 import ResultsTable from './ResultsTable';
@@ -21,6 +22,7 @@ export default function Board({
   hideSearchBar?: boolean;
 }) {
   const [search, setSearch] = useState<SearchType>({});
+  const waves = useMemo(() => getWaves(results), [results]);
 
   return (
     <>
@@ -67,37 +69,26 @@ export default function Board({
               </SelectContent>
             </Select>
           </div>
-          <div className="w-35">
-            <Select
-              value={search.wave}
-              onValueChange={(value) => setSearch({ ...search, wave: value === 'none' ? '' : value })}
-            >
-              <SelectTrigger>
-                <SelectValue placeholder="Vague" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="none">Aucun filtre</SelectItem>
-                <SelectItem value="1">Vague 1</SelectItem>
-                <SelectItem value="2">Vague 2</SelectItem>
-                <SelectItem value="3">Vague 3</SelectItem>
-                <SelectItem value="4">Vague 4</SelectItem>
-                <SelectItem value="5">Vague 5</SelectItem>
-                <SelectItem value="1">Vague 6</SelectItem>
-                <SelectItem value="2">Vague 7</SelectItem>
-                <SelectItem value="3">Vague 8</SelectItem>
-                <SelectItem value="4">Vague 9</SelectItem>
-                <SelectItem value="5">Vague 10</SelectItem>
-                <SelectItem value="1">Vague 11</SelectItem>
-                <SelectItem value="2">Vague 12</SelectItem>
-                <SelectItem value="3">Vague 13</SelectItem>
-                <SelectItem value="4">Vague 14</SelectItem>
-                <SelectItem value="5">Vague 15</SelectItem>
-                <SelectItem value="1">Vague 16</SelectItem>
-                <SelectItem value="2">Vague 17</SelectItem>
-                <SelectItem value="3">Vague 18</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
+          {waves.length > 0 && (
+            <div className="w-35">
+              <Select
+                value={search.wave}
+                onValueChange={(value) => setSearch({ ...search, wave: value === 'none' ? '' : value })}
+              >
+                <SelectTrigger>
+                  <SelectValue placeholder="Vague" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="none">Aucun filtre</SelectItem>
+                  {waves.map((wave) => (
+                    <SelectItem key={wave} value={String(wave)}>
+                      Vague {wave}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+          )}
         </div>
       )}
       <ResultsTable results={results} search={search} totals={totals} />
