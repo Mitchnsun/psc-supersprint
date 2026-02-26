@@ -150,7 +150,8 @@ Les tests utilisent **Vitest** avec **Testing Library** et sont configurés dans
 - Styling avec Tailwind et `cn()` pour les classes conditionnelles
 - Types définis dans `@/utils/types.ts`
 
-Pour plus de détails, voir [.github/copilot-instructions.md](.github/copilot-instructions.md).
+Pour plus de détails, voir [.github/copilot-instructions.md](.github/copilot-instructions.md).  
+Pour le workflow d'orchestration IA, voir [AI_WORKFLOW.md](AI_WORKFLOW.md).
 
 ## 🤝 Contribution
 

@@ -1,5 +1,7 @@
 # Copilot Instructions - PSC Supersprint
 
+> For the AI orchestration workflow (planning, subagent strategy, self-improvement loop, etc.), see [AI_WORKFLOW.md](../AI_WORKFLOW.md).
+
 ## Project Overview
 
 PSC Supersprint est une application web pour gérer et afficher les résultats d'une compétition de triathlon supersprint. L'application permet de visualiser les classements, les podiums et les résultats individuels des athlètes.
