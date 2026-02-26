@@ -11,10 +11,11 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import db from '@/lib/firebase';
 import { CATEGORIES, categoryFromBirthYear } from '@/utils/categories.utils';
 import { YEAR } from '@/utils/constants';
+import { DraftResult } from '@/utils/drafts';
 import { FormValues, schema } from '@/utils/results';
 import Time from '@/utils/time';
 
-const timeCalculus = ({ swim, bike, total }: { swim: string; bike: string; total: string }) => {
+export const timeCalculus = ({ swim, bike, total }: { swim: string; bike: string; total: string }) => {
   const swimSeconds = swim
     .split(':')
     .reverse()
@@ -32,32 +33,39 @@ const timeCalculus = ({ swim, bike, total }: { swim: string; bike: string; total
   return { swim: swimSeconds, bike: bikeSeconds, run: run > 0 ? run : 0, total: totalSeconds };
 };
 
-const AddResultForm = () => {
+interface AddResultFormProps {
+  draft?: DraftResult;
+  onDraftSave: (values: Partial<FormValues>, draftId?: string) => void;
+  onSubmitSuccess?: (draftId?: string) => void;
+}
+
+const AddResultForm = ({ draft, onDraftSave, onSubmitSuccess }: AddResultFormProps) => {
   const [isLoading, setIsLoading] = useState(false);
-  const [status, setStatus] = useState(null);
+  const [status, setStatus] = useState<string | null>(null);
   const {
     control,
     reset,
     setValue,
     handleSubmit,
     watch,
+    getValues,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
     defaultValues: {
-      bib: undefined,
-      lastname: '',
-      firstname: '',
-      gender: '',
-      birthYear: undefined,
-      category: CATEGORIES[1].id,
-      status: 'finisher',
-      bikeNumber: undefined,
-      wave: undefined,
+      bib: draft?.bib ?? undefined,
+      lastname: draft?.lastname ?? '',
+      firstname: draft?.firstname ?? '',
+      gender: draft?.gender ?? '',
+      birthYear: draft?.birthYear ?? undefined,
+      category: draft?.category ?? CATEGORIES[1].id,
+      status: draft?.status ?? 'finisher',
+      bikeNumber: draft?.bikeNumber ?? undefined,
+      wave: draft?.wave ?? undefined,
       times: {
-        swim: '',
-        bike: '',
-        total: '',
+        swim: draft?.times?.swim ?? '',
+        bike: draft?.times?.bike ?? '',
+        total: draft?.times?.total ?? '',
       },
     },
   });
@@ -71,6 +79,11 @@ const AddResultForm = () => {
     setValue('category', category?.id || CATEGORIES[1].id);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [birthYear]);
+
+  const saveDraft = () => {
+    const values = getValues();
+    onDraftSave(values, draft?.id);
+  };
 
   const onSubmit = async ({
     firstname,
@@ -96,8 +109,11 @@ const AddResultForm = () => {
       ...(wave && { wave }),
       ...timeCalculus(times),
     })
-      .then(() => reset())
-      .catch((error) => setStatus(error.message))
+      .then(() => {
+        reset();
+        onSubmitSuccess?.(draft?.id);
+      })
+      .catch((error: Error) => setStatus(error.message))
       .finally(() => setIsLoading(false));
   };
 
@@ -293,9 +309,14 @@ const AddResultForm = () => {
         defaultValue=""
       />
 
-      <Button type="submit" variant="secondary" disabled={isLoading}>
-        Submit
-      </Button>
+      <div className="flex gap-2">
+        <Button type="submit" variant="secondary" disabled={isLoading}>
+          Submit
+        </Button>
+        <Button type="button" variant="outline" onClick={saveDraft} disabled={isLoading}>
+          Sauvegarder brouillon
+        </Button>
+      </div>
 
       {status && (
         <Alert variant="destructive">
