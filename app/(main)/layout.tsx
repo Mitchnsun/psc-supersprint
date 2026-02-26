@@ -12,6 +12,16 @@ export default function MainLayout({ children }: { children: ReactNode }) {
       <div className="mx-auto max-w-300 px-4 pb-4">
         <Header />
         <div className="border-secondary border bg-white p-5">{children}</div>
+        <footer className="mt-2 text-center">
+          <a
+            href="https://www.gocosmic.dev/"
+            rel="noopener noreferrer"
+            target="_blank"
+            className="text-[10px] text-white opacity-40"
+          >
+            Par Gocosmic
+          </a>
+        </footer>
       </div>
     </div>
   );
