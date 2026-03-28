@@ -1,6 +1,9 @@
 import { afterEach, beforeEach, describe, expect, test } from 'vitest';
 
+import { YEAR } from './constants';
 import { DraftResult, loadDrafts, saveDraftsToStorage } from './drafts';
+
+const STORAGE_KEY = `psc-drafts-${YEAR}`;
 
 const mockDraft: DraftResult = {
   id: '1',
@@ -26,12 +29,12 @@ describe('drafts utilities', () => {
 
     test('should return saved drafts from localStorage', () => {
       const drafts = [mockDraft];
-      localStorage.setItem('psc-drafts-2026', JSON.stringify(drafts));
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(drafts));
       expect(loadDrafts()).toEqual(drafts);
     });
 
     test('should return empty array when localStorage contains invalid JSON', () => {
-      localStorage.setItem('psc-drafts-2026', 'invalid json');
+      localStorage.setItem(STORAGE_KEY, 'invalid json');
       expect(loadDrafts()).toEqual([]);
     });
   });
@@ -40,7 +43,7 @@ describe('drafts utilities', () => {
     test('should save drafts to localStorage', () => {
       const drafts = [mockDraft];
       saveDraftsToStorage(drafts);
-      const stored = localStorage.getItem('psc-drafts-2026');
+      const stored = localStorage.getItem(STORAGE_KEY);
       expect(JSON.parse(stored!)).toEqual(drafts);
     });
 
@@ -49,13 +52,13 @@ describe('drafts utilities', () => {
       saveDraftsToStorage(initial);
       const updated = [{ ...mockDraft, id: '2', firstname: 'Jane' }];
       saveDraftsToStorage(updated);
-      const stored = localStorage.getItem('psc-drafts-2026');
+      const stored = localStorage.getItem(STORAGE_KEY);
       expect(JSON.parse(stored!)).toEqual(updated);
     });
 
     test('should save empty array to localStorage', () => {
       saveDraftsToStorage([]);
-      const stored = localStorage.getItem('psc-drafts-2026');
+      const stored = localStorage.getItem(STORAGE_KEY);
       expect(JSON.parse(stored!)).toEqual([]);
     });
   });

@@ -35,11 +35,12 @@ export const timeCalculus = ({ swim, bike, total }: { swim: string; bike: string
 
 interface AddResultFormProps {
   draft?: DraftResult;
+  existingDrafts: DraftResult[];
   onDraftSave: (values: Partial<FormValues>, draftId?: string) => void;
   onSubmitSuccess?: (draftId?: string) => void;
 }
 
-const AddResultForm = ({ draft, onDraftSave, onSubmitSuccess }: AddResultFormProps) => {
+const AddResultForm = ({ draft, existingDrafts, onDraftSave, onSubmitSuccess }: AddResultFormProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const [status, setStatus] = useState<string | null>(null);
   const {
@@ -75,14 +76,35 @@ const AddResultForm = ({ draft, onDraftSave, onSubmitSuccess }: AddResultFormPro
   useEffect(() => {
     const parsedYear = Number(birthYear);
     const isValidYear = birthYear && !isNaN(parsedYear) && parsedYear > 0;
-    const category = isValidYear ? categoryFromBirthYear(birthYear) : null;
+    const category = isValidYear ? categoryFromBirthYear(parsedYear) : null;
     setValue('category', category?.id || CATEGORIES[1].id);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [birthYear]);
 
   const saveDraft = () => {
     const values = getValues();
-    onDraftSave(values, draft?.id);
+    const toNumber = (val: unknown): number | undefined => {
+      if (val == null || val === '') return undefined;
+      const n = Number(val);
+      return isNaN(n) ? undefined : n;
+    };
+    const normalized = {
+      ...values,
+      bib: toNumber(values.bib),
+      birthYear: toNumber(values.birthYear),
+      bikeNumber: toNumber(values.bikeNumber),
+      wave: toNumber(values.wave),
+    };
+    if (normalized.bib) {
+      const duplicate = existingDrafts.find((d) => d.bib === normalized.bib && d.id !== draft?.id);
+      if (duplicate) {
+        setStatus(`Un brouillon avec le dossard #${normalized.bib} existe déjà.`);
+        return;
+      }
+    }
+    setStatus(null);
+    onDraftSave(normalized, draft?.id);
+    reset();
   };
 
   const onSubmit = async ({
@@ -97,8 +119,8 @@ const AddResultForm = ({ draft, onDraftSave, onSubmitSuccess }: AddResultFormPro
     wave,
   }: FormValues) => {
     setIsLoading(true);
-    const { key } = await push(ref(db, YEAR.toString()));
-    set(ref(db, `${YEAR}/${key}`), {
+    const newRef = push(ref(db, YEAR.toString()));
+    set(newRef, {
       firstname,
       lastname,
       bib,
@@ -186,7 +208,7 @@ const AddResultForm = ({ draft, onDraftSave, onSubmitSuccess }: AddResultFormPro
       <FormField
         render={({ field }) => (
           <FormItem className="w-38">
-            <FormLabel>Gender</FormLabel>
+            <FormLabel>Sexe</FormLabel>
             <Select value={field.value} onValueChange={field.onChange}>
               <SelectTrigger>
                 <SelectValue />
@@ -245,10 +267,10 @@ const AddResultForm = ({ draft, onDraftSave, onSubmitSuccess }: AddResultFormPro
         <FormField
           render={({ field }) => (
             <FormItem className="w-38">
-              <FormLabel>Swim</FormLabel>
+              <FormLabel>Natation</FormLabel>
               <Input {...field} onChange={(e) => field.onChange(Time.maskInput(e.target.value))} />
               <FormMessage>
-                {errors.times?.swim?.message || (!Time.valid(field.value) && field.value ? 'Invalid time' : '')}
+                {errors.times?.swim?.message || (!Time.valid(field.value) && field.value ? 'Temps invalide' : '')}
               </FormMessage>
             </FormItem>
           )}
@@ -259,10 +281,10 @@ const AddResultForm = ({ draft, onDraftSave, onSubmitSuccess }: AddResultFormPro
         <FormField
           render={({ field }) => (
             <FormItem className="w-38">
-              <FormLabel>Bike</FormLabel>
+              <FormLabel>Vélo</FormLabel>
               <Input {...field} onChange={(e) => field.onChange(Time.maskInput(e.target.value))} />
               <FormMessage>
-                {errors.times?.bike?.message || (!Time.valid(field.value) && field.value ? 'Invalid time' : '')}
+                {errors.times?.bike?.message || (!Time.valid(field.value) && field.value ? 'Temps invalide' : '')}
               </FormMessage>
             </FormItem>
           )}
@@ -276,7 +298,7 @@ const AddResultForm = ({ draft, onDraftSave, onSubmitSuccess }: AddResultFormPro
               <FormLabel>Total</FormLabel>
               <Input {...field} onChange={(e) => field.onChange(Time.maskInput(e.target.value))} />
               <FormMessage>
-                {errors.times?.total?.message || (!Time.valid(field.value) && field.value ? 'Invalid time' : '')}
+                {errors.times?.total?.message || (!Time.valid(field.value) && field.value ? 'Temps invalide' : '')}
               </FormMessage>
             </FormItem>
           )}
@@ -289,7 +311,7 @@ const AddResultForm = ({ draft, onDraftSave, onSubmitSuccess }: AddResultFormPro
       <FormField
         render={({ field }) => (
           <FormItem className="w-38">
-            <FormLabel>Status</FormLabel>
+            <FormLabel>Statut</FormLabel>
             <Select value={field.value} onValueChange={field.onChange}>
               <SelectTrigger>
                 <SelectValue />
@@ -311,9 +333,9 @@ const AddResultForm = ({ draft, onDraftSave, onSubmitSuccess }: AddResultFormPro
 
       <div className="flex gap-2">
         <Button type="submit" variant="secondary" disabled={isLoading}>
-          Submit
+          Valider
         </Button>
-        <Button type="button" variant="outline" onClick={saveDraft} disabled={isLoading}>
+        <Button type="button" onClick={saveDraft} disabled={isLoading}>
           Sauvegarder brouillon
         </Button>
       </div>

@@ -20,22 +20,24 @@ const AdminView = () => {
     setDrafts(loadDrafts());
   }, []);
 
-  const updateDrafts = (updated: DraftResult[]) => {
-    setDrafts(updated);
-    saveDraftsToStorage(updated);
+  const updateDrafts = (updater: (prev: DraftResult[]) => DraftResult[]) => {
+    setDrafts((prev) => {
+      const updated = updater(prev);
+      saveDraftsToStorage(updated);
+      return updated;
+    });
   };
 
   const handleDraftSave = (values: Partial<FormValues>, draftId?: string) => {
     const id = draftId ?? Date.now().toString();
     const draft: DraftResult = { id, savedAt: Date.now(), ...values };
-    const updated = draftId ? drafts.map((d) => (d.id === draftId ? draft : d)) : [...drafts, draft];
-    updateDrafts(updated);
-    setEditingDraftId(id);
+    updateDrafts((prev) => (draftId ? prev.map((d) => (d.id === draftId ? draft : d)) : [...prev, draft]));
+    setEditingDraftId(null);
   };
 
   const handleSubmitSuccess = (draftId?: string) => {
     if (draftId) {
-      updateDrafts(drafts.filter((d) => d.id !== draftId));
+      updateDrafts((prev) => prev.filter((d) => d.id !== draftId));
     }
     setEditingDraftId(null);
   };
@@ -45,45 +47,60 @@ const AdminView = () => {
   };
 
   const handleDelete = (draftId: string) => {
-    updateDrafts(drafts.filter((d) => d.id !== draftId));
+    updateDrafts((prev) => prev.filter((d) => d.id !== draftId));
     if (editingDraftId === draftId) setEditingDraftId(null);
   };
 
+  const handleDeleteAll = () => {
+    updateDrafts(() => []);
+    setEditingDraftId(null);
+  };
+
   const handleSubmitAll = async (): Promise<string[]> => {
-    const failed: string[] = [];
-    const successful: string[] = [];
+    // Phase 1: validate all drafts before any submission
+    const invalid: string[] = [];
+    const validatedDrafts: { draft: DraftResult; values: FormValues }[] = [];
 
     for (const draft of drafts) {
       try {
         const values = await schema.validate({ ...draft }, { abortEarly: false });
-        const { key } = await push(ref(db, YEAR.toString()));
-        await set(ref(db, `${YEAR}/${key}`), {
-          firstname: values.firstname,
-          lastname: values.lastname,
-          bib: values.bib,
-          sex: values.gender,
-          status: values.status === 'finisher' ? '' : values.status,
-          cat: values.category,
-          ...(values.bikeNumber && { bikeNumber: values.bikeNumber }),
-          ...(values.wave && { wave: values.wave }),
-          ...timeCalculus(values.times),
-        });
-        successful.push(draft.id);
-      } catch (error) {
-        failed.push(draft.bib?.toString() ?? draft.id);
-        console.error(`Failed to submit draft ${draft.id}:`, error);
+        validatedDrafts.push({ draft, values });
+      } catch {
+        invalid.push(draft.bib?.toString() ?? `sans dossard (${draft.id})`);
       }
     }
 
+    if (invalid.length > 0) {
+      return invalid;
+    }
+
+    // Phase 2: all drafts are valid, submit them
+    const successful: string[] = [];
+
+    for (const { draft, values } of validatedDrafts) {
+      const newRef = push(ref(db, YEAR.toString()));
+      await set(newRef, {
+        firstname: values.firstname,
+        lastname: values.lastname,
+        bib: values.bib,
+        sex: values.gender,
+        status: values.status === 'finisher' ? '' : values.status,
+        cat: values.category,
+        ...(values.bikeNumber && { bikeNumber: values.bikeNumber }),
+        ...(values.wave && { wave: values.wave }),
+        ...timeCalculus(values.times),
+      });
+      successful.push(draft.id);
+    }
+
     if (successful.length > 0) {
-      const remaining = drafts.filter((d) => !successful.includes(d.id));
-      updateDrafts(remaining);
+      updateDrafts((prev) => prev.filter((d) => !successful.includes(d.id)));
       if (editingDraftId && successful.includes(editingDraftId)) {
         setEditingDraftId(null);
       }
     }
 
-    return failed;
+    return [];
   };
 
   const editingDraft = drafts.find((d) => d.id === editingDraftId);
@@ -95,6 +112,7 @@ const AdminView = () => {
           <AddResultForm
             key={editingDraftId ?? 'new'}
             draft={editingDraft}
+            existingDrafts={drafts}
             onDraftSave={handleDraftSave}
             onSubmitSuccess={handleSubmitSuccess}
           />
@@ -103,6 +121,7 @@ const AdminView = () => {
             editingDraftId={editingDraftId}
             onEdit={handleEdit}
             onDelete={handleDelete}
+            onDeleteAll={handleDeleteAll}
             onSubmitAll={handleSubmitAll}
           />
         </div>

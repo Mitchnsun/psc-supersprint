@@ -20,5 +20,9 @@ export const loadDrafts = (): DraftResult[] => {
 
 export const saveDraftsToStorage = (drafts: DraftResult[]): void => {
   if (typeof window === 'undefined') return;
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(drafts));
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(drafts));
+  } catch {
+    // Silently fail (e.g., quota exceeded, storage disabled)
+  }
 };
