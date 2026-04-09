@@ -22,8 +22,8 @@ Application web pour gérer et afficher les résultats d'une compétition de tri
 
 ### Prérequis
 
-- **Node.js** ≥ 20.9.0
-- **Yarn** ≥ 1.22.0
+- **Node.js** ≥ 24
+- **Yarn** ≥ 4
 
 ### Installation
 

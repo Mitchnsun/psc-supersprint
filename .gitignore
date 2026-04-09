@@ -50,6 +50,10 @@ next-env.d.ts
 # Yarn Integrity file
 .yarn-integrity
 
+# Yarn v4
+.yarn/cache
+.yarn/install-state.gz
+
 # dotenv environment variables file
 .env
 .env.local
