@@ -22,21 +22,21 @@ const DetailsResult = ({ result, totals }: { result: ResultTypeWithId; totals: R
         icon={<SwimIcon />}
         label="Natation"
         time={Time.convert(result.swim)}
-        speed={Time.swim(result.swim)}
+        speed={Time.swim(result.swim, context.year || YEAR)}
         unit="/100m"
       />
       <ActivityResult
         icon={<BikeIcon />}
         label="Vélo"
         time={Time.convert(result.bike)}
-        speed={Time.bike(result.bike)}
+        speed={Time.bike(result.bike, context.year || YEAR)}
         unit="km/h"
       />
       <ActivityResult
         icon={<RunIcon />}
         label="Course à pied"
         time={Time.convert(result.run)}
-        speed={Time.run(result.run)}
+        speed={Time.run(result.run, context.year || YEAR)}
         unit="/km"
       />
       <div className="col-span-2 m-auto text-center">
