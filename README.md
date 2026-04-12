@@ -22,8 +22,10 @@ Application web pour gérer et afficher les résultats d'une compétition de tri
 
 ### Prérequis
 
-- **Node.js** ≥ 20.9.0
-- **Yarn** ≥ 1.22.0
+- **Node.js** ≥ 22
+- **Yarn** ≥ 4
+
+> **Note** : Node.js 22 LTS est utilisé à la place de Node.js 24 car Yarn 4 n’est pas encore compatible avec Node 24 (erreur `Dynamic require of "util"` causée par les restrictions ESM strictes de Node 24).
 
 ### Installation
 
