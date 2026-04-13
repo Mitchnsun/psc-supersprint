@@ -1,3 +1,5 @@
+import { YEAR } from './constants';
+
 export interface DistanceDetail {
   length: number;
   unit: string;
@@ -38,11 +40,9 @@ export const DISTANCES_BY_YEAR: Record<string, DistanceConfig> = {
   },
 };
 
-const DEFAULT_YEAR = '2025';
-
 export const getDistances = (year?: string | number): DistanceConfig => {
   const yearKey = year?.toString();
-  return (yearKey !== undefined && DISTANCES_BY_YEAR[yearKey]) ? DISTANCES_BY_YEAR[yearKey] : DISTANCES_BY_YEAR[DEFAULT_YEAR];
+  return (yearKey !== undefined && DISTANCES_BY_YEAR[yearKey]) ? DISTANCES_BY_YEAR[yearKey] : DISTANCES_BY_YEAR[YEAR];
 };
 
 export default getDistances();
