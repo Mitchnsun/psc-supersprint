@@ -15,6 +15,7 @@ import SwimIcon from './atoms/SwimIcon';
 
 const DetailsResult = ({ result, totals }: { result: ResultTypeWithId; totals: Record<string, number> }) => {
   const { context } = useContext(GlobalContext);
+  const year = context.year || YEAR;
   return (
     <div className="grid grid-cols-12 justify-center gap-2 p-2">
       <Ranks ranks={result.ranks} cat={result.cat} gender={result.sex} totals={totals} />
@@ -22,25 +23,25 @@ const DetailsResult = ({ result, totals }: { result: ResultTypeWithId; totals: R
         icon={<SwimIcon />}
         label="Natation"
         time={Time.convert(result.swim)}
-        speed={Time.swim(result.swim)}
+        speed={Time.swim(result.swim, year)}
         unit="/100m"
       />
       <ActivityResult
         icon={<BikeIcon />}
         label="Vélo"
         time={Time.convert(result.bike)}
-        speed={Time.bike(result.bike)}
+        speed={Time.bike(result.bike, year)}
         unit="km/h"
       />
       <ActivityResult
         icon={<RunIcon />}
         label="Course à pied"
         time={Time.convert(result.run)}
-        speed={Time.run(result.run)}
+        speed={Time.run(result.run, year)}
         unit="/km"
       />
       <div className="col-span-2 m-auto text-center">
-        <Link href={`/athlete/${context.year || YEAR}/${result.id}`}>
+        <Link href={`/athlete/${year}/${result.id}`}>
           <ShareIcon className="text-logo" />
         </Link>
       </div>

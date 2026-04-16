@@ -62,6 +62,11 @@ describe('Utils: Time', () => {
       expect(Time.swim(359)).toBe('1:59');
       expect(Time.swim(360)).toBe('2:00');
     });
+
+    test('should return the same swim speed for any year (all editions have 300m swim)', () => {
+      expect(Time.swim(300, '2022')).toBe('1:40');
+      expect(Time.swim(300, '2026')).toBe('1:40');
+    });
   });
 
   describe('Time.bike()', () => {
@@ -69,8 +74,15 @@ describe('Utils: Time', () => {
       expect(Time.bike(0)).toBe('-');
     });
 
-    test('should return the swim speed', () => {
+    test('should return the bike speed', () => {
       expect(Time.bike(800)).toBe('25.65');
+    });
+
+    test('should return a different bike speed for different years', () => {
+      // 2022: 6km bike → (3600 / 800) * 6 = 27.00 km/h
+      expect(Time.bike(800, '2022')).toBe('27.00');
+      // 2026: 5.7km bike → (3600 / 800) * 5.7 = 25.65 km/h
+      expect(Time.bike(800, '2026')).toBe('25.65');
     });
   });
 
@@ -79,9 +91,16 @@ describe('Utils: Time', () => {
       expect(Time.run(0)).toBe('-');
     });
 
-    test('should return the run speed', () => {
+    test('should return the run pace', () => {
       expect(Time.run(750)).toBe('5:00');
       expect(Time.run(1000)).toBe('6:40');
+    });
+
+    test('should return a different run pace for different years', () => {
+      // 2023: 2km run → 750 / 2 = 375s = 6:15 min/km
+      expect(Time.run(750, '2023')).toBe('6:15');
+      // 2026: 2.5km run → 750 / 2.5 = 300s = 5:00 min/km
+      expect(Time.run(750, '2026')).toBe('5:00');
     });
   });
 });

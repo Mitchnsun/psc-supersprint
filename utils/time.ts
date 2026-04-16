@@ -1,4 +1,4 @@
-import DISTANCES from './distances';
+import { getDistances } from './distances';
 
 const prependZero = (value: number, skip: boolean): string => {
   if (skip) {
@@ -49,19 +49,19 @@ export default {
   convert: (time: number) => convert(time),
   maskInput: (value: string) => maskInput(value),
   valid: (value: string) => validTime(value),
-  swim: (time: number) => {
+  swim: (time: number, year?: string | number) => {
     if (Number.isNaN(time) || time === 0) return '-';
-    const formatted = time / DISTANCES.swim.length;
+    const formatted = time / getDistances(year).swim.length;
     return convert(Math.trunc(formatted * 100));
   },
-  bike: (time: number) => {
+  bike: (time: number, year?: string | number) => {
     if (Number.isNaN(time) || time === 0) return '-';
-    const formatted = (3600 / time) * DISTANCES.bike.length;
+    const formatted = (3600 / time) * getDistances(year).bike.length;
     return formatted.toFixed(2);
   },
-  run: (time: number) => {
+  run: (time: number, year?: string | number) => {
     if (Number.isNaN(time) || time === 0) return '-';
-    const formatted = time / DISTANCES.run.length;
+    const formatted = time / getDistances(year).run.length;
     return convert(formatted);
   },
 };
