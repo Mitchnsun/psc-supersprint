@@ -57,7 +57,7 @@ const ResultsTable = ({
       <TableBody>
         {[...list, ...statusList].map((item, index) => (
           <LineResult
-            key={item.bib}
+            key={`item-${item.bib}-${item.firstname}-${item.lastname}`}
             result={item}
             totals={totals}
             rank={search.input ? item.ranks.scratch : index + 1}
