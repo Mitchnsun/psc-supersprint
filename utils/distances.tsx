@@ -35,14 +35,14 @@ export const DISTANCES_BY_YEAR: Record<string, DistanceConfig> = {
   },
   '2026': {
     swim: { length: 300, unit: 'm', unit_label: 'mètres' },
-    bike: { length: 5.7, unit: 'km', unit_label: 'kilomètres' },
+    bike: { length: 6.2, unit: 'km', unit_label: 'kilomètres' },
     run: { length: 2.5, unit: 'km', unit_label: 'kilomètres' },
   },
 };
 
 export const getDistances = (year?: string | number): DistanceConfig => {
   const yearKey = year?.toString();
-  return (yearKey !== undefined && DISTANCES_BY_YEAR[yearKey]) ? DISTANCES_BY_YEAR[yearKey] : DISTANCES_BY_YEAR[YEAR];
+  return yearKey !== undefined && DISTANCES_BY_YEAR[yearKey] ? DISTANCES_BY_YEAR[yearKey] : DISTANCES_BY_YEAR[YEAR];
 };
 
 export default getDistances();
