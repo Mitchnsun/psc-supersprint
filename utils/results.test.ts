@@ -182,7 +182,7 @@ const makeResult = (id: string, wave?: number): ResultTypeWithId => ({
   id,
   bib: 1,
   bike: 0,
-  cat: 'S' as never,
+  cat: CAT.S,
   firstname: 'John',
   lastname: 'Doe',
   ranks: { cat: 1, gender: 1, scratch: 1, swim: 1, bike: 1 },
@@ -249,11 +249,7 @@ describe('excludeRank schema field', () => {
 });
 
 describe('rankResults excludeRank filtering', () => {
-  const makeResultWithExclude = (
-    id: string,
-    total: number,
-    excludeRank?: boolean,
-  ): ResultTypeWithId => ({
+  const makeResultWithExclude = (id: string, total: number, excludeRank?: boolean): ResultTypeWithId => ({
     id,
     bib: Number(id),
     bike: 0,
