@@ -340,6 +340,7 @@ const AddResultForm = ({ draft, existingDrafts, onDraftSave, onSubmitSuccess }: 
             <input
               type="checkbox"
               id="excludeRank"
+              aria-label="Hors classement - exclure ce participant du classement podiums"
               checked={field.value ?? false}
               onChange={(e) => field.onChange(e.target.checked)}
               className="h-4 w-4"

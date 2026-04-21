@@ -1,5 +1,6 @@
 import { describe, expect, test } from 'vitest';
 
+import { CAT } from './categories.utils';
 import { getWaves, rankResults, schema } from './results';
 import { ResultTypeWithId } from './types';
 
@@ -256,7 +257,7 @@ describe('rankResults excludeRank filtering', () => {
     id,
     bib: Number(id),
     bike: 0,
-    cat: 'S' as never,
+    cat: CAT.S,
     firstname: 'Athlete',
     lastname: id,
     ranks: { cat: 0, gender: 0, scratch: 0, swim: 0, bike: 0 },
