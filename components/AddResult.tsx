@@ -340,9 +340,11 @@ const AddResultForm = ({ draft, existingDrafts, onDraftSave, onSubmitSuccess }: 
             <input
               type="checkbox"
               id="excludeRank"
-              aria-label="Hors classement - exclure ce participant du classement podiums"
+              name={field.name}
               checked={field.value ?? false}
               onChange={(e) => field.onChange(e.target.checked)}
+              onBlur={field.onBlur}
+              ref={field.ref}
               className="h-4 w-4"
             />
             <FormLabel htmlFor="excludeRank" className="cursor-pointer">

@@ -285,9 +285,22 @@ describe('rankResults excludeRank filtering', () => {
       makeResultWithExclude('2', 2000, true),
       makeResultWithExclude('3', 3000),
     ];
-    const filtered = results.filter(({ excludeRank }) => !excludeRank);
+    const filtered = results.filter(({ excludeRank }) => excludeRank !== true);
     const ranked = rankResults(filtered);
     expect(ranked.results).toHaveLength(2);
+    expect(ranked.results.find((r) => r.id === '2')).toBeUndefined();
+  });
+
+  test('filtering excludeRank before rankResults keeps participants when excludeRank is undefined', () => {
+    const results = [
+      makeResultWithExclude('1', 1000, undefined),
+      makeResultWithExclude('2', 2000, true),
+      makeResultWithExclude('3', 3000),
+    ];
+    const filtered = results.filter(({ excludeRank }) => excludeRank !== true);
+    const ranked = rankResults(filtered);
+    expect(ranked.results).toHaveLength(2);
+    expect(ranked.results.find((r) => r.id === '1')).toBeDefined();
     expect(ranked.results.find((r) => r.id === '2')).toBeUndefined();
   });
 });
