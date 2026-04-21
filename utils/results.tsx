@@ -15,6 +15,7 @@ export interface FormValues {
   category: string;
   bikeNumber?: number;
   wave?: number;
+  excludeRank?: boolean;
   times: {
     swim: string;
     bike: string;
@@ -48,6 +49,7 @@ export const schema: yup.ObjectSchema<FormValues> = yup.object({
     .transform((value, originalValue) => (originalValue === '' ? undefined : value))
     .positive()
     .integer(),
+  excludeRank: yup.boolean().optional().default(false),
   times: yup
     .object({
       swim: yup.string().required(),

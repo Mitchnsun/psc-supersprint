@@ -1,6 +1,7 @@
 import { describe, expect, test } from 'vitest';
 
-import { getWaves, schema } from './results';
+import { CAT } from './categories.utils';
+import { getWaves, rankResults, schema } from './results';
 import { ResultTypeWithId } from './types';
 
 describe('Results Schema Validation', () => {
@@ -181,7 +182,7 @@ const makeResult = (id: string, wave?: number): ResultTypeWithId => ({
   id,
   bib: 1,
   bike: 0,
-  cat: 'S' as never,
+  cat: CAT.S,
   firstname: 'John',
   lastname: 'Doe',
   ranks: { cat: 1, gender: 1, scratch: 1, swim: 1, bike: 1 },
@@ -216,5 +217,86 @@ describe('getWaves', () => {
 
   test('should return empty array for empty input', () => {
     expect(getWaves([])).toEqual([]);
+  });
+});
+
+describe('excludeRank schema field', () => {
+  const baseData = {
+    firstname: 'John',
+    lastname: 'Doe',
+    gender: 'M',
+    status: '',
+    bib: 100,
+    birthYear: 1990,
+    category: 'V1',
+    times: { swim: '10:00', bike: '20:00', total: '35:00' },
+  };
+
+  test('should default to false when not provided', async () => {
+    const result = await schema.validate(baseData);
+    expect(result.excludeRank).toBe(false);
+  });
+
+  test('should accept true', async () => {
+    const result = await schema.validate({ ...baseData, excludeRank: true });
+    expect(result.excludeRank).toBe(true);
+  });
+
+  test('should accept false', async () => {
+    const result = await schema.validate({ ...baseData, excludeRank: false });
+    expect(result.excludeRank).toBe(false);
+  });
+});
+
+describe('rankResults excludeRank filtering', () => {
+  const makeResultWithExclude = (id: string, total: number, excludeRank?: boolean): ResultTypeWithId => ({
+    id,
+    bib: Number(id),
+    bike: 0,
+    cat: CAT.S,
+    firstname: 'Athlete',
+    lastname: id,
+    ranks: { cat: 0, gender: 0, scratch: 0, swim: 0, bike: 0 },
+    run: 0,
+    sex: 'M',
+    status: '',
+    swim: 0,
+    total,
+    excludeRank,
+  });
+
+  test('participants with excludeRank true are still included in rankResults (filtering is done at page level)', () => {
+    const results = [
+      makeResultWithExclude('1', 1000),
+      makeResultWithExclude('2', 2000, true),
+      makeResultWithExclude('3', 3000),
+    ];
+    const ranked = rankResults(results);
+    expect(ranked.results).toHaveLength(3);
+  });
+
+  test('filtering excludeRank before rankResults excludes them from podiums', () => {
+    const results = [
+      makeResultWithExclude('1', 1000),
+      makeResultWithExclude('2', 2000, true),
+      makeResultWithExclude('3', 3000),
+    ];
+    const filtered = results.filter(({ excludeRank }) => excludeRank !== true);
+    const ranked = rankResults(filtered);
+    expect(ranked.results).toHaveLength(2);
+    expect(ranked.results.find((r) => r.id === '2')).toBeUndefined();
+  });
+
+  test('filtering excludeRank before rankResults keeps participants when excludeRank is undefined', () => {
+    const results = [
+      makeResultWithExclude('1', 1000, undefined),
+      makeResultWithExclude('2', 2000, true),
+      makeResultWithExclude('3', 3000),
+    ];
+    const filtered = results.filter(({ excludeRank }) => excludeRank !== true);
+    const ranked = rankResults(filtered);
+    expect(ranked.results).toHaveLength(2);
+    expect(ranked.results.find((r) => r.id === '1')).toBeDefined();
+    expect(ranked.results.find((r) => r.id === '2')).toBeUndefined();
   });
 });

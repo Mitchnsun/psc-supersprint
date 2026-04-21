@@ -1,5 +1,6 @@
 import { describe, expect, test } from 'vitest';
 
+import { YEAR } from './constants';
 import { DISTANCES_BY_YEAR, getDistances } from './distances';
 
 describe('Utils: Distances', () => {
@@ -38,7 +39,7 @@ describe('Utils: Distances', () => {
 
     test('should have correct distances for 2026', () => {
       expect(DISTANCES_BY_YEAR['2026'].swim.length).toBe(300);
-      expect(DISTANCES_BY_YEAR['2026'].bike.length).toBe(5.7);
+      expect(DISTANCES_BY_YEAR['2026'].bike.length).toBe(6.2);
       expect(DISTANCES_BY_YEAR['2026'].run.length).toBe(2.5);
     });
   });
@@ -72,13 +73,13 @@ describe('Utils: Distances', () => {
     test('should return same distances for 2026 as 2025', () => {
       const distances = getDistances('2026');
       expect(distances.swim.length).toBe(300);
-      expect(distances.bike.length).toBe(5.7);
+      expect(distances.bike.length).toBe(6.2);
       expect(distances.run.length).toBe(2.5);
     });
 
     test('should return default distances for an unknown year', () => {
       const distances = getDistances('1999');
-      const defaultDistances = getDistances('2025');
+      const defaultDistances = getDistances(YEAR);
       expect(distances.swim.length).toBe(defaultDistances.swim.length);
       expect(distances.bike.length).toBe(defaultDistances.bike.length);
       expect(distances.run.length).toBe(defaultDistances.run.length);
@@ -86,7 +87,7 @@ describe('Utils: Distances', () => {
 
     test('should return default distances when year is undefined', () => {
       const distances = getDistances(undefined);
-      const defaultDistances = getDistances('2025');
+      const defaultDistances = getDistances(YEAR);
       expect(distances.swim.length).toBe(defaultDistances.swim.length);
       expect(distances.bike.length).toBe(defaultDistances.bike.length);
       expect(distances.run.length).toBe(defaultDistances.run.length);

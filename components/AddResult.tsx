@@ -63,6 +63,7 @@ const AddResultForm = ({ draft, existingDrafts, onDraftSave, onSubmitSuccess }: 
       status: draft?.status ?? 'finisher',
       bikeNumber: draft?.bikeNumber ?? undefined,
       wave: draft?.wave ?? undefined,
+      excludeRank: draft?.excludeRank ?? false,
       times: {
         swim: draft?.times?.swim ?? '',
         bike: draft?.times?.bike ?? '',
@@ -117,6 +118,7 @@ const AddResultForm = ({ draft, existingDrafts, onDraftSave, onSubmitSuccess }: 
     times,
     bikeNumber,
     wave,
+    excludeRank,
   }: FormValues) => {
     setIsLoading(true);
     const newRef = push(ref(db, YEAR.toString()));
@@ -129,6 +131,7 @@ const AddResultForm = ({ draft, existingDrafts, onDraftSave, onSubmitSuccess }: 
       cat: category,
       ...(bikeNumber && { bikeNumber }),
       ...(wave && { wave }),
+      ...(excludeRank === true && { excludeRank: true }),
       ...timeCalculus(times),
     })
       .then(() => {
@@ -308,28 +311,52 @@ const AddResultForm = ({ draft, existingDrafts, onDraftSave, onSubmitSuccess }: 
         />
       </div>
 
-      <FormField
-        render={({ field }) => (
-          <FormItem className="w-38">
-            <FormLabel>Statut</FormLabel>
-            <Select value={field.value} onValueChange={field.onChange}>
-              <SelectTrigger>
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="finisher">Finisher</SelectItem>
-                <SelectItem value="DNF">DNF</SelectItem>
-                <SelectItem value="DNS">DNS</SelectItem>
-                <SelectItem value="DNQ">DNQ</SelectItem>
-              </SelectContent>
-            </Select>
-            <FormMessage>{errors.status?.message}</FormMessage>
-          </FormItem>
-        )}
-        name="status"
-        control={control}
-        defaultValue=""
-      />
+      <div className="flex items-center gap-8">
+        <FormField
+          render={({ field }) => (
+            <FormItem className="w-38">
+              <FormLabel>Statut</FormLabel>
+              <Select value={field.value} onValueChange={field.onChange}>
+                <SelectTrigger>
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="finisher">Finisher</SelectItem>
+                  <SelectItem value="DNF">DNF</SelectItem>
+                  <SelectItem value="DNS">DNS</SelectItem>
+                  <SelectItem value="DNQ">DNQ</SelectItem>
+                </SelectContent>
+              </Select>
+              <FormMessage>{errors.status?.message}</FormMessage>
+            </FormItem>
+          )}
+          name="status"
+          control={control}
+          defaultValue=""
+        />
+        <FormField
+          render={({ field }) => (
+            <FormItem className="flex items-center gap-2">
+              <input
+                type="checkbox"
+                id="excludeRank"
+                name={field.name}
+                checked={field.value ?? false}
+                onChange={(e) => field.onChange(e.target.checked)}
+                onBlur={field.onBlur}
+                ref={field.ref}
+                className="mb-0 h-4 w-4"
+              />
+              <FormLabel htmlFor="excludeRank" className="cursor-pointer">
+                Hors classement
+              </FormLabel>
+            </FormItem>
+          )}
+          name="excludeRank"
+          control={control}
+          defaultValue={false}
+        />
+      </div>
 
       <div className="flex gap-2">
         <Button type="submit" variant="secondary" disabled={isLoading}>

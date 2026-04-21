@@ -75,14 +75,14 @@ describe('Utils: Time', () => {
     });
 
     test('should return the bike speed', () => {
-      expect(Time.bike(800)).toBe('25.65');
+      expect(Time.bike(800, '2026')).toBe('27.90');
     });
 
     test('should return a different bike speed for different years', () => {
       // 2022: 6km bike → (3600 / 800) * 6 = 27.00 km/h
       expect(Time.bike(800, '2022')).toBe('27.00');
       // 2026: 5.7km bike → (3600 / 800) * 5.7 = 25.65 km/h
-      expect(Time.bike(800, '2026')).toBe('25.65');
+      expect(Time.bike(800, '2025')).toBe('25.65');
     });
   });
 
