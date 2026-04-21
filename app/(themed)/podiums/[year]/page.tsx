@@ -31,7 +31,7 @@ async function getData(year: string) {
     ...rankResults(
       Object.entries(results.val() || [])
         .map(([key, value]: [string, ResultType]) => ({ ...value, id: key }))
-        .filter(({ status, excludeRank }) => isEmpty(status) && !excludeRank),
+        .filter(({ status, excludeRank }) => isEmpty(status) && excludeRank !== true),
     ),
   };
 }

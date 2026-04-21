@@ -131,7 +131,7 @@ const AddResultForm = ({ draft, existingDrafts, onDraftSave, onSubmitSuccess }: 
       cat: category,
       ...(bikeNumber && { bikeNumber }),
       ...(wave && { wave }),
-      ...(excludeRank && { excludeRank }),
+      ...(excludeRank === true && { excludeRank: true }),
       ...timeCalculus(times),
     })
       .then(() => {
