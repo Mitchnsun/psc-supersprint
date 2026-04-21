@@ -29,6 +29,7 @@ export interface ResultType {
   total: number;
   bikeNumber?: number;
   wave?: number;
+  excludeRank?: boolean;
 }
 
 export interface ResultTypeWithId extends ResultType {
