@@ -15,7 +15,7 @@
   },
   "homepage": "https://psc-supersprint.vercel.app/",
   "engines": {
-    "node": ">=22.0.0 <24.0.0",
+    "node": ">=24.0.0 <25.0.0",
     "yarn": ">=4.0.0"
   },
   "scripts": {
